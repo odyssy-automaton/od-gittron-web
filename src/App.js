@@ -1,25 +1,25 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component, Fragment } from 'react';
+import { BrowserRouter, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+
+import Routes from './Routes';
+
+import './App.scss';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Helmet>
+          <meta name="description" content="REPO EVO" />
+        </Helmet>
+        <BrowserRouter>
+          <Fragment>
+            <h1>gittron</h1>
+            <Link to="/">Home</Link> | <Link to="/repos">Search Repos</Link>
+            <Routes />
+          </Fragment>
+        </BrowserRouter>
       </div>
     );
   }
