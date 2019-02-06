@@ -1,13 +1,16 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import FourOhFour from './views/404/404';
-import Home from './views/home/Home';
-import Repos from './views/repos/Repos';
+import Bots from './views/bots/Bots';
+import About from './views/about/About';
+import Dashboard from './views/dashboard/Dashboard';
 
 const Routes = () => (
   <Switch>
-    <Route path="/" exact component={Home} />
-    <Route path="/repos" exact component={Repos} />
+    <Route path="/" exact component={Bots} />
+    <Route path="/about" exact component={About} />
+    <Route path="/dashboard" exact component={Dashboard} />
+
     <Route path="*" component={FourOhFour} />
   </Switch>
 );
