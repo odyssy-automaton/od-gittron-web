@@ -1,8 +1,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import FourOhFour from './views/404';
-import Home from './views/home';
-import Repos from './views/repos';
+import FourOhFour from './views/404/404';
+import Home from './views/home/Home';
+import Repos from './views/repos/Repos';
 
 const Routes = () => (
   <Switch>

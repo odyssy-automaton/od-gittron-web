@@ -3,7 +3,7 @@ import React from 'react';
 import logo from '../../img/odyssy-icon.png';
 import '../../App.scss';
 
-function Repos() {
+function Home() {
   return (
     <div>
       <header className="App-header">
@@ -13,4 +13,4 @@ function Repos() {
   );
 }
 
-export default Repos;
+export default Home;

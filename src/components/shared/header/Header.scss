@@ -1,0 +1,40 @@
+.Header {
+  height: auto;
+  background-color: white;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  padding-left: 25px;
+  padding-right: 25px;
+  width: calc(100% - 50px);
+  border-bottom: 2px solid black;
+}
+
+.Header__title {
+  color: black;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: 2em;
+  font-weight: 300;
+  @media (max-width: 889px) {
+    font-size: 1.5em;
+  }
+}
+
+.Logo {
+  flex-basis: 33%;
+  margin-right: auto;
+  @media (max-width: 889px) {
+    flex-basis: 75%;
+  }
+}
+
+.Navigation--Desktop {
+  margin-left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  > *:not(first-child) {
+    margin-left: 50px;
+  }
+}
