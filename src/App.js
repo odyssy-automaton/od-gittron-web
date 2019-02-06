@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter, Link } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 import Routes from './Routes';
+import Header from './components/shared/header/Header';
 
 import './App.scss';
 
@@ -15,8 +16,7 @@ class App extends Component {
         </Helmet>
         <BrowserRouter>
           <Fragment>
-            <h1>gittron</h1>
-            <Link to="/">Home</Link> | <Link to="/repos">Search Repos</Link>
+            <Header />
             <Routes />
           </Fragment>
         </BrowserRouter>
