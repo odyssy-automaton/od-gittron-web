@@ -8,7 +8,6 @@ export const instance = axios.create({
 });
 
 export const get = async (endpoint) => {
-  console.log(baseURL);
   try {
     return await instance.get(`/${endpoint}`);
   } catch (err) {
