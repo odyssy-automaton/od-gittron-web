@@ -3,32 +3,67 @@ import Select from 'react-select';
 
 import BotList from '../bot-list/BotList';
 
+import './BotFilter.scss';
+
 class BotFilter extends Component {
   state = {
-    options: [
-      { value: 'all', label: 'All Bots' },
+    typeOptions: [
+      { value: 'all', label: 'All Types' },
       { value: 'master', label: 'Master Bot' },
       { value: 'worker', label: 'Worker Bot' },
       { value: 'support', label: 'Support Bot' },
     ],
-    selectedOption: { value: 'all', label: 'All Bots' },
+    selectedType: { value: 'all', label: 'All Types' },
+    selectedRepo: { value: 'all', label: 'All Repos' },
   };
 
-  handleChange = (selectedOption) => {
-    this.setState({ selectedOption });
+  handleTypeChange = (selection) => {
+    const selectedType = selection || { value: 'all', label: 'All Types' };
+    this.setState({ selectedType });
+  };
+
+  handleRepoChange = (selection) => {
+    const selectedRepo = selection || { value: 'all', label: 'All Repos' };
+    this.setState({ selectedRepo });
   };
 
   withFilters = () => {
-    return this.state.selectedOption.value === 'all'
-      ? this.props.bots
-      : this.props.bots.filter((bot) => {
-          return bot.tokenType === this.state.selectedOption.value;
+    const typeBots =
+      this.state.selectedType.value === 'all'
+        ? this.props.bots
+        : this.props.bots.filter((bot) => {
+            return bot.tokenType === this.state.selectedType.value;
+          });
+
+    return this.state.selectedRepo.value === 'all'
+      ? typeBots
+      : typeBots.filter((bot) => {
+          return bot.ghid === this.state.selectedRepo.value;
         });
   };
 
+  genRepoOptions = () => {
+    let hash = {};
+
+    const repos = this.props.bots
+      .filter((bot) => {
+        if (hash[bot.ghid]) {
+          return false;
+        }
+        hash[bot.ghid] = true;
+        return true;
+      })
+      .map((bot) => {
+        return { value: bot.ghid, label: bot.repo };
+      });
+
+    return [{ value: 'all', label: 'All Repos' }, ...repos];
+  };
+
   render() {
-    const { options } = this.state;
+    const { typeOptions, selectedType, selectedRepo } = this.state;
     const filteredBots = this.withFilters();
+    const repoOptions = this.genRepoOptions();
 
     return (
       <div>
@@ -36,7 +71,22 @@ class BotFilter extends Component {
           <p>{filteredBots.length} bots</p>
 
           <h4>Filters</h4>
-          <Select options={options} onChange={this.handleChange} />
+          <div className="BotFilter__filters">
+            <Select
+              className="BotFilter__select"
+              options={repoOptions}
+              onChange={this.handleRepoChange}
+              value={selectedRepo}
+              isClearable={true}
+            />
+            <Select
+              className="BotFilter__select"
+              options={typeOptions}
+              onChange={this.handleTypeChange}
+              value={selectedType}
+              isClearable={true}
+            />
+          </div>
         </div>
         <div>
           <BotList bots={filteredBots} />
