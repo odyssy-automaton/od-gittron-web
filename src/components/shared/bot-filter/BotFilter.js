@@ -6,39 +6,44 @@ import BotList from '../bot-list/BotList';
 import './BotFilter.scss';
 
 class BotFilter extends Component {
-  state = {
+  defaultValues = {
     typeOptions: [
       { value: 'all', label: 'All Types' },
       { value: 'master', label: 'Master Bot' },
       { value: 'worker', label: 'Worker Bot' },
       { value: 'support', label: 'Support Bot' },
     ],
-    selectedType: { value: 'all', label: 'All Types' },
-    selectedRepo: { value: 'all', label: 'All Repos' },
+    type: { value: 'all', label: 'All Types' },
+    repo: { value: 'all', label: 'All Repos' },
   };
 
-  handleTypeChange = (selection) => {
-    const selectedType = selection || { value: 'all', label: 'All Types' };
-    this.setState({ selectedType });
+  state = {
+    selected: {
+      type: this.defaultValues.type,
+      repo: this.defaultValues.repo,
+    },
   };
 
-  handleRepoChange = (selection) => {
-    const selectedRepo = selection || { value: 'all', label: 'All Repos' };
-    this.setState({ selectedRepo });
+  handleChange = (selectionCategory, selection) => {
+    const selected = selection || this.defaultValues[selectionCategory];
+    const newSelections = { ...this.state.selected };
+    newSelections[selectionCategory] = selected;
+
+    this.setState({ selected: newSelections });
   };
 
   withFilters = () => {
     const typeBots =
-      this.state.selectedType.value === 'all'
+      this.state.selected.type.value === 'all'
         ? this.props.bots
         : this.props.bots.filter((bot) => {
-            return bot.tokenType === this.state.selectedType.value;
+            return bot.tokenType === this.state.selected.type.value;
           });
 
-    return this.state.selectedRepo.value === 'all'
+    return this.state.selected.repo.value === 'all'
       ? typeBots
       : typeBots.filter((bot) => {
-          return bot.ghid === this.state.selectedRepo.value;
+          return bot.ghid === this.state.selected.repo.value;
         });
   };
 
@@ -61,7 +66,8 @@ class BotFilter extends Component {
   };
 
   render() {
-    const { typeOptions, selectedType, selectedRepo } = this.state;
+    const { selected } = this.state;
+    const { typeOptions } = this.defaultValues;
     const filteredBots = this.withFilters();
     const repoOptions = this.genRepoOptions();
 
@@ -75,15 +81,15 @@ class BotFilter extends Component {
             <Select
               className="BotFilter__select"
               options={repoOptions}
-              onChange={this.handleRepoChange}
-              value={selectedRepo}
+              onChange={(e) => this.handleChange('repo', e)}
+              value={selected.repo}
               isClearable={true}
             />
             <Select
               className="BotFilter__select"
               options={typeOptions}
-              onChange={this.handleTypeChange}
-              value={selectedType}
+              onChange={(e) => this.handleChange('type', e)}
+              value={selected.type}
               isClearable={true}
             />
           </div>
