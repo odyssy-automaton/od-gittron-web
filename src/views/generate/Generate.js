@@ -30,7 +30,14 @@ class Generate extends Component {
     return (
       <div>
         {tokenId ? (
-          <p>{tokenId} HAS BEEN CREATED</p>
+          <div>
+            <p>{tokenId} HAS BEEN CREATED</p>
+            <img
+              src="https://s3.amazonaws.com/odyssy-assets/Gittron__BotCube.png"
+              alt={tokenId}
+              height="300px"
+            />
+          </div>
         ) : (
           <GenerationForm onSubmit={this.handleSubmit} />
         )}
