@@ -8,9 +8,10 @@ class BotCard extends Component {
     return (
       <div className="BotCard">
         <h3>{bot.tokenId}</h3>
-        <img src={bot.tokenUriData.image} alt={bot.tokenId} height="200px" />
+        <img src={bot.tokenUriData.image} alt={bot.tokenId} height="300px" />
         <p>{bot.tokenType} bot</p>
         <p>Gen {bot.generation}</p>
+        <p>DNA {bot.dna}</p>
       </div>
     );
   }
