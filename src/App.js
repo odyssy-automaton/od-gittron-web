@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
-import Web3Provider, { Web3Consumer } from 'web3-react';
+import Web3Provider from 'web3-react';
 import Web3 from 'web3';
 
 import Routes from './Routes';
@@ -20,14 +20,10 @@ class App extends Component {
         </Helmet>
         <Web3Provider supportedNetworks={this.networks}>
           <BrowserRouter>
-            <Web3Consumer>
-              {(context) => (
-                <Fragment>
-                  <Header />
-                  <Routes />
-                </Fragment>
-              )}
-            </Web3Consumer>
+            <Fragment>
+              <Header />
+              <Routes />
+            </Fragment>
           </BrowserRouter>
         </Web3Provider>
       </div>
