@@ -26,6 +26,8 @@ export default class GittronWeb3Service {
 
     return await this.gittronContract.methods
       .launchBaseToken(tokenUri, tokenId, price, withdrawAddr)
-      .send({ from: '0xBaf6e57A3940898fd21076b139D4aB231dCbBc5f' });
+      .send({ from: '0xBaf6e57A3940898fd21076b139D4aB231dCbBc5f' })
+      .once('transactionHash', (once) => console.log('once', once))
+      .then((resp) => console.log('then', resp));
   }
 }

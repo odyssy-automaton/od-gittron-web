@@ -63,11 +63,12 @@ class Generator extends Component {
     console.log(res);
 
     var thing = this.GittronWeb3Service.rigisterMasterBot(
-      `test/0x${res.data.tokenId}`,
-      `0x${res.data.tokenId}`,
+      `test/0x12345`,
+      `123456789`,
       bot.price,
       bot.withdrawAddr,
     );
+
     console.log('thing', thing);
 
     this.setState({ tokenId: res.data.tokenId });

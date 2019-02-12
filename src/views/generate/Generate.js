@@ -9,7 +9,10 @@ class Generate extends Component {
     return (
       <Web3Consumer>
         {(context) => (
-          <Generator account={context.account} web3={context.web3js} />
+          <Generator
+            account={context.account}
+            web3={new Web3(context.web3js.givenProvider)}
+          />
         )}
       </Web3Consumer>
     );
