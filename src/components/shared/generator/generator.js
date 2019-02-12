@@ -93,7 +93,8 @@ class Generator extends Component {
         </div>
         {tokenId ? (
           <div>
-            <p>{tokenId} HAS BEEN CREATED</p>
+            <p>{tokenId} is generating</p>
+            <p>LOADING...</p>
             <img
               src="https://s3.amazonaws.com/odyssy-assets/Gittron__BotCube.png"
               alt={tokenId}
