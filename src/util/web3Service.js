@@ -59,6 +59,6 @@ export default class Web3Service {
   }
 
   numberToHex(number) {
-    return this.eb3.utils.numberToHex(number);
+    return this.web3.utils.numberToHex(number);
   }
 }

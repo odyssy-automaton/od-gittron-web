@@ -61,9 +61,11 @@ export default class GittronWeb3Service {
   }
 
   async tokensByOwner(address) {
-    let tokens = this.gittronContract.methods.tokensByOwner(address).call();
-    tokens = tokens.map((item) => this.web3Service.numberToHex(item));
-    return tokens;
+    let tokens = await this.gittronContract.methods
+      .tokensByOwner(address)
+      .call();
+
+    return tokens.map((item) => this.web3Service.numberToHex(item));
   }
 
   async ownerOf(tokenId) {

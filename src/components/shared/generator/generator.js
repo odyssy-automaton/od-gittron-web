@@ -40,12 +40,8 @@ class Generator extends Component {
     );
   };
 
-  totalSupply = async () => {
-    console.log('service');
-    console.log(this.GittronWeb3Service);
-    console.log('contract', this.state.contract);
-
-    console.log(await this.GittronWeb3Service.totalSupply());
+  tokensByOwner = async (address) => {
+    return await this.GittronWeb3Service.tokensByOwner(address);
   };
 
   handleSubmit = async (bot) => {
