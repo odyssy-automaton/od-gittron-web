@@ -62,11 +62,13 @@ class Generator extends Component {
 
     console.log(res);
 
-    var thing = this.GittronWeb3Service.rigisterMasterBot(
-      `test/0x12345`,
-      `123456789`,
+    var thing = this.GittronWeb3Service.registerMasterBot(
+      `${process.env.REACT_APP_API_HOST}uri/${res.data.tokenId}`,
+      `${res.data.tokenId}`,
       bot.price,
       bot.withdrawAddr,
+      this.props.account,
+      res.data.ghid,
     );
 
     console.log('thing', thing);
