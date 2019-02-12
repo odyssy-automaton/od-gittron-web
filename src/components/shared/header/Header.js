@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Web3Consumer } from 'web3-react';
 
 import './Header.scss';
+import HeaderLinks from './HeaderLinks';
 
 class Header extends Component {
   render() {
+    const { authenticated } = this.props;
+
     return (
-      <div className="Header">
-        <div className="Logo">
-          <h1 className="Header__title">
-            <Link to="/">Gittron</Link>
-          </h1>
-        </div>
-        <div className="Navigation--Desktop">
-          <Link to="/">Bots</Link>
-          <Link to="/generate">Generate</Link>
-          <Link to="/about">About</Link>
-          <Link to="/dashboard">Dashboard</Link>
-        </div>
+      <div>
+        {authenticated ? (
+          <Web3Consumer>
+            {(context) => <HeaderLinks authenticated={authenticated} />}
+          </Web3Consumer>
+        ) : (
+          <HeaderLinks authenticated={authenticated} />
+        )}
       </div>
     );
   }
