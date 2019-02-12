@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import GenerationForm from '../../forms/generation/GenerationForm';
 
 import { post } from '../../../util/requests';
@@ -54,6 +55,7 @@ class Generator extends Component {
       tokenType: 'master',
       address: this.props.account,
       generation: '0',
+      generated: false,
     };
 
     console.log('newBot', newBot);
@@ -61,8 +63,9 @@ class Generator extends Component {
     const res = await post('tokens/new', newBot);
 
     console.log(res);
+    this.setState({ tokenId: res.data.tokenId });
 
-    var thing = this.GittronWeb3Service.registerMasterBot(
+    var thing = await this.GittronWeb3Service.registerMasterBot(
       `${process.env.REACT_APP_API_HOST}uri/${res.data.tokenId}`,
       `${res.data.tokenId}`,
       bot.price,
@@ -73,11 +76,15 @@ class Generator extends Component {
 
     console.log('thing', thing);
 
-    this.setState({ tokenId: res.data.tokenId });
+    this.setState({ generated: true });
   };
 
   render() {
-    const { tokenId } = this.state;
+    const { tokenId, generated } = this.state;
+
+    if (generated) {
+      return <Redirect to={`bots/${tokenId}`} />;
+    }
 
     return (
       <div>

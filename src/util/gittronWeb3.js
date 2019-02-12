@@ -63,6 +63,8 @@ export default class GittronWeb3Service {
           tokenId: tokenId,
         });
         console.log('res svg', resSvg);
+
+        return resSvg;
       });
   }
 
