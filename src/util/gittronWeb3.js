@@ -12,10 +12,13 @@ export default class GittronWeb3Service {
   async initContracts() {
     console.log('abi', GitTronAbi);
 
-    return (this.gittronContract = await this.web3Service.initContract(
-      GitTronAbi,
-      this.contractAddress,
-    ));
+    return (
+      this.gittronContract ||
+      (this.gittronContract = await this.web3Service.initContract(
+        GitTronAbi,
+        this.contractAddress,
+      ))
+    );
   }
 
   async totalSupply() {
@@ -52,6 +55,10 @@ export default class GittronWeb3Service {
     return await this.gittronContract.methods
       .baseTokenLevel(baseTokenId)
       .call();
+  }
+
+  async canMetaMorph(baseTokenId) {
+    return await this.gittronContract.methods.canMetaMorph(baseTokenId).call();
   }
 
   async allowedToWithdraw(baseTokenId) {

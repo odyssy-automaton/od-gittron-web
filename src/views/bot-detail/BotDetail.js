@@ -1,6 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Web3Consumer } from 'web3-react';
 import { get } from '../../util/requests';
+import BotCard from '../../components/shared/bot-card/BotCard';
+import Web3 from 'web3';
+import SupportButton from '../../components/shared/support-button/supportButton';
 
 class BotDetail extends Component {
   state = {
@@ -20,25 +23,22 @@ class BotDetail extends Component {
     return (
       <Web3Consumer>
         {(context) => (
-          <div>
-            <h2>{bot.tokenId}</h2>
-            {bot.mined ? (
-              <img
-                src={bot.tokenUriData.image}
-                alt={bot.tokenId}
-                height="500px"
-              />
-            ) : (
-              <img
-                src="https://s3.amazonaws.com/odyssy-assets/Gittron__BotCube.png"
-                alt={bot.tokenId}
-                height="300px"
-              />
-            )}
-            <p>{bot.dna}</p>
-            <p>{bot.tokenType} bot</p>
-            <p>Repo: {bot.repo}</p>
-          </div>
+          <Fragment>
+            <BotCard
+              bot={bot}
+              account={context.account}
+              web3={new Web3(context.web3js.givenProvider)}
+            />
+            <div>
+              {bot.tokenType === 'master' ? (
+                <SupportButton
+                  bot={bot}
+                  account={context.account}
+                  web3={new Web3(context.web3js.givenProvider)}
+                />
+              ) : null}
+            </div>
+          </Fragment>
         )}
       </Web3Consumer>
     );
