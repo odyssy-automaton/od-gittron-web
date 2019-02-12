@@ -8,10 +8,8 @@ class BotDetail extends Component {
   };
 
   componentDidMount = async () => {
-    console.log(this.props.match.params);
     const { data } = await get(`tokenid/${this.props.match.params.tokenId}`);
 
-    console.log(data);
     this.setState({
       bot: data,
     });
@@ -28,7 +26,7 @@ class BotDetail extends Component {
               <img
                 src={bot.tokenUriData.image}
                 alt={bot.tokenId}
-                height="300px"
+                height="500px"
               />
             ) : (
               <img
