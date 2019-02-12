@@ -10,8 +10,7 @@ class BotCard extends Component {
       <div className="BotCard">
         <h3>{bot.tokenId}</h3>
         <p>{bot.mined}</p>
-        <img src={bot.tokenUriData.image} alt={bot.tokenId} height="300px" />
-        {/* {bot.mined ? (
+        {bot.mined ? (
           <img src={bot.tokenUriData.image} alt={bot.tokenId} height="300px" />
         ) : (
           <img
@@ -19,7 +18,7 @@ class BotCard extends Component {
             alt={bot.tokenId}
             height="300px"
           />
-        )} */}
+        )}
         <p>{bot.tokenType} bot</p>
         <p>Gen {bot.generation}</p>
         <p>DNA {bot.dna}</p>
