@@ -1,4 +1,11 @@
 .BotCard {
-  padding: 20px;
   border: 2px solid black;
+  flex-basis: 33%;
+  margin-bottom: 25px;
+  
+  > h3 { 
+    border-bottom: 2px solid black; 
+    width: 100%;
+    padding-bottom: 25px; 
+  }
 }
