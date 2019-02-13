@@ -17,12 +17,11 @@ class GenerationForm extends Component {
   };
 
   getGitFromUrl(event) {
-    const url = event.target.value;
-
-    //https://github.com/odyssy-automaton/od-sls-htmlgen.git
-    const gitStuff = url.split('/');
-    const repo = gitStuff[gitStuff.length - 1].split('.')[0];
-    const owner = gitStuff[gitStuff.length - 2];
+    // const url = event.target.value;
+    // //https://github.com/odyssy-automaton/od-sls-htmlgen.git
+    // const gitStuff = url.split('/');
+    // const repo = gitStuff[gitStuff.length - 1].split('.')[0];
+    // const owner = gitStuff[gitStuff.length - 2];
   }
 
   render() {
