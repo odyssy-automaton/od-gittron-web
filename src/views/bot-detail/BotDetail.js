@@ -17,8 +17,18 @@ class BotDetail extends Component {
     this.getBot();
   };
 
-  getBot = async () => {
-    const { data } = await get(`tokenid/${this.props.match.params.tokenId}`);
+  componentWillUpdate = (nextProps, nextState) => {
+    // this.props.match.params.tokenId
+    console.log('hit');
+    if (this.props.match.params.tokenId !== nextProps.match.params.tokenId) {
+      console.log('hit THE BIG ONE');
+      this.getBot(nextProps.match.params.tokenId);
+    }
+  };
+
+  getBot = async (id) => {
+    const tokenId = id || this.props.match.params.tokenId;
+    const { data } = await get(`tokenid/${tokenId}`);
 
     this.setState({
       bot: data,
@@ -32,6 +42,7 @@ class BotDetail extends Component {
   render() {
     const { bot } = this.state;
     const unverified = bot.tokenType === 'master' && !bot.verified;
+    const verified = bot.tokenType === 'master' && bot.verified;
 
     return (
       <Web3Consumer>
@@ -56,7 +67,7 @@ class BotDetail extends Component {
                 <div>
                   <h3>{bot.tokenId}</h3>
                   <h4>{bot.tokenType}</h4>
-                  {!unverified && (
+                  {verified && (
                     <div className="BotDetail__verfication-badge">
                       <p>VERIFIED BOT!</p>
                     </div>

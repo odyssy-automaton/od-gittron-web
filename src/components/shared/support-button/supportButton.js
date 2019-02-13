@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import GittronWeb3Service from '../../../util/gittronWeb3';
 import { post } from '../../../util/requests';
@@ -10,7 +10,6 @@ class SupportButton extends Component {
     price: 0,
     priceInEth: 0,
     contract: null,
-    generated: false,
     supportTokenId: null,
     tokenId: null,
   };
@@ -61,16 +60,12 @@ class SupportButton extends Component {
       res.data.ghid,
     );
 
-    this.setState({ generated: true });
+    this.props.history.push(`/bots/${this.state.supportTokenId}`);
   };
 
   render() {
     const { bot } = this.props;
-    const { supportTokenId, generated, priceInEth } = this.state;
-
-    if (generated) {
-      return <Redirect to={`${supportTokenId}`} />;
-    }
+    const { priceInEth } = this.state;
 
     return (
       <div>
@@ -81,4 +76,4 @@ class SupportButton extends Component {
   }
 }
 
-export default SupportButton;
+export default withRouter(SupportButton);

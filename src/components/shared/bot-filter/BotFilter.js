@@ -11,7 +11,7 @@ class BotFilter extends Component {
       { value: 'all', label: 'All Types' },
       { value: 'master', label: 'Master Bot' },
       { value: 'worker', label: 'Worker Bot' },
-      { value: 'support', label: 'Support Bot' },
+      { value: 'supporter', label: 'Support Bot' },
     ],
     type: { value: 'all', label: 'All Types' },
     repo: { value: 'all', label: 'All Repos' },

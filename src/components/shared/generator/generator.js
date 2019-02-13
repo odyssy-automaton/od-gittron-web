@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import GenerationForm from '../../forms/generation/GenerationForm';
 
 import { post } from '../../../util/requests';
@@ -13,7 +13,6 @@ class Generator extends Component {
 
   componentDidMount() {
     this._isMounted = true;
-    console.log('web3 account', this.props.account);
     this.web3Service = new Web3Service(this.props.web3);
 
     this.GittronWeb3Service = new GittronWeb3Service(this.props.web3);
@@ -26,7 +25,6 @@ class Generator extends Component {
 
   loadContract = async () => {
     const contract = await this.GittronWeb3Service.initContracts();
-    console.log('load contract', contract);
 
     if (this._isMounted) {
       this.setState({ contract });
@@ -57,16 +55,12 @@ class Generator extends Component {
     };
 
     bot.price = await this.web3Service.toWei(bot.price);
-    console.log(bot.price);
-
-    console.log('newBot', newBot);
 
     const res = await post('tokens/new', newBot);
 
-    console.log(res);
     this.setState({ tokenId: res.data.tokenId });
 
-    var thing = await this.GittronWeb3Service.registerMasterBot(
+    await this.GittronWeb3Service.registerMasterBot(
       `${process.env.REACT_APP_API_HOST}uri/${res.data.tokenId}`,
       `${res.data.tokenId}`,
       bot.price,
@@ -75,23 +69,14 @@ class Generator extends Component {
       res.data.ghid,
     );
 
-    console.log('thing', thing);
-
-    this.setState({ generated: true });
+    this.props.history.push(`/bots/${this.state.tokenId}`);
   };
 
   render() {
-    const { tokenId, generated } = this.state;
-
-    if (generated) {
-      return <Redirect to={`bots/${tokenId}`} />;
-    }
+    const { tokenId } = this.state;
 
     return (
       <div>
-        <div>
-          <button onClick={() => this.totalSupply()}>totalSupply</button>
-        </div>
         {tokenId ? (
           <div>
             <p>{tokenId} is generating</p>
@@ -124,4 +109,4 @@ class Generator extends Component {
   }
 }
 
-export default Generator;
+export default withRouter(Generator);
