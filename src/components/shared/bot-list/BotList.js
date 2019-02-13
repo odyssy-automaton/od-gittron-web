@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import BotCard from '../bot-card/BotCard';
 
@@ -7,7 +8,11 @@ import './BotList.scss';
 class BotList extends Component {
   renderBots() {
     return this.props.bots.map((bot) => {
-      return <BotCard key={bot.tokenId} bot={bot} />;
+      return (
+        <Link to={`bots/${bot.tokenId}`}>
+          <BotCard key={bot.tokenId} bot={bot} />
+        </Link>
+      );
     });
   }
 

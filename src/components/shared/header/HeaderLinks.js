@@ -15,6 +15,7 @@ class HeaderLinks extends Component {
         </div>
         <div className="Navigation--Desktop">
           <Link to="/">Bots</Link>
+          <Link to="/repos">Repos</Link>
           <Link to="/about">About</Link>
 
           {authenticated ? <Link to="/dashboard">Dashboard</Link> : null}
