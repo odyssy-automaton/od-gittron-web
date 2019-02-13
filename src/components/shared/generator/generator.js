@@ -4,6 +4,7 @@ import GenerationForm from '../../forms/generation/GenerationForm';
 
 import { post } from '../../../util/requests';
 import GittronWeb3Service from '../../../util/gittronWeb3';
+import Web3Service from '../../../util/web3Service';
 
 class Generator extends Component {
   state = {
@@ -13,6 +14,7 @@ class Generator extends Component {
   componentDidMount() {
     this._isMounted = true;
     console.log('web3 account', this.props.account);
+    this.web3Service = new Web3Service(this.props.web3);
 
     this.GittronWeb3Service = new GittronWeb3Service(this.props.web3);
     this.loadContract();
@@ -53,6 +55,9 @@ class Generator extends Component {
       generation: '0',
       generated: false,
     };
+
+    bot.price = await this.web3Service.toWei(bot.price);
+    console.log(bot.price);
 
     console.log('newBot', newBot);
 
