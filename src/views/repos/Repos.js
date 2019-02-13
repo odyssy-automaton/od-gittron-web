@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Web3Consumer } from 'web3-react';
+import Web3 from 'web3';
 
 import { get } from '../../util/requests';
+import RepoList from '../../components/shared/repo-list/RepoList';
 
 class Repos extends Component {
   state = {
@@ -13,43 +16,39 @@ class Repos extends Component {
     this.setState({
       repos: this.uniqueRepos(data),
     });
-
-    //need to turn this into a repo list
   };
 
   uniqueRepos = (data) => {
     let hash = {};
 
-    const repos = data
-      .filter((bot) => {
-        if (hash[bot.ghid]) {
-          return false;
-        }
-        hash[bot.ghid] = true;
-        return true;
-      })
-      .map((bot) => {
-        return { repo: bot.repo, ghid: bot.ghid };
-      });
+    //TODO: might filter by unverified here
+    const repos = data.filter((bot) => {
+      if (hash[bot.ghid]) {
+        return false;
+      }
+      hash[bot.ghid] = true;
+      return true;
+    });
 
     return repos;
   };
 
-  repoList = () => {
-    return this.state.repos.map((repo) => {
-      return (
-        <Link to={`repos/${repo.ghid}`}>
-          <p>{repo.repo}</p>
-        </Link>
-      );
-    });
-  };
-
   render() {
-    // const { repos } = this.state;
-    const repoList = this.repoList();
+    const { repos } = this.state;
 
-    return <div>{repoList}</div>;
+    return (
+      <Web3Consumer>
+        {(context) => (
+          <div>
+            <h3>Repos ({repos.length})</h3>
+            <RepoList
+              repos={repos}
+              web3={new Web3(context.web3js.givenProvider)}
+            />
+          </div>
+        )}
+      </Web3Consumer>
+    );
   }
 }
 
