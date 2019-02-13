@@ -17,8 +17,18 @@ class BotDetail extends Component {
     this.getBot();
   };
 
-  getBot = async () => {
-    const { data } = await get(`tokenid/${this.props.match.params.tokenId}`);
+  componentWillUpdate = (nextProps, nextState) => {
+    // this.props.match.params.tokenId
+    console.log('hit');
+    if (this.props.match.params.tokenId !== nextProps.match.params.tokenId) {
+      console.log('hit THE BIG ONE');
+      this.getBot(nextProps.match.params.tokenId);
+    }
+  };
+
+  getBot = async (id) => {
+    const tokenId = id || this.props.match.params.tokenId;
+    const { data } = await get(`tokenid/${tokenId}`);
 
     this.setState({
       bot: data,

@@ -198,7 +198,7 @@ export default class GittronWeb3Service {
       })
       .then(async (resp) => {
         await this.checkStauts(resp.transactionHash, tokenId, ghid);
-        const resSvg = await post('generatepng', {
+        await post('generatepng', {
           ghid: ghid,
           tokenId: tokenId,
         });
