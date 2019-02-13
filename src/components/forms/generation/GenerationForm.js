@@ -37,18 +37,14 @@ class GenerationForm extends Component {
           <fieldset>
             <div>
               <label>Repo Name</label>
-              <input defaultValue="od-sls-htmlgen" type="text" name="repo" />
+              <input defaultValue="" type="text" name="repo" />
             </div>
             <div>
               <label>Repo Owner</label>
-              <input
-                defaultValue="odyssy-automaton"
-                type="text"
-                name="repoOwner"
-              />
+              <input defaultValue="" type="text" name="repoOwner" />
             </div>
             <div>
-              <label>Price</label>
+              <label>Amount in DAI</label>
               <input
                 type="text"
                 name="price"
@@ -56,15 +52,11 @@ class GenerationForm extends Component {
               />
             </div>
             <div>
-              <label>Withdraw Address</label>
-              <input
-                type="text"
-                name="withdrawAddr"
-                defaultValue="0xBaf6e57A3940898fd21076b139D4aB231dCbBc5f"
-              />
+              <label>Ethereum Wallet Address</label>
+              <input type="text" name="withdrawAddr" defaultValue="" />
             </div>
             <div>
-              <button type="submit">Generate Master Bot</button>
+              <button type="submit">Register Repo</button>
             </div>
           </fieldset>
         </form>
