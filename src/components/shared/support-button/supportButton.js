@@ -3,10 +3,12 @@ import { Redirect } from 'react-router-dom';
 
 import GittronWeb3Service from '../../../util/gittronWeb3';
 import { post } from '../../../util/requests';
+import Web3Service from '../../../util/web3Service';
 
 class SupportButton extends Component {
   state = {
     price: 0,
+    priceInEth: 0,
     contract: null,
     generated: false,
     supportTokenId: null,
@@ -17,6 +19,7 @@ class SupportButton extends Component {
     console.log(this.props.web3);
 
     this.GittronWeb3Service = new GittronWeb3Service(this.props.web3);
+    this.web3Service = new Web3Service(this.props.web3);
 
     this.loadContract();
     console.log('botz', this.props.bot);
@@ -29,7 +32,8 @@ class SupportButton extends Component {
     if (this._isMounted) {
       this.setState({ contract });
       const price = await this.getBaseTokenPrice(this.props.bot.tokenId);
-      this.setState({ contract, price });
+      const priceInEth = await this.web3Service.toEth(price);
+      this.setState({ contract, price, priceInEth });
     }
   };
 
@@ -72,7 +76,7 @@ class SupportButton extends Component {
 
   render() {
     const { bot } = this.props;
-    const { supportTokenId, tokenId, generated } = this.state;
+    const { supportTokenId, generated, priceInEth } = this.state;
 
     if (generated) {
       return <Redirect to={`${supportTokenId}`} />;
@@ -80,7 +84,7 @@ class SupportButton extends Component {
 
     return (
       <div>
-        <p>Price: {this.state.price}</p>
+        <p>Price: {priceInEth}</p>
         <button onClick={() => this.handleSubmit(bot)}>Support</button>
       </div>
     );

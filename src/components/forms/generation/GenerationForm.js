@@ -44,12 +44,8 @@ class GenerationForm extends Component {
               <input defaultValue="" type="text" name="repoOwner" />
             </div>
             <div>
-              <label>Amount in DAI</label>
-              <input
-                type="text"
-                name="price"
-                defaultValue="100000000000000000"
-              />
+              <label>Amount in ETH</label>
+              <input type="text" name="price" defaultValue=".01" />
             </div>
             <div>
               <label>Ethereum Wallet Address</label>
