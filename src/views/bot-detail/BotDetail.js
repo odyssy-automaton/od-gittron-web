@@ -18,10 +18,7 @@ class BotDetail extends Component {
   };
 
   componentWillUpdate = (nextProps, nextState) => {
-    // this.props.match.params.tokenId
-    console.log('hit');
     if (this.props.match.params.tokenId !== nextProps.match.params.tokenId) {
-      console.log('hit THE BIG ONE');
       this.getBot(nextProps.match.params.tokenId);
     }
   };
