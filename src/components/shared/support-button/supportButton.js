@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
 import GittronWeb3Service from '../../../util/gittronWeb3';
@@ -14,17 +14,12 @@ class SupportButton extends Component {
   };
   async componentDidMount() {
     this._isMounted = true;
-    console.log(this.props.web3);
-
     this.GittronWeb3Service = new GittronWeb3Service(this.props.web3);
-
     this.loadContract();
-    console.log('botz', this.props.bot);
   }
 
   loadContract = async () => {
     const contract = await this.GittronWeb3Service.initContracts();
-    console.log('load contract', contract);
 
     if (this._isMounted) {
       this.setState({ contract });
@@ -47,15 +42,11 @@ class SupportButton extends Component {
       tokenType: 'supporter',
       address: this.props.account,
     };
-
-    console.log('newBot', newBot);
-
     const res = await post('tokens/workersupporter', newBot);
 
-    console.log(res);
     this.setState({ supportTokenId: res.data.tokenId });
 
-    var thing = await this.GittronWeb3Service.launchSupportBot(
+    await this.GittronWeb3Service.launchSupportBot(
       bot.tokenId,
       res.data.tokenId,
       `${process.env.REACT_APP_API_HOST}uri/${res.data.tokenId}`,
@@ -65,14 +56,12 @@ class SupportButton extends Component {
       res.data.ghid,
     );
 
-    console.log('state', this.state);
-
     this.setState({ generated: true });
   };
 
   render() {
     const { bot } = this.props;
-    const { supportTokenId, tokenId, generated } = this.state;
+    const { supportTokenId, generated } = this.state;
 
     if (generated) {
       return <Redirect to={`${supportTokenId}`} />;

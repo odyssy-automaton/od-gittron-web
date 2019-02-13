@@ -13,12 +13,20 @@ class BotDetail extends Component {
     bot: {},
   };
 
-  componentDidMount = async () => {
+  componentDidMount = () => {
+    this.getBot();
+  };
+
+  getBot = async () => {
     const { data } = await get(`tokenid/${this.props.match.params.tokenId}`);
 
     this.setState({
       bot: data,
     });
+  };
+
+  handleVerification = () => {
+    this.getBot();
   };
 
   render() {
@@ -32,7 +40,10 @@ class BotDetail extends Component {
             {unverified && (
               <div>
                 <h5>Your Master Bot is unverified</h5>
-                <BotVerfication bot={bot} />
+                <BotVerfication
+                  bot={bot}
+                  handleVerification={this.handleVerification}
+                />
               </div>
             )}
             <div className="BotDetail">
@@ -45,6 +56,11 @@ class BotDetail extends Component {
                 <div>
                   <h3>{bot.tokenId}</h3>
                   <h4>{bot.tokenType}</h4>
+                  {!unverified && (
+                    <div className="BotDetail__verfication-badge">
+                      <p>VERIFIED BOT!</p>
+                    </div>
+                  )}
                   <p>owner: from contract</p>
                   <p>Repo: {bot.repo}</p>
                   <p>DNA {bot.dna}</p>
