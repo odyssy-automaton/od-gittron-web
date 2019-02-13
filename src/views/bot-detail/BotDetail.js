@@ -42,6 +42,7 @@ class BotDetail extends Component {
   render() {
     const { bot } = this.state;
     const unverified = bot.tokenType === 'master' && !bot.verified;
+    const verified = bot.tokenType === 'master' && bot.verified;
 
     return (
       <Web3Consumer>
@@ -66,7 +67,7 @@ class BotDetail extends Component {
                 <div>
                   <h3>{bot.tokenId}</h3>
                   <h4>{bot.tokenType}</h4>
-                  {!unverified && (
+                  {verified && (
                     <div className="BotDetail__verfication-badge">
                       <p>VERIFIED BOT!</p>
                     </div>
