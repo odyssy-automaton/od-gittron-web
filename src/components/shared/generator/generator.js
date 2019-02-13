@@ -98,7 +98,21 @@ class Generator extends Component {
             />
           </div>
         ) : (
-          <GenerationForm onSubmit={this.handleSubmit} />
+          <div>
+            <p>
+              Enter the clone URL for a Github repo that you own or mangge to
+              receive a Gen 0 Master bot-cube.
+            </p>
+            <p>
+              Supporters of your repo can donate to your fund of choice and
+              they'll get a clone in the form of a Support Bot.
+            </p>
+            <p>
+              Set a proce for each Support bot here and an address to receive
+              the funds.
+            </p>
+            <GenerationForm onSubmit={this.handleSubmit} />
+          </div>
         )}
       </div>
     );

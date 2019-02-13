@@ -4,6 +4,7 @@ import { get } from '../../util/requests';
 import BotCard from '../../components/shared/bot-card/BotCard';
 import Web3 from 'web3';
 import SupportButton from '../../components/shared/support-button/supportButton';
+import BotVerfication from '../../components/shared/bot-verfication/BotVerfication';
 
 class BotDetail extends Component {
   state = {
@@ -20,10 +21,18 @@ class BotDetail extends Component {
 
   render() {
     const { bot } = this.state;
+    const unverified = bot.tokenType === 'master' && !bot.verified;
+
     return (
       <Web3Consumer>
         {(context) => (
           <Fragment>
+            {unverified && (
+              <div>
+                <h5>Your Master Bot is unverified</h5>
+                <BotVerfication bot={bot} />
+              </div>
+            )}
             <BotCard
               bot={bot}
               account={context.account}
