@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Web3Consumer } from 'web3-react';
 
 import './Header.scss';

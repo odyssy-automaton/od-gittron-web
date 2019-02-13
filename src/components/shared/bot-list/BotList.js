@@ -9,8 +9,8 @@ class BotList extends Component {
   renderBots() {
     return this.props.bots.map((bot) => {
       return (
-        <Link to={`bots/${bot.tokenId}`}>
-          <BotCard key={bot.tokenId} bot={bot} />
+        <Link to={`bots/${bot.tokenId}`} key={bot.tokenId}>
+          <BotCard bot={bot} />
         </Link>
       );
     });
