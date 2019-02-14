@@ -1,32 +1,56 @@
 import React, { Component, Fragment } from 'react';
 
 class GenerationForm extends Component {
+  state = {
+    valid: true,
+  };
+
   handleSubmit = (e) => {
     e.preventDefault();
-    const { onSubmit } = this.props;
+
+    this.setState({ valid: true });
 
     const formData = new FormData(this.form);
     const botDetails = {};
-
     for (let pair of formData.entries()) {
       botDetails[pair[0]] = pair[1];
     }
 
-    onSubmit(botDetails);
+    if (this.invalidBot(botDetails)) {
+      this.setState({ valid: false });
+
+      return;
+    }
+
+    this.props.onSubmit({
+      ...botDetails,
+      ...this.getGitFromUrl(botDetails.repoUrl),
+    });
+
     this.form.reset();
   };
 
-  getGitFromUrl(event) {
-    // const url = event.target.value;
-    // //https://github.com/odyssy-automaton/od-sls-htmlgen.git
-    // const gitStuff = url.split('/');
-    // const repo = gitStuff[gitStuff.length - 1].split('.')[0];
-    // const owner = gitStuff[gitStuff.length - 2];
-  }
+  invalidBot = (bot) => {
+    return Object.entries(bot).find((attr) => {
+      return !attr[1].length;
+    });
+  };
+
+  getGitFromUrl = (url) => {
+    const gitStuff = url.split('/');
+
+    return {
+      repo: gitStuff[gitStuff.length - 1],
+      repoOwner: gitStuff[gitStuff.length - 2],
+    };
+  };
 
   render() {
+    const { valid } = this.state;
+
     return (
       <Fragment>
+        {!valid && <p>Invalid submission</p>}
         <form
           onSubmit={this.handleSubmit}
           name="GenerationForm"
@@ -35,12 +59,8 @@ class GenerationForm extends Component {
         >
           <fieldset>
             <div>
-              <label>Repo Name</label>
-              <input defaultValue="" type="text" name="repo" />
-            </div>
-            <div>
-              <label>Repo Owner</label>
-              <input defaultValue="" type="text" name="repoOwner" />
+              <label>Repo Url</label>
+              <input defaultValue="" type="text" name="repoUrl" />
             </div>
             <div>
               <label>Amount in ETH</label>
