@@ -4,7 +4,7 @@ import { get } from '../../util/requests';
 import BotCard from '../../components/shared/bot-card/BotCard';
 import Web3 from 'web3';
 import SupportButton from '../../components/shared/support-button/supportButton';
-import BuidleButton from '../../components/shared/buidl-button/buidlButton';
+import BuidlButton from '../../components/shared/buidl-button/buidlButton';
 import BotVerification from '../../components/shared/bot-verfication/BotVerification';
 import EvolveButton from '../../components/shared/evolve-button/evolveButton';
 import WithdrawButton from '../../components/shared/withdraw-button/withdrawButton';
@@ -94,7 +94,7 @@ class BotDetail extends Component {
                         account={context.account}
                         web3={new Web3(context.web3js.givenProvider)}
                       />
-                      <BuidleButton
+                      <BuidlButton
                         bot={bot}
                         account={context.account}
                         web3={new Web3(context.web3js.givenProvider)}
