@@ -34,6 +34,10 @@ body {
 a {
   color: black;
   text-decoration: none;
+  transition: all .15s linear;
+  &:hover {
+    color: #5f5fff;
+  }
 }
 
 .Contain {
@@ -65,17 +69,47 @@ a {
   }
 }
 
+// Components
+
+.Loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &__Contents {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+  }
+}
+
 // Columns
 
 .Columns {
   display: flex;
+  flex-wrap: wrap;
   &__Column {
     &--33 {
-      flex-basis: 33%;
+      flex-basis: calc(33% - 25px);
       padding-right: 25px;
+      @media (max-width: $tablet) {
+        flex-basis: 100%;
+        padding-left: 25px;
+      }
     }
     &--50 {
-      flex-basis: 50%;
+      flex-basis: calc(50% - 25px);
+      padding-right: 25px;
+      @media (max-width: $tablet) {
+        flex-basis: calc(100% - 50px);
+        padding-left: 25px;
+      }
     }
   }
 }

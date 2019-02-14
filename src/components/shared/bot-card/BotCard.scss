@@ -1,12 +1,9 @@
 .BotCard {
-  position: relative;
-  flex-basis: 33%;
-  margin-bottom: 25px;
   border: 2px solid black;
   &__Header {
     padding: 10px 25px;
     border-bottom: 2px solid black; 
-    h3 { 
+    &--Name { 
       width: 100%;
     }
   }

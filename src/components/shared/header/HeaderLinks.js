@@ -10,7 +10,7 @@ class HeaderLinks extends Component {
       <div className="Header">
         <div className="Logo">
           <h1 className="Header__title">
-            <Link to="/">MechaPrime</Link>
+            <Link to="/">Gittron</Link>
           </h1>
         </div>
         <div className="Navigation--Desktop">
