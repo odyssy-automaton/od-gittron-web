@@ -39,8 +39,13 @@ class WithdrawButton extends Component {
   };
 
   handleSubmit = async (bot) => {
-    await this.GittronWeb3Service.withdraw(bot.tokenId, this.props.account);
-    this.setState({ botBank: 0 });
+    const res = await this.GittronWeb3Service.withdraw(
+      bot.tokenId,
+      this.props.account,
+    );
+    if (!res.error) {
+      this.setState({ botBank: 0 });
+    }
   };
 
   render() {

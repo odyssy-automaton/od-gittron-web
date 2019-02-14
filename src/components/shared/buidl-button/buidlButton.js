@@ -49,7 +49,7 @@ class BuidlButton extends Component {
 
     this.setState({ workerTokenId: res.data.tokenId });
 
-    await this.GittronWeb3Service.launchWorkerBot(
+    const botRes = await this.GittronWeb3Service.launchWorkerBot(
       newBot.masterTokenId,
       res.data.tokenId,
       `${process.env.REACT_APP_API_HOST}uri/${res.data.tokenId}`,
@@ -58,7 +58,9 @@ class BuidlButton extends Component {
       res.data.ghid,
     );
 
-    this.props.history.push(`/bots/${this.state.workerTokenId}`);
+    if (!botRes.error) {
+      this.props.history.push(`/bots/${this.state.workerTokenId}`);
+    }
   };
 
   render() {

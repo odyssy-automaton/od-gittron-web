@@ -65,7 +65,7 @@ class Generator extends Component {
 
     this.setState({ tokenId: res.data.tokenId });
 
-    await this.GittronWeb3Service.registerMasterBot(
+    const botRes = await this.GittronWeb3Service.registerMasterBot(
       `${process.env.REACT_APP_API_HOST}uri/${res.data.tokenId}`,
       `${res.data.tokenId}`,
       bot.price,
@@ -74,7 +74,9 @@ class Generator extends Component {
       res.data.ghid,
     );
 
-    this.props.history.push(`/bots/${this.state.tokenId}`);
+    if (!botRes.error) {
+      this.props.history.push(`/bots/${this.state.tokenId}`);
+    }
   };
 
   render() {

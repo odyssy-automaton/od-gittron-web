@@ -56,7 +56,7 @@ class SupportButton extends Component {
 
     this.setState({ supportTokenId: res.data.tokenId });
 
-    await this.GittronWeb3Service.launchSupportBot(
+    const botRes = await this.GittronWeb3Service.launchSupportBot(
       bot.tokenId,
       res.data.tokenId,
       `${process.env.REACT_APP_API_HOST}uri/${res.data.tokenId}`,
@@ -66,7 +66,9 @@ class SupportButton extends Component {
       res.data.ghid,
     );
 
-    this.props.history.push(`/bots/${this.state.supportTokenId}`);
+    if (!botRes.error) {
+      this.props.history.push(`/bots/${this.state.supportTokenId}`);
+    }
   };
 
   render() {
