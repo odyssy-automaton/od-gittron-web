@@ -10,8 +10,9 @@ class WithdrawButton extends Component {
     workerTokenId: null,
     tokenId: null,
     botBank: null,
-    ownerOf: false,
+    ownerOfToken: false,
   };
+
   async componentDidMount() {
     this._isMounted = true;
     this.GittronWeb3Service = new GittronWeb3Service(this.props.web3);
@@ -39,8 +40,13 @@ class WithdrawButton extends Component {
   };
 
   handleSubmit = async (bot) => {
-    await this.GittronWeb3Service.withdraw(bot.tokenId, this.props.account);
-    this.setState({ botBank: 0 });
+    const res = await this.GittronWeb3Service.withdraw(
+      bot.tokenId,
+      this.props.account,
+    );
+    if (!res.error) {
+      this.setState({ botBank: 0 });
+    }
   };
 
   render() {

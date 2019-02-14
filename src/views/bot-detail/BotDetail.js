@@ -49,13 +49,12 @@ class BotDetail extends Component {
         {(context) => (
           <Fragment>
             {unverified && (
-              <div>
-                <h5>Your Master Bot is unverified</h5>
-                <BotVerification
-                  bot={bot}
-                  handleVerification={this.handleVerification}
-                />
-              </div>
+              <BotVerification
+                bot={bot}
+                handleVerification={this.handleVerification}
+                account={context.account}
+                web3={new Web3(context.web3js.givenProvider)}
+              />
             )}
             <div className="BotDetail Columns Contain">
               <div className="Columns__Column--50">

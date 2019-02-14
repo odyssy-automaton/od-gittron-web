@@ -81,7 +81,7 @@ export default class GittronWeb3Service {
     return await this.gittronContract.methods.ownerOf(tokenId).call();
   }
 
-  async checkStauts(txHash, tokenId, ghid) {
+  async checkStatus(txHash, tokenId, ghid) {
     let query = {
       txHash: txHash,
       tokenId: tokenId,
@@ -101,6 +101,11 @@ export default class GittronWeb3Service {
       })
       .then(async (resp) => {
         console.log('withdrawed');
+        return resp;
+      })
+      .catch(async (err) => {
+        console.log(err);
+        return { error: 'rejected transaction' };
       });
   }
 
@@ -117,10 +122,10 @@ export default class GittronWeb3Service {
       .metamorph(baseTokenId, tokenUri, tokenId, price, withdrawAddr)
       .send({ from: account })
       .once('transactionHash', async (txHash) => {
-        await this.checkStauts(txHash, tokenId, ghid);
+        await this.checkStatus(txHash, tokenId, ghid);
       })
       .then(async (resp) => {
-        await this.checkStauts(resp.transactionHash, tokenId, ghid);
+        await this.checkStatus(resp.transactionHash, tokenId, ghid);
         const resSvg = await post('generatepng', {
           ghid: ghid,
           tokenId: tokenId,
@@ -145,10 +150,10 @@ export default class GittronWeb3Service {
       .launchBaseToken(tokenUri, tokenId, price, withdrawAddr)
       .send({ from: account })
       .once('transactionHash', async (txHash) => {
-        await this.checkStauts(txHash, tokenId, ghid);
+        await this.checkStatus(txHash, tokenId, ghid);
       })
       .then(async (resp) => {
-        await this.checkStauts(resp.transactionHash, tokenId, ghid);
+        await this.checkStatus(resp.transactionHash, tokenId, ghid);
         const resSvg = await post('generatepng', {
           ghid: ghid,
           tokenId: tokenId,
@@ -156,15 +161,15 @@ export default class GittronWeb3Service {
         console.log('res svg', resSvg);
 
         return resSvg;
+      })
+      .catch(async (err) => {
+        console.log(err);
+        await this.checkStatus('rejected', tokenId, ghid);
+
+        return { error: 'rejected transaction' };
       });
   }
 
-  // function launchRareToken(
-  //   uint _baseTokenId,
-  //   uint _tokenId,
-  //   string memory _tokenURI,
-  //   address receiver
-  // )
   async launchWorkerBot(
     baseTokenId,
     tokenId,
@@ -179,10 +184,10 @@ export default class GittronWeb3Service {
       .launchRareToken(baseTokenId, tokenId, tokenUri, receiver)
       .send({ from: account })
       .once('transactionHash', async (txHash) => {
-        await this.checkStauts(txHash, tokenId, ghid);
+        await this.checkStatus(txHash, tokenId, ghid);
       })
       .then(async (resp) => {
-        await this.checkStauts(resp.transactionHash, tokenId, ghid);
+        await this.checkStatus(resp.transactionHash, tokenId, ghid);
         const resSvg = await post('generatepng', {
           ghid: ghid,
           tokenId: tokenId,
@@ -190,6 +195,12 @@ export default class GittronWeb3Service {
         console.log('res svg', resSvg);
 
         return resSvg;
+      })
+      .catch(async (err) => {
+        console.log(err);
+        await this.checkStatus('rejected', tokenId, ghid);
+
+        return { error: 'rejected transaction' };
       });
   }
 
@@ -208,14 +219,22 @@ export default class GittronWeb3Service {
       .launchNormalToken(baseTokenId, tokenId, tokenUri, amount, receiver)
       .send({ from: account, value: amount })
       .once('transactionHash', async (txHash) => {
-        await this.checkStauts(txHash, tokenId, ghid);
+        await this.checkStatus(txHash, tokenId, ghid);
       })
       .then(async (resp) => {
-        await this.checkStauts(resp.transactionHash, tokenId, ghid);
-        await post('generatepng', {
+        await this.checkStatus(resp.transactionHash, tokenId, ghid);
+        const resSvg = await post('generatepng', {
           ghid: ghid,
           tokenId: tokenId,
         });
+
+        return resSvg;
+      })
+      .catch(async (err) => {
+        console.log(err);
+        await this.checkStatus('rejected', tokenId, ghid);
+
+        return { error: 'rejected transaction' };
       });
   }
 }

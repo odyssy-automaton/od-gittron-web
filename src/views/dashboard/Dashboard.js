@@ -5,6 +5,7 @@ import Web3 from 'web3';
 import Generator from '../../components/shared/generator/generator';
 
 import './Dashboard.scss';
+import DashboardBots from '../../components/shared/dashboard-bots/DashboardBots';
 
 function Dashboard() {
   return (
@@ -13,6 +14,10 @@ function Dashboard() {
         <div className="Dashboard">
           <div>
             <h3>Your Bots</h3>
+            <DashboardBots
+              address={context.account}
+              web3={new Web3(context.web3js.givenProvider)}
+            />
           </div>
           <div>
             <h3>Your Repos</h3>
