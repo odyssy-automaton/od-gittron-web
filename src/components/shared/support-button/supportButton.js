@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import GittronWeb3Service from '../../../util/gittronWeb3';
 import { post } from '../../../util/requests';
 import Web3Service from '../../../util/web3Service';
+import Loader from '../loader/loader';
 
 class SupportButton extends Component {
   state = {
@@ -12,7 +13,9 @@ class SupportButton extends Component {
     contract: null,
     supportTokenId: null,
     tokenId: null,
+    loading: false,
   };
+
   async componentDidMount() {
     this._isMounted = true;
     this.GittronWeb3Service = new GittronWeb3Service(this.props.web3);
@@ -40,6 +43,10 @@ class SupportButton extends Component {
   };
 
   handleSubmit = async (bot) => {
+    this.setState({
+      loading: true,
+    });
+
     const newBot = {
       masterTokenId: bot.tokenId,
       tokenType: 'support',
@@ -64,7 +71,11 @@ class SupportButton extends Component {
 
   render() {
     const { bot } = this.props;
-    const { priceInEth } = this.state;
+    const { priceInEth, loading } = this.state;
+
+    if (loading) {
+      return <Loader />;
+    }
 
     return (
       <div>

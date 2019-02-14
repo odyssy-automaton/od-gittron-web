@@ -5,6 +5,7 @@ import GenerationForm from '../../forms/generation/GenerationForm';
 import { post } from '../../../util/requests';
 import GittronWeb3Service from '../../../util/gittronWeb3';
 import Web3Service from '../../../util/web3Service';
+import Loader from '../loader/loader';
 
 class Generator extends Component {
   state = {
@@ -45,6 +46,10 @@ class Generator extends Component {
   };
 
   handleSubmit = async (bot) => {
+    this.setState({
+      loading: true,
+    });
+
     const newBot = {
       repo: bot.repo,
       repoOwner: bot.repoOwner,
@@ -80,7 +85,7 @@ class Generator extends Component {
         {tokenId ? (
           <div>
             <p>{tokenId} is generating</p>
-            <p>LOADING...</p>
+            <Loader />
             <img
               src="https://s3.amazonaws.com/odyssy-assets/Gittron__BotCube.png"
               alt={tokenId}
