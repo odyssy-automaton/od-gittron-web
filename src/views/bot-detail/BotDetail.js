@@ -4,7 +4,10 @@ import { get } from '../../util/requests';
 import BotCard from '../../components/shared/bot-card/BotCard';
 import Web3 from 'web3';
 import SupportButton from '../../components/shared/support-button/supportButton';
+import BuidleButton from '../../components/shared/buidl-button/buidlButton';
 import BotVerification from '../../components/shared/bot-verfication/BotVerification';
+import EvolveButton from '../../components/shared/evolve-button/evolveButton';
+import WithdrawButton from '../../components/shared/withdraw-button/withdrawButton';
 
 import './BotDetail.scss';
 
@@ -72,7 +75,9 @@ class BotDetail extends Component {
                   <p>Owner = from contract</p>
                   <p>Repo = {bot.repo}</p>
                   <p>DNA = {bot.dna}</p>
-                  <p>Gen <strong>{bot.generation}</strong></p>
+                  <p>
+                    Gen <strong>{bot.generation}</strong>
+                  </p>
                   <div classname="BotDetail__Info--Rares">
                     <h5>Rares</h5>
                   </div>
@@ -84,8 +89,24 @@ class BotDetail extends Component {
                         Support the development of this bot's repo by cloning as
                         a support bot.
                       </p>
-                      <p>Price: from contract</p>
                       <SupportButton
+                        bot={bot}
+                        account={context.account}
+                        web3={new Web3(context.web3js.givenProvider)}
+                      />
+                      <BuidleButton
+                        bot={bot}
+                        account={context.account}
+                        web3={new Web3(context.web3js.givenProvider)}
+                      />
+
+                      <EvolveButton
+                        bot={bot}
+                        account={context.account}
+                        web3={new Web3(context.web3js.givenProvider)}
+                      />
+
+                      <WithdrawButton
                         bot={bot}
                         account={context.account}
                         web3={new Web3(context.web3js.givenProvider)}
