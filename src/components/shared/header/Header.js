@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Web3Consumer } from 'web3-react';
 
 import './Header.scss';
+
 import HeaderLinks from './HeaderLinks';
 
 class Header extends Component {
