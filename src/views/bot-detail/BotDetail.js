@@ -4,7 +4,7 @@ import { get } from '../../util/requests';
 import BotCard from '../../components/shared/bot-card/BotCard';
 import Web3 from 'web3';
 import SupportButton from '../../components/shared/support-button/supportButton';
-import BotVerfication from '../../components/shared/bot-verfication/BotVerification';
+import BotVerification from '../../components/shared/bot-verfication/BotVerification';
 
 import './BotDetail.scss';
 
@@ -48,7 +48,7 @@ class BotDetail extends Component {
             {unverified && (
               <div>
                 <h5>Your Master Bot is unverified</h5>
-                <BotVerfication
+                <BotVerification
                   bot={bot}
                   handleVerification={this.handleVerification}
                 />
@@ -60,24 +60,26 @@ class BotDetail extends Component {
                 account={context.account}
                 web3={new Web3(context.web3js.givenProvider)}
               />
-              <div>
+              <div className="BotDetail__Info">
                 <div>
                   <h3>{bot.tokenId}</h3>
-                  <h4>{bot.tokenType}</h4>
+                  <h4 className="Capitalize">{bot.tokenType} Bot</h4>
                   {verified && (
-                    <div className="BotDetail__verfication-badge">
+                    <div className="BotDetail__Verification-Badge">
                       <p>VERIFIED BOT!</p>
                     </div>
                   )}
-                  <p>owner: from contract</p>
-                  <p>Repo: {bot.repo}</p>
-                  <p>DNA {bot.dna}</p>
-                  <p>Gen {bot.generation}</p>
-                  <h5>Rares</h5>
+                  <p>Owner = from contract</p>
+                  <p>Repo = {bot.repo}</p>
+                  <p>DNA = {bot.dna}</p>
+                  <p>Gen <strong>{bot.generation}</strong></p>
+                  <div classname="BotDetail__Info--Rares">
+                    <h5>Rares</h5>
+                  </div>
                 </div>
-                <div>
-                  {bot.tokenType === 'master' ? (
-                    <div>
+                {bot.tokenType === 'master' ? (
+                  <div className="BotDetail__Actions">
+                    <div className="BotDetail__Actions--Support">
                       <p>
                         Support the development of this bot's repo by cloning as
                         a support bot.
@@ -88,11 +90,15 @@ class BotDetail extends Component {
                         account={context.account}
                         web3={new Web3(context.web3js.givenProvider)}
                       />
-                      <p>Clone as a Builder Bot</p>
-                      <p>Evolve button here</p>
                     </div>
-                  ) : null}
-                </div>
+                    <div className="BotDetail__Actions--Worker">
+                      <p>Clone as a Worker Bot</p>
+                    </div>
+                    <div className="BotDetail__Actions--Evolve">
+                      <p>Evolve Master Bot</p>
+                    </div>
+                  </div>
+                ) : null}
               </div>
             </div>
           </Fragment>

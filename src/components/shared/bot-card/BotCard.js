@@ -11,8 +11,10 @@ class BotCard extends Component {
 
     return (
       <div className="BotCard">
-        <h3>{bot.tokenId}</h3>
-        <p>{bot.mined}</p>
+        <div className="BotCard__Header">
+          <h3>{bot.tokenId}</h3>
+          <p>{bot.mined}</p>
+        </div>
         {bot.mined ? (
           <img src={bot.tokenUriData.image} alt={bot.tokenId} height="300px" />
         ) : (
@@ -22,9 +24,11 @@ class BotCard extends Component {
             height="300px"
           />
         )}
-        <p>{bot.tokenType} bot</p>
-        <p>Gen {bot.generation}</p>
-        <p>DNA {bot.dna}</p>
+        <div className="BotCard__Footer">
+          <p className="BotCard__Footer--Type">{bot.tokenType} bot</p>
+          <p>Gen {bot.generation}</p>
+          {/* <p>DNA {bot.dna}</p> */}
+        </div>
       </div>
     );
   }
