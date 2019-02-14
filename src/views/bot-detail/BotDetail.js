@@ -11,6 +11,7 @@ import GittronWeb3Service from '../../util/gittronWeb3';
 
 import './BotDetail.scss';
 import EvolveButton from '../../components/shared/evolve-button/evolveButton';
+import WithdrawButton from '../../components/shared/withdraw-button/WithdrawButton';
 
 class BotDetail extends Component {
   state = {
@@ -98,6 +99,12 @@ class BotDetail extends Component {
                       />
 
                       <EvolveButton
+                        bot={bot}
+                        account={context.account}
+                        web3={new Web3(context.web3js.givenProvider)}
+                      />
+
+                      <WithdrawButton
                         bot={bot}
                         account={context.account}
                         web3={new Web3(context.web3js.givenProvider)}
