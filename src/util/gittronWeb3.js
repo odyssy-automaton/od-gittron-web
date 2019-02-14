@@ -10,8 +10,6 @@ export default class GittronWeb3Service {
     this.contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
   }
   async initContracts() {
-    console.log('abi', GitTronAbi);
-
     return (
       this.gittronContract ||
       (this.gittronContract = await this.web3Service.initContract(
@@ -33,6 +31,10 @@ export default class GittronWeb3Service {
 
   async totalWorkers(baseTokenId) {
     return await this.gittronContract.methods.totalRare(baseTokenId).call();
+  }
+
+  async totalSupports(baseTokenId) {
+    return await this.gittronContract.methods.totalNormal(baseTokenId).call();
   }
 
   async tokenURI(baseTokenId) {
@@ -88,6 +90,18 @@ export default class GittronWeb3Service {
     console.log('query', query);
 
     return await put('tokenstatus', query);
+  }
+
+  async withdraw(baseTokenId, account) {
+    return await this.gittronContract.methods
+      .withdraw(baseTokenId)
+      .send({ from: account })
+      .once('transactionHash', async (txHash) => {
+        console.log('withdrawing', txHash);
+      })
+      .then(async (resp) => {
+        console.log('withdrawed');
+      });
   }
 
   async metaMorphBot(

@@ -28,7 +28,6 @@ class SupportButton extends Component {
     const contract = await this.GittronWeb3Service.initContracts();
 
     if (this._isMounted) {
-      this.setState({ contract });
       const price = await this.getBaseTokenPrice(this.props.bot.tokenId);
       const priceInEth = await this.web3Service.toEth(price);
       this.setState({ contract, price, priceInEth });
@@ -50,7 +49,7 @@ class SupportButton extends Component {
 
     const newBot = {
       masterTokenId: bot.tokenId,
-      tokenType: 'supporter',
+      tokenType: 'support',
       address: this.props.account,
     };
     const res = await post('tokens/workersupporter', newBot);
