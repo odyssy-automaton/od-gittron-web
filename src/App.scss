@@ -65,11 +65,17 @@ a {
   }
 }
 
+// Columns
+
 .Columns {
   display: flex;
   &__Column {
     &--33 {
       flex-basis: 33%;
+      padding-right: 25px;
+    }
+    &--50 {
+      flex-basis: 50%;
     }
   }
 }
