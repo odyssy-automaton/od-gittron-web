@@ -96,19 +96,15 @@ a {
   flex-wrap: wrap;
   &__Column {
     &--33 {
-      flex-basis: calc(33% - 25px);
-      padding-right: 25px;
+      flex-basis: 33%;
       @media (max-width: $tablet) {
         flex-basis: 100%;
-        padding-left: 25px;
       }
     }
     &--50 {
-      flex-basis: calc(50% - 25px);
-      padding-right: 25px;
+      flex-basis: 50%;
       @media (max-width: $tablet) {
         flex-basis: calc(100% - 50px);
-        padding-left: 25px;
       }
     }
   }
