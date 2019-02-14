@@ -8,7 +8,7 @@ function About() {
           <h1>The year is 3369 and, throughout the universe, all biological life has been decimated. It's up to the Prime Bots to buidl their own future. They'll need help from the Worker and Support Bots in order to survive.</h1>
         </div>
       </div>
-      <div className="Columns Contain">
+      <div className="Block Columns Contain">
         <div className="Columns__Column--33">
           <h2>Prime Bots</h2>
           <p>If you manage or own a repo, you can generate a unique Prime Bot.</p>

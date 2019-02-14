@@ -5,5 +5,11 @@
   justify-content: space-between;
   flex-wrap: wrap;
   max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
+  > a {
+    position: relative;
+    flex-basis: 33%;
+    margin-bottom: 25px;
+  }
 }

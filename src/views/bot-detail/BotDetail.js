@@ -57,13 +57,15 @@ class BotDetail extends Component {
                 />
               </div>
             )}
-            <div className="BotDetail">
-              <BotCard
-                bot={bot}
-                account={context.account}
-                web3={new Web3(context.web3js.givenProvider)}
-              />
-              <div className="BotDetail__Info">
+            <div className="BotDetail Columns Contain">
+              <div className="Columns__Column--50">
+                <BotCard
+                  bot={bot}
+                  account={context.account}
+                  web3={new Web3(context.web3js.givenProvider)}
+                />
+              </div>
+              <div className="Columns__Column--50 BotDetail__Info">
                 <div>
                   <h3>{bot.tokenId}</h3>
                   <h4 className="Capitalize">{bot.tokenType} Bot</h4>
@@ -86,7 +88,7 @@ class BotDetail extends Component {
                   <div className="BotDetail__Actions">
                     <div className="BotDetail__Actions--Support">
                       <p>
-                        Support the development of this bot's repo by cloning as
+                        Support the development of this bot's repo by cloning it as
                         a support bot.
                       </p>
                       <SupportButton
@@ -111,12 +113,6 @@ class BotDetail extends Component {
                         account={context.account}
                         web3={new Web3(context.web3js.givenProvider)}
                       />
-                    </div>
-                    <div className="BotDetail__Actions--Worker">
-                      <p>Clone as a Worker Bot</p>
-                    </div>
-                    <div className="BotDetail__Actions--Evolve">
-                      <p>Evolve Master Bot</p>
                     </div>
                   </div>
                 ) : null}
