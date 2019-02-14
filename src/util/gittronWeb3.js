@@ -101,6 +101,7 @@ export default class GittronWeb3Service {
       })
       .then(async (resp) => {
         console.log('withdrawed');
+        return resp;
       })
       .catch(async (err) => {
         console.log(err);
