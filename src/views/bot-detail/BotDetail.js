@@ -78,7 +78,7 @@ class BotDetail extends Component {
                   <p>
                     Gen <strong>{bot.generation}</strong>
                   </p>
-                  <div classname="BotDetail__Info--Rares">
+                  <div className="BotDetail__Info--Rares">
                     <h5>Rares</h5>
                   </div>
                 </div>
