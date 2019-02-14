@@ -1,4 +1,5 @@
 .BotCard {
+  position: relative;
   flex-basis: 33%;
   margin-bottom: 25px;
   border: 2px solid black;
@@ -8,6 +9,10 @@
     h3 { 
       width: 100%;
     }
+  }
+  img {
+    width: 100%;
+    height: auto !important;
   }
   &__Footer {
     border-top: 2px solid black;
