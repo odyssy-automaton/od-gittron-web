@@ -42,7 +42,7 @@ class SupportButton extends Component {
   handleSubmit = async (bot) => {
     const newBot = {
       masterTokenId: bot.tokenId,
-      tokenType: 'supporter',
+      tokenType: 'support',
       address: this.props.account,
     };
     const res = await post('tokens/workersupporter', newBot);

@@ -4,12 +4,13 @@ import { get } from '../../util/requests';
 import BotCard from '../../components/shared/bot-card/BotCard';
 import Web3 from 'web3';
 import SupportButton from '../../components/shared/support-button/supportButton';
-import BuidleButton from '../../components/shared/buidle-button/buidleButton';
+import BuidleButton from '../../components/shared/buidl-button/buidlButton';
 import BotVerfication from '../../components/shared/bot-verfication/BotVerification';
 
-import GittronWeb3Service from '../../../util/gittronWeb3';
+import GittronWeb3Service from '../../util/gittronWeb3';
 
 import './BotDetail.scss';
+import EvolveButton from '../../components/shared/evolve-button/evolveButton';
 
 class BotDetail extends Component {
   state = {
@@ -85,14 +86,22 @@ class BotDetail extends Component {
                         Support the development of this bot's repo by cloning as
                         a support bot.
                       </p>
-                      <p>Price: from contract</p>
                       <SupportButton
                         bot={bot}
                         account={context.account}
                         web3={new Web3(context.web3js.givenProvider)}
                       />
-                      <p>Clone as a Builder Bot</p>
-                      <p>Evolve button here</p>
+                      <BuidleButton
+                        bot={bot}
+                        account={context.account}
+                        web3={new Web3(context.web3js.givenProvider)}
+                      />
+
+                      <EvolveButton
+                        bot={bot}
+                        account={context.account}
+                        web3={new Web3(context.web3js.givenProvider)}
+                      />
                     </div>
                   ) : null}
                 </div>

@@ -5,11 +5,13 @@ import GittronWeb3Service from '../../../util/gittronWeb3';
 import { post } from '../../../util/requests';
 import Web3Service from '../../../util/web3Service';
 
-class WorkerButton extends Component {
+class BuidlButton extends Component {
   state = {
     contract: null,
     workerTokenId: null,
     tokenId: null,
+    buidlAvail: null,
+    ownerOf: false,
   };
   async componentDidMount() {
     this._isMounted = true;
@@ -23,14 +25,24 @@ class WorkerButton extends Component {
     const contract = await this.GittronWeb3Service.initContracts();
 
     if (this._isMounted) {
-      this.setState({ contract });
+      const buidlAvail = await this.totalRareAvailible(this.props.bot.tokenId);
+      const ownerOfToken = await this.ownerOf(this.props.bot.tokenId);
+      this.setState({ contract, buidlAvail, ownerOfToken });
     }
+  };
+
+  totalRareAvailible = async (tokenId) => {
+    return await this.GittronWeb3Service.totalRareAvailible(tokenId);
+  };
+
+  ownerOf = async (tokenId) => {
+    return await this.GittronWeb3Service.ownerOf(tokenId);
   };
 
   handleSubmit = async (bot) => {
     const newBot = {
       masterTokenId: bot.tokenId,
-      tokenType: 'supporter',
+      tokenType: 'worker',
       address: this.props.account,
     };
     const res = await post('tokens/workersupporter', newBot);
@@ -38,7 +50,7 @@ class WorkerButton extends Component {
     this.setState({ workerTokenId: res.data.tokenId });
 
     await this.GittronWeb3Service.launchWorkerBot(
-      bot.tokenId,
+      newBot.masterTokenId,
       res.data.tokenId,
       `${process.env.REACT_APP_API_HOST}uri/${res.data.tokenId}`,
       this.props.account, //receiver,
@@ -50,15 +62,24 @@ class WorkerButton extends Component {
   };
 
   render() {
-    const { bot, buidlAvail } = this.props;
+    const { bot, account } = this.props;
+    const { buidlAvail, ownerOfToken } = this.state;
 
     return (
       <div>
         <p>Free buidlbots availible: {buidlAvail}</p>
-        <button onClick={() => this.handleSubmit(bot)}>Gift BuidlBot</button>
+
+        {buidlAvail > 0 && ownerOfToken === account ? (
+          <button onClick={() => this.handleSubmit(bot)}>Gift BuidlBot</button>
+        ) : (
+          <p>Get more free BuidlerBots at next metamorph level</p>
+        )}
+        {ownerOfToken !== account ? (
+          <p>you are not the owner of this bot</p>
+        ) : null}
       </div>
     );
   }
 }
 
-export default withRouter(WorkerButton);
+export default withRouter(BuidlButton);

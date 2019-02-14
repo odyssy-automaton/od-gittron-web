@@ -10,8 +10,6 @@ export default class GittronWeb3Service {
     this.contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
   }
   async initContracts() {
-    console.log('abi', GitTronAbi);
-
     return (
       this.gittronContract ||
       (this.gittronContract = await this.web3Service.initContract(
@@ -33,6 +31,10 @@ export default class GittronWeb3Service {
 
   async totalWorkers(baseTokenId) {
     return await this.gittronContract.methods.totalRare(baseTokenId).call();
+  }
+
+  async totalSupports(baseTokenId) {
+    return await this.gittronContract.methods.totalNormal(baseTokenId).call();
   }
 
   async tokenURI(baseTokenId) {
