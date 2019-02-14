@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import RepoListItem from './RepoListItem';
+import './RepoList.scss';
 
 class RepoList extends Component {
   renderRepos() {

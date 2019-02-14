@@ -72,9 +72,9 @@ class BotFilter extends Component {
     const repoOptions = this.genRepoOptions();
 
     return (
-      <div>
+      <div className="Contain">
         <div>
-          <p>{filteredBots.length} bots</p>
+          <p>{filteredBots.length} Bots</p>
 
           <h4>Filters</h4>
           <div className="BotFilter__filters">
