@@ -222,10 +222,12 @@ export default class GittronWeb3Service {
       })
       .then(async (resp) => {
         await this.checkStatus(resp.transactionHash, tokenId, ghid);
-        await post('generatepng', {
+        const resSvg = await post('generatepng', {
           ghid: ghid,
           tokenId: tokenId,
         });
+
+        return resSvg;
       })
       .catch(async (err) => {
         console.log(err);
