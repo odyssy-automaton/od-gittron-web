@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import GittronWeb3Service from '../../../util/gittronWeb3';
-import { post } from '../../../util/requests';
+// import { post } from '../../../util/requests';
 import Web3Service from '../../../util/web3Service';
 
 class EvolveButton extends Component {
