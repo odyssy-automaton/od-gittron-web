@@ -92,6 +92,18 @@ export default class GittronWeb3Service {
     return await put('tokenstatus', query);
   }
 
+  async withdraw(baseTokenId, account) {
+    return await this.gittronContract.methods
+      .withdraw(baseTokenId)
+      .send({ from: account })
+      .once('transactionHash', async (txHash) => {
+        console.log('withdrawing', txHash);
+      })
+      .then(async (resp) => {
+        console.log('withdrawed');
+      });
+  }
+
   async metaMorphBot(
     baseTokenId,
     tokenUri,

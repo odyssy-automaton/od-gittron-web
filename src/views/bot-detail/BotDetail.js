@@ -11,7 +11,7 @@ import GittronWeb3Service from '../../util/gittronWeb3';
 
 import './BotDetail.scss';
 import EvolveButton from '../../components/shared/evolve-button/evolveButton';
-import WithdrawButton from '../../components/shared/withdraw-button/WithdrawButton';
+import WithdrawButton from '../../components/shared/withdraw-button/withdrawButton';
 
 class BotDetail extends Component {
   state = {

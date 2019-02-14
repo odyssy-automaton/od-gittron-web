@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import GittronWeb3Service from '../../../util/gittronWeb3';
-import { post } from '../../../util/requests';
 import Web3Service from '../../../util/web3Service';
 
 class WithdrawButton extends Component {
@@ -31,7 +30,7 @@ class WithdrawButton extends Component {
     }
   };
 
-  totalRareAvailible = async (tokenId) => {
+  allowedToWithdraw = async (tokenId) => {
     return await this.GittronWeb3Service.allowedToWithdraw(tokenId);
   };
 
@@ -40,12 +39,8 @@ class WithdrawButton extends Component {
   };
 
   handleSubmit = async (bot) => {
-    const newBot = {
-      masterTokenId: bot.tokenId,
-      tokenType: 'worker',
-      address: this.props.account,
-    };
-    const res = await post('tokens/workersupporter', newBot);
+    await this.GittronWeb3Service.withdraw(bot.tokenId, this.props.account);
+    this.setState({ botBank: 0 });
   };
 
   render() {
@@ -57,7 +52,11 @@ class WithdrawButton extends Component {
         <p>Bot bank: {botBank}</p>
 
         {botBank > 0 && ownerOfToken === account ? (
-          <button onClick={() => this.handleSubmit(bot)}>Withdraw</button>
+          <div>
+            <p>20% of withdraw goes to dev fund</p>
+
+            <button onClick={() => this.handleSubmit(bot)}>Withdraw</button>
+          </div>
         ) : null}
       </div>
     );
