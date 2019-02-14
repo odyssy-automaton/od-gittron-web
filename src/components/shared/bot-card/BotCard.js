@@ -22,7 +22,6 @@ class BotCard extends Component {
             src="https://s3.amazonaws.com/odyssy-assets/Gittron__BotCube.png"
             alt={bot.tokenId}
             height="300px"
-            textAlign="center"
           />
         )}
         <div className="BotCard__Footer">

@@ -38,7 +38,7 @@ class Repos extends Component {
     return (
       <Web3Consumer>
         {(context) => (
-          <div>
+          <div className="Contain">
             <h3>Repos ({repos.length})</h3>
             <RepoList
               repos={repos}
