@@ -4,7 +4,10 @@ import { get } from '../../util/requests';
 import BotCard from '../../components/shared/bot-card/BotCard';
 import Web3 from 'web3';
 import SupportButton from '../../components/shared/support-button/supportButton';
+import BuidleButton from '../../components/shared/buidle-button/buidleButton';
 import BotVerfication from '../../components/shared/bot-verfication/BotVerification';
+
+import GittronWeb3Service from '../../../util/gittronWeb3';
 
 import './BotDetail.scss';
 

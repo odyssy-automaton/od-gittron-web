@@ -5,12 +5,10 @@ import GittronWeb3Service from '../../../util/gittronWeb3';
 import { post } from '../../../util/requests';
 import Web3Service from '../../../util/web3Service';
 
-class SupportButton extends Component {
+class WorkerButton extends Component {
   state = {
-    price: 0,
-    priceInEth: 0,
     contract: null,
-    supportTokenId: null,
+    workerTokenId: null,
     tokenId: null,
   };
   async componentDidMount() {
@@ -25,18 +23,8 @@ class SupportButton extends Component {
     const contract = await this.GittronWeb3Service.initContracts();
 
     if (this._isMounted) {
-      const price = await this.getBaseTokenPrice(this.props.bot.tokenId);
-      const priceInEth = await this.web3Service.toEth(price);
-      this.setState({ contract, price, priceInEth });
+      this.setState({ contract });
     }
-  };
-
-  tokensByOwner = async (address) => {
-    return await this.GittronWeb3Service.tokensByOwner(address);
-  };
-
-  getBaseTokenPrice = async (tokenId) => {
-    return await this.GittronWeb3Service.baseTokenPrice(tokenId);
   };
 
   handleSubmit = async (bot) => {
@@ -47,32 +35,30 @@ class SupportButton extends Component {
     };
     const res = await post('tokens/workersupporter', newBot);
 
-    this.setState({ supportTokenId: res.data.tokenId });
+    this.setState({ workerTokenId: res.data.tokenId });
 
-    await this.GittronWeb3Service.launchSupportBot(
+    await this.GittronWeb3Service.launchWorkerBot(
       bot.tokenId,
       res.data.tokenId,
       `${process.env.REACT_APP_API_HOST}uri/${res.data.tokenId}`,
-      this.state.price, //amount
       this.props.account, //receiver,
       this.props.account,
       res.data.ghid,
     );
 
-    this.props.history.push(`/bots/${this.state.supportTokenId}`);
+    this.props.history.push(`/bots/${this.state.workerTokenId}`);
   };
 
   render() {
-    const { bot } = this.props;
-    const { priceInEth } = this.state;
+    const { bot, buidlAvail } = this.props;
 
     return (
       <div>
-        <p>Price: {priceInEth}</p>
-        <button onClick={() => this.handleSubmit(bot)}>Support</button>
+        <p>Free buidlbots availible: {buidlAvail}</p>
+        <button onClick={() => this.handleSubmit(bot)}>Gift BuidlBot</button>
       </div>
     );
   }
 }
 
-export default withRouter(SupportButton);
+export default withRouter(WorkerButton);
