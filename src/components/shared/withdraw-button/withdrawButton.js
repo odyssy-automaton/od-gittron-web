@@ -4,6 +4,8 @@ import { withRouter } from 'react-router-dom';
 import GittronWeb3Service from '../../../util/gittronWeb3';
 import Web3Service from '../../../util/web3Service';
 
+import Loader from '../loader/loader';
+
 class WithdrawButton extends Component {
   state = {
     contract: null,
@@ -11,6 +13,8 @@ class WithdrawButton extends Component {
     tokenId: null,
     botBank: null,
     ownerOfToken: false,
+    withdrawInEth: null,
+    isLoading: false,
   };
 
   async componentDidMount() {
@@ -27,7 +31,8 @@ class WithdrawButton extends Component {
     if (this._isMounted) {
       const botBank = await this.allowedToWithdraw(this.props.bot.tokenId);
       const ownerOfToken = await this.ownerOf(this.props.bot.tokenId);
-      this.setState({ contract, botBank, ownerOfToken });
+      const withdrawInEth = await this.web3Service.toEth(botBank);
+      this.setState({ contract, botBank, ownerOfToken, withdrawInEth });
     }
   };
 
@@ -40,24 +45,28 @@ class WithdrawButton extends Component {
   };
 
   handleSubmit = async (bot) => {
+    this.setState({ isLoading: true });
     const res = await this.GittronWeb3Service.withdraw(
       bot.tokenId,
       this.props.account,
     );
     if (!res.error) {
-      this.setState({ botBank: 0 });
+      this.setState({ isLoading: false, botBank: 0 });
+    } else {
+      this.setState({ isLoading: false });
     }
   };
 
   render() {
     const { bot, account } = this.props;
-    const { botBank, ownerOfToken } = this.state;
+    const { botBank, ownerOfToken, withdrawInEth, isLoading } = this.state;
 
     return (
       <div>
-        <p>Bot bank: {botBank}</p>
+        <p>Bot bank: {withdrawInEth}</p>
+        {isLoading ? <Loader /> : null}
 
-        {botBank > 0 && ownerOfToken === account ? (
+        {botBank > 0 && ownerOfToken === account && !isLoading ? (
           <div>
             <p>20% of withdraw goes to dev fund</p>
 

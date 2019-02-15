@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import GittronWeb3Service from '../../../util/gittronWeb3';
 import { post } from '../../../util/requests';
 import Web3Service from '../../../util/web3Service';
+import Loader from '../loader/loader';
 
 class BuidlButton extends Component {
   state = {
@@ -12,6 +13,8 @@ class BuidlButton extends Component {
     tokenId: null,
     buidlAvail: null,
     ownerOf: false,
+    isLoading: false,
+    toAccount: null,
   };
   async componentDidMount() {
     this._isMounted = true;
@@ -40,10 +43,12 @@ class BuidlButton extends Component {
   };
 
   handleSubmit = async (bot) => {
+    this.setState({ isLoading: true });
+
     const newBot = {
       masterTokenId: bot.tokenId,
       tokenType: 'worker',
-      address: this.props.account,
+      address: this.state.toAccount || this.props.account,
     };
     const res = await post('tokens/workersupporter', newBot);
 
@@ -53,7 +58,7 @@ class BuidlButton extends Component {
       newBot.masterTokenId,
       res.data.tokenId,
       `${process.env.REACT_APP_API_HOST}uri/${res.data.tokenId}`,
-      this.props.account, //receiver,
+      this.state.toAccount || this.props.account, //receiver,
       this.props.account,
       res.data.ghid,
     );
@@ -61,18 +66,33 @@ class BuidlButton extends Component {
     if (!botRes.error) {
       this.props.history.push(`/bots/${this.state.workerTokenId}`);
     }
+
+    this.setState({ isLoading: false });
   };
 
   render() {
     const { bot, account } = this.props;
-    const { buidlAvail, ownerOfToken } = this.state;
+    const { buidlAvail, ownerOfToken, isLoading, toAccount } = this.state;
 
     return (
       <div>
         <p>Free buidlbots availible: {buidlAvail}</p>
-
-        {buidlAvail > 0 && ownerOfToken === account ? (
-          <button onClick={() => this.handleSubmit(bot)}>Gift BuidlBot</button>
+        {isLoading ? <Loader /> : null}
+        {buidlAvail > 0 && ownerOfToken === account && !isLoading ? (
+          <div>
+            <div className="hideUnlessClicked">
+              <label>send to address: {toAccount}</label>
+              <input
+                type="text"
+                name="toAccount"
+                onInput={(e) => this.setState({ toAccount: e.target.value })}
+                defaultValue={account}
+              />
+            </div>
+            <button onClick={() => this.handleSubmit(bot)}>
+              Gift BuidlBot
+            </button>
+          </div>
         ) : (
           <p>Get more free BuidlerBots at next metamorph level</p>
         )}

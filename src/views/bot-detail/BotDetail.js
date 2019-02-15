@@ -41,8 +41,8 @@ class BotDetail extends Component {
 
   render() {
     const { bot } = this.state;
-    const unverified = bot.tokenType === 'master' && !bot.verified;
-    const verified = bot.tokenType === 'master' && bot.verified;
+    const unverified = bot.tokenType === 'prime' && !bot.verified;
+    const verified = bot.tokenType === 'prime' && bot.verified;
 
     return (
       <Web3Consumer>
@@ -83,12 +83,12 @@ class BotDetail extends Component {
                     <h5>Rares</h5>
                   </div>
                 </div>
-                {bot.tokenType === 'master' ? (
+                {bot.tokenType === 'prime' ? (
                   <div className="BotDetail__Actions">
                     <div className="BotDetail__Actions--Support">
                       <p>
-                        Support the development of this bot's repo by cloning it as
-                        a support bot.
+                        Support the development of this bot's repo by cloning it
+                        as a support bot.
                       </p>
                       <SupportButton
                         bot={bot}

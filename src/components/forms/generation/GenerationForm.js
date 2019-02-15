@@ -47,6 +47,7 @@ class GenerationForm extends Component {
 
   render() {
     const { valid } = this.state;
+    const { account } = this.props;
 
     return (
       <Fragment>
@@ -68,7 +69,12 @@ class GenerationForm extends Component {
             </div>
             <div>
               <label>Ethereum Wallet Address</label>
-              <input type="text" name="withdrawAddr" defaultValue="" />
+              <input type="text" name="withdrawAddr" defaultValue={account} />
+              <p>
+                Address Note: Tis is the account that all sales from support
+                bots will withdraw too. Prepopulated with you current account
+                but could be a bounty, grant or multisig.
+              </p>
             </div>
             <div>
               <button type="submit">Register Repo</button>

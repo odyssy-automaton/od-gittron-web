@@ -54,12 +54,12 @@ class BotVerfication extends Component {
       <Fragment>
         {ownerOfToken === account ? (
           <div className="BotVerfication">
-            <h5>Your Master Bot is unverified</h5>
+            <h5>Your Prime Bot is unverified</h5>
             <h6>Verify ownership</h6>
             <p>Repo = {bot.repo}</p>
             <p>
-              To enable Worker and Support clones of your Master Bot, you need
-              to verify ownership of this repo.
+              To enable Worker and Support clones of your Prime Bot, you need to
+              verify ownership of this repo.
             </p>
             <p>
               To verity you own or manage a repo, create a file in your root
