@@ -1,5 +1,6 @@
 .BotCard {
   border: 2px solid black;
+  position: relative;
   &__Header {
     padding: 10px 25px;
     border-bottom: 2px solid black; 
@@ -19,5 +20,11 @@
     &--Type {
       text-transform: capitalize;
     }
+  }
+  .Verified {
+    position: absolute;
+    top: 90px;
+    left: 15px;
+    img { width: 30px; }
   }
 }
