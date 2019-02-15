@@ -17,7 +17,7 @@ class RepoDetail extends Component {
     const { data } = await get(`tokens/repo/${this.props.match.params.ghid}`);
     this.setState({
       bots: data,
-      masterBot: data.find((bot) => bot.tokenType === 'master'),
+      masterBot: data.find((bot) => bot.tokenType === 'prime'),
       supporters: data.filter((bot) => bot.tokenType === 'supporter'),
       workers: data.filter((bot) => bot.tokenType === 'worker'),
     });
@@ -35,7 +35,7 @@ class RepoDetail extends Component {
                 <h3>{bots.length} total bots</h3>
                 <div className="RepoDetail__Lists">
                   <div>
-                    <h4>Master bot</h4>
+                    <h4>Prime bot</h4>
                     <BotList bots={[masterBot]} />
                   </div>
                   <div>

@@ -12,7 +12,9 @@ class BotCard extends Component {
     return (
       <div className="BotCard">
         <div className="BotCard__Header">
-          <p className="BotCard__Header--Name">{bot.tokenId}</p>
+          <p className="BotCard__Header--Name">
+            {bot.tokenUriData && bot.tokenUriData.name}
+          </p>
           <p>{bot.mined}</p>
         </div>
         <div className="Verified">

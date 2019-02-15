@@ -9,7 +9,7 @@ class BotFilter extends Component {
   defaultValues = {
     typeOptions: [
       { value: 'all', label: 'All Types' },
-      { value: 'master', label: 'Master Bot' },
+      { value: 'prime', label: 'Prime Bot' },
       { value: 'worker', label: 'Worker Bot' },
       { value: 'supporter', label: 'Support Bot' },
     ],
