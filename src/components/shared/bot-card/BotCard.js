@@ -17,9 +17,14 @@ class BotCard extends Component {
           </p>
           <p>{bot.mined}</p>
         </div>
-        <div className="Verified">
-          <img src="https://s3.amazonaws.com/odyssy-assets/Bot--Verified.svg" alt="Verified" />
-        </div>
+        {bot.verified ? (
+          <div className="Verified">
+            <img
+              src="https://s3.amazonaws.com/odyssy-assets/Bot--Verified.svg"
+              alt="Verified"
+            />
+          </div>
+        ) : null}
         {bot.mined ? (
           <img src={bot.tokenUriData.image} alt={bot.tokenId} height="300px" />
         ) : (
