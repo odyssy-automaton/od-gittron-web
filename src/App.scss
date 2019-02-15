@@ -63,10 +63,21 @@ a {
 .Block {
   min-height: 50vh;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   &__Contents {
     max-width: 800px;
     margin: 0 auto;
   }
+  &.Black {
+    background-color: black;
+    color: white !important;
+  }
+}
+
+.Border-Bottom {
+  border-bottom: 2px solid black;
 }
 
 // Components
