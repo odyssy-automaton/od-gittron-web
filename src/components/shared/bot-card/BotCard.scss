@@ -1,0 +1,23 @@
+.BotCard {
+  border: 2px solid black;
+  &__Header {
+    padding: 10px 25px;
+    border-bottom: 2px solid black; 
+    &--Name { 
+      width: 100%;
+    }
+  }
+  img {
+    width: 100%;
+    height: auto !important;
+  }
+  &__Footer {
+    border-top: 2px solid black;
+    padding: 10px 25px;
+    display: flex;
+    justify-content: space-between;
+    &--Type {
+      text-transform: capitalize;
+    }
+  }
+}

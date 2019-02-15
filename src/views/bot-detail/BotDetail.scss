@@ -1,0 +1,26 @@
+.BotDetail {
+  padding-top: 50px;
+  &__Info {
+    text-align: left;
+    padding-left: 25px;
+    flex-basis: 50%;
+  }
+  &__Verification-Badge {
+    color: red;
+  }
+  &__Actions {
+    max-width: 300px;
+    padding-left: 25px;
+    &--Support {
+      border: 2px solid black;
+      padding: 25px;
+    }
+    &--Worker {
+      
+    }
+    &--Evolve {
+      
+    }
+    button { width: 100%; }
+  }
+}
