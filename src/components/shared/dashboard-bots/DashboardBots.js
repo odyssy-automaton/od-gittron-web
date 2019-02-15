@@ -37,7 +37,7 @@ class DashboardBots extends Component {
     const proms = [];
 
     tokens.map((token) => {
-      proms.push(get(`tokenid/${token}`));
+      return proms.push(get(`tokenid/${token}`));
     });
 
     return await Promise.all(proms);
