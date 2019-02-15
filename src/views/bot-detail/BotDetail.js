@@ -10,6 +10,7 @@ import EvolveButton from '../../components/shared/evolve-button/evolveButton';
 import WithdrawButton from '../../components/shared/withdraw-button/withdrawButton';
 
 import './BotDetail.scss';
+import BotStats from '../../components/shared/bot-stats/BotStats';
 
 class BotDetail extends Component {
   state = {
@@ -66,22 +67,16 @@ class BotDetail extends Component {
               </div>
               <div className="Columns__Column--50">
                 <div className="BotDetail__Info">
-                  <h3>{bot.tokenId}</h3>
+                  <h3>{bot.tokenUriData && bot.tokenUriData.name}</h3>
                   <h4 className="Capitalize">{bot.tokenType} Bot</h4>
-                  {verified && (
+                  {verified ? (
                     <div className="BotDetail__Verification-Badge">
                       <p>VERIFIED BOT!</p>
                     </div>
+                  ) : (
+                    <p>CAUTION: UNVERIFIED BOT!</p>
                   )}
-                  <p>Owner = from contract</p>
-                  <p>Repo = {bot.repo}</p>
-                  <p>DNA = {bot.dna}</p>
-                  <p>
-                    Gen <strong>{bot.generation}</strong>
-                  </p>
-                  <div className="BotDetail__Info--Rares">
-                    <h5>Rares</h5>
-                  </div>
+                  <BotStats bot={bot} />
                 </div>
                 {bot.tokenType === 'prime' ? (
                   <div className="BotDetail__Actions">
