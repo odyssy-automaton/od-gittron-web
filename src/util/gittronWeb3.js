@@ -87,7 +87,6 @@ export default class GittronWeb3Service {
       tokenId: tokenId,
       ghid: ghid,
     };
-    console.log('query', query);
 
     return await put('tokenstatus', query);
   }
@@ -100,7 +99,6 @@ export default class GittronWeb3Service {
         console.log('withdrawing', txHash);
       })
       .then(async (resp) => {
-        console.log('withdrawed');
         return resp;
       })
       .catch(async (err) => {
@@ -130,7 +128,6 @@ export default class GittronWeb3Service {
           ghid: ghid,
           tokenId: tokenId,
         });
-        console.log('res svg', resSvg);
 
         return resSvg;
       });
@@ -144,8 +141,6 @@ export default class GittronWeb3Service {
     account,
     ghid,
   ) {
-    console.log('launch token');
-
     return await this.gittronContract.methods
       .launchBaseToken(tokenUri, tokenId, price, withdrawAddr)
       .send({ from: account })
@@ -158,7 +153,6 @@ export default class GittronWeb3Service {
           ghid: ghid,
           tokenId: tokenId,
         });
-        console.log('res svg', resSvg);
 
         return resSvg;
       })
@@ -178,8 +172,6 @@ export default class GittronWeb3Service {
     account,
     ghid,
   ) {
-    console.log('launch worker token');
-
     return await this.gittronContract.methods
       .launchRareToken(baseTokenId, tokenId, tokenUri, receiver)
       .send({ from: account })
@@ -192,7 +184,6 @@ export default class GittronWeb3Service {
           ghid: ghid,
           tokenId: tokenId,
         });
-        console.log('res svg', resSvg);
 
         return resSvg;
       })
@@ -213,8 +204,6 @@ export default class GittronWeb3Service {
     account,
     ghid,
   ) {
-    console.log('launch support token');
-
     return await this.gittronContract.methods
       .launchNormalToken(baseTokenId, tokenId, tokenUri, amount, receiver)
       .send({ from: account, value: amount })
