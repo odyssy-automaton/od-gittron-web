@@ -15,11 +15,14 @@ class BotCard extends Component {
           <p className="BotCard__Header--Name">{bot.tokenId}</p>
           <p>{bot.mined}</p>
         </div>
+        <div className="Verified">
+          <img src="https://s3.amazonaws.com/odyssy-assets/Bot--Verified.svg" alt="Verified" />
+        </div>
         {bot.mined ? (
           <img src={bot.tokenUriData.image} alt={bot.tokenId} height="300px" />
         ) : (
           <img
-            src="https://s3.amazonaws.com/odyssy-assets/Gittron__BotCube.png"
+            src="https://s3.amazonaws.com/odyssy-assets/Gittron__BotCube.svg"
             alt={bot.tokenId}
             height="300px"
           />
