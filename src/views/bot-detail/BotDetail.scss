@@ -10,6 +10,7 @@
   }
   &__Actions {
     max-width: 300px;
+    padding-left: 25px;
     &--Support {
       border: 2px solid black;
       padding: 25px;
@@ -20,5 +21,6 @@
     &--Evolve {
       
     }
+    button { width: 100%; }
   }
 }

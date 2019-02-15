@@ -33,15 +33,10 @@ const HeaderLinks = class extends React.Component {
           </h1>
         </div>
         <div className="Navbar__Desktop">
-          <Link to="/" activeClassName="Navbar__Desktop--Item--Active"
-            className="Navbar__Desktop--Item">Bots</Link>
-          
-          {authenticated ? <Link to="/repos" activeClassName="Navbar__Desktop--Item--Active"
-            className="Navbar__Desktop--Item">Repos</Link> : null}
-          <Link to="/about" activeClassName="Navbar__Desktop--Item--Active"
-            className="Navbar__Desktop--Item">About</Link>
-          {authenticated ? <Link to="/dashboard" activeClassName="Navbar__Desktop--Item--Active"
-            className="Navbar__Desktop--Item">Dashboard</Link> : null}
+          <Link to="/" className="Navbar__Desktop--Item">Bots</Link>
+          {authenticated ? <Link to="/repos" className="Navbar__Desktop--Item">Repos</Link> : null}
+          <Link to="/about" className="Navbar__Desktop--Item">About</Link>
+          {authenticated ? <Link to="/dashboard" className="Navbar__Desktop--Item">Dashboard</Link> : null}
         </div>
         {/* Start Hamburger */}
         <button

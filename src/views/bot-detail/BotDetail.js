@@ -64,8 +64,8 @@ class BotDetail extends Component {
                   web3={new Web3(context.web3js.givenProvider)}
                 />
               </div>
-              <div className="Columns__Column--50 BotDetail__Info">
-                <div>
+              <div className="Columns__Column--50">
+                <div className="BotDetail__Info">
                   <h3>{bot.tokenId}</h3>
                   <h4 className="Capitalize">{bot.tokenType} Bot</h4>
                   {verified && (
