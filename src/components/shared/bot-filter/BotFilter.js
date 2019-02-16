@@ -10,7 +10,7 @@ class BotFilter extends Component {
     typeOptions: [
       { value: 'all', label: 'All Bots' },
       { value: 'prime', label: 'Prime Bots' },
-      { value: 'worker', label: 'Buidl Bots' },
+      { value: 'buidl', label: 'Buidl Bots' },
       { value: 'support', label: 'Support Bots' },
     ],
     type: { value: 'all', label: 'All Bots' },
