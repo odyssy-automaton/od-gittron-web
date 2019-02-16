@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 
 import { get } from '../../../util/requests';
-import BotList from '../bot-list/BotList';
 import GittronWeb3Service from '../../../util/gittronWeb3';
+// import BotList from '../bot-list/BotList';
+import BotFilter from '../bot-filter/BotFilter';
 
 import './DashboardBots.scss';
 
@@ -51,7 +52,8 @@ class DashboardBots extends Component {
     return (
       <div>
         <div className="DashboardBots">
-          <BotList bots={bots} />
+          {/* <BotList bots={bots} /> */}
+          {bots ? <BotFilter bots={bots} /> : null}
         </div>
       </div>
     );

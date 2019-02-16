@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Web3Consumer } from 'web3-react';
-import { get } from '../../util/requests';
+import { get, put } from '../../util/requests';
 import BotCard from '../../components/shared/bot-card/BotCard';
 import Web3 from 'web3';
 import SupportButton from '../../components/shared/support-button/supportButton';
@@ -34,6 +34,19 @@ class BotDetail extends Component {
     this.setState({
       bot: data,
     });
+
+    if (!data.mined) {
+      console.log('poopin');
+      let query = {
+        txHash: data.txHash,
+        tokenId: data.tokenId,
+        ghid: data.ghid,
+      };
+
+      console.log(query);
+      // const res = await put('tokenstatus', query);
+      // console.log(res);
+    }
   };
 
   handleVerification = () => {
@@ -69,21 +82,20 @@ class BotDetail extends Component {
                 )}
                   <h3>{bot.tokenUriData && bot.tokenUriData.name}</h3>
                   <h4 className="Capitalize">{bot.tokenType} Bot</h4>
-                  {verified ? (
+                  {verified && (
                     <div className="BotDetail__Verification-Badge">
                       <p>VERIFIED BOT!</p>
                     </div>
-                  ) : (
-                    <p>CAUTION: UNVERIFIED BOT!</p>
                   )}
+                  {unverified && <p>CAUTION: UNVERIFIED BOT!</p>}
                   <BotStats bot={bot} />
-                
+
                   {bot.tokenType === 'prime' ? (
                     <div className="BotDetail__Actions">
                       <div className="BotDetail__Actions--Support">
                         <p>
-                          Support the development of this bot's repo by cloning it
-                          as a support bot.
+                          Support the development of this bot's repo by cloning
+                          it as a support bot.
                         </p>
                         <SupportButton
                           bot={bot}
@@ -110,9 +122,9 @@ class BotDetail extends Component {
                           account={context.account}
                           web3={new Web3(context.web3js.givenProvider)}
                         />
+                      </div>
                     </div>
-                  </div>
-                ) : null}
+                  ) : null}
                 </div>
               </div>
             </div>
