@@ -13,7 +13,12 @@ class Header extends Component {
       <div>
         {authenticated ? (
           <Web3Consumer>
-            {(context) => <HeaderLinks authenticated={authenticated} />}
+            {(context) => (
+              <HeaderLinks
+                networkId={context.networkId}
+                authenticated={authenticated}
+              />
+            )}
           </Web3Consumer>
         ) : (
           <HeaderLinks authenticated={authenticated} />
