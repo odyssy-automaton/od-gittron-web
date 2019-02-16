@@ -81,7 +81,7 @@ class BuidlButton extends Component {
         {buidlAvail > 0 && ownerOfToken === account && !isLoading ? (
           <div>
             <div className="hideUnlessClicked">
-              <label>Send to Address: {toAccount}</label>
+              <label>Send to Address</label>
               <input
                 type="text"
                 name="toAccount"

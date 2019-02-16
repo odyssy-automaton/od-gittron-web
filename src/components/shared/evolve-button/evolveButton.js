@@ -68,12 +68,10 @@ class EvolveButton extends Component {
 
     return (
       <div>
-        <p>Able to evolve: {evolveAvail}</p>
-
         {evolveAvail && ownerOfToken === account ? (
-          <button onClick={() => this.handleSubmit(bot)}>Evolve</button>
+          <button onClick={() => this.handleSubmit(bot)}>Metamorph</button>
         ) : (
-          <p>Need more supporters to evolve</p>
+          <p>Metamorph feature is coming soon!</p>
         )}
       </div>
     );

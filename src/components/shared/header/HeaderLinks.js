@@ -33,7 +33,6 @@ const HeaderLinks = class extends React.Component {
           </h1>
         </div>
         <div className="Navbar__Desktop">
-          {networkId === 4 ? <p>Rinkeby</p> : <p>Main</p>}
           <Link to="/" className="Navbar__Desktop--Item">
             Bots
           </Link>
@@ -46,6 +45,7 @@ const HeaderLinks = class extends React.Component {
               Dashboard
             </Link>
           ) : null}
+          {networkId === 4 ? <p className="Rinkeby">Rinkeby</p> : <p className="Mainnet">Main</p>}
         </div>
         {/* Start Hamburger */}
         <button
