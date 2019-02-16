@@ -98,6 +98,8 @@ class Generator extends Component {
 
     if (botRes.error) {
       this.setState({ loading: false, tokenId: null });
+    } else {
+      this.props.history.push(`/bots/${this.state.tokenId}`);
     }
   };
 
