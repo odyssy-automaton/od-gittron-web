@@ -11,20 +11,20 @@ function Dashboard() {
   return (
     <Web3Consumer>
       {(context) => (
-        <div className="Dashboard">
-          <div>
-            <h3>Your Bots</h3>
-            <DashboardBots
-              address={context.account}
+        <div className="Contain Columns">
+          <div className="Columns__Column--50">
+            {/* <h3>Your Repos</h3>
+            <p>There will be a list here</p> */}
+            <h4>Generate a Prime Bot</h4>
+            <Generator
+              account={context.account}
               web3={new Web3(context.web3js.givenProvider)}
             />
           </div>
-          <div>
-            <h3>Your Repos</h3>
-            <p>There will be a list here</p>
-            <h4>Register a new repo</h4>
-            <Generator
-              account={context.account}
+          <div className="Columns__Column--50">
+            <h3>Your Bots</h3>
+            <DashboardBots
+              address={context.account}
               web3={new Web3(context.web3js.givenProvider)}
             />
           </div>
