@@ -8,12 +8,11 @@ export const BaseUrl = async () => {
     return process.env.REACT_APP_MAIN_API_HOST;
   }
   const network = await web3.eth.net.getId();
-  console.log('network', network);
 
   if (network === 1) {
     console.log('main');
     return process.env.REACT_APP_MAIN_API_HOST;
-  } else {
+  } else if (network === 4) {
     console.log('rinkeby');
     return process.env.REACT_APP_API_HOST;
   }
@@ -21,6 +20,7 @@ export const BaseUrl = async () => {
 
 export const get = async (endpoint) => {
   const baseURL = await BaseUrl();
+  console.log(baseURL);
 
   const instance = axios.create({
     baseURL,
