@@ -7,16 +7,19 @@ export default class GittronWeb3Service {
   gittronContract;
   constructor(web3) {
     this.web3Service = new Web3Service(web3);
-    web3.eth.net.getNetworkType().then((network) => {
-      console.log('network', network);
-      if (network === 'main') {
-        this.contractAddress = process.env.REACT_APP_MAIN_CONTRACT_ADDRESS;
-      } else if (network === 'rinkbey') {
-        this.contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
-      }
-    });
+    // this.selectNetowrkContract(web3);
+    // this.contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
   }
+
   async initContracts() {
+    const network = await this.web3Service.getNetwork();
+
+    if (network === 'main') {
+      this.contractAddress = process.env.REACT_APP_MAIN_CONTRACT_ADDRESS;
+    } else if (network === 'rinkeby') {
+      this.contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
+    }
+
     return (
       this.gittronContract ||
       (this.gittronContract = await this.web3Service.initContract(
