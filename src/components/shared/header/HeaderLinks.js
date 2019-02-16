@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import './Header.scss';
 import './Navbar.scss';
-import  './Hamburger.scss';
+import './Hamburger.scss';
 
 const HeaderLinks = class extends React.Component {
   state = {
@@ -33,10 +33,18 @@ const HeaderLinks = class extends React.Component {
           </h1>
         </div>
         <div className="Navbar__Desktop">
-          <Link to="/" className="Navbar__Desktop--Item">Bots</Link>
-          {authenticated ? <Link to="/repos" className="Navbar__Desktop--Item">Repos</Link> : null}
-          <Link to="/about" className="Navbar__Desktop--Item">About</Link>
-          {authenticated ? <Link to="/dashboard" className="Navbar__Desktop--Item">Dashboard</Link> : null}
+          <Link to="/" className="Navbar__Desktop--Item">
+            Bots
+          </Link>
+          {/* {authenticated ? <Link to="/repos" className="Navbar__Desktop--Item">Repos</Link> : null} */}
+          <Link to="/about" className="Navbar__Desktop--Item">
+            About
+          </Link>
+          {authenticated ? (
+            <Link to="/dashboard" className="Navbar__Desktop--Item">
+              Dashboard
+            </Link>
+          ) : null}
         </div>
         {/* Start Hamburger */}
         <button
@@ -50,12 +58,36 @@ const HeaderLinks = class extends React.Component {
         </button>
         <div className={mobileNavClass}>
           <div className="Navbar__Mobile--Contents">
-            <Link onClick={this.toggleNav} className="Navbar__Mobile--Contents--Item" to="/">
+            <Link
+              onClick={this.toggleNav}
+              className="Navbar__Mobile--Contents--Item"
+              to="/"
+            >
               Bots
             </Link>
-            {authenticated ? <Link onClick={this.toggleNav} className="Navbar__Mobile--Contents--Item" to="/dashboard">Dashboard</Link> : null}
-            {authenticated ? <Link onClick={this.toggleNav} className="Navbar__Mobile--Contents--Item" to="/repos">Repos</Link> : null}
-            <Link onClick={this.toggleNav} className="Navbar__Mobile--Contents--Item" to="/about">
+            {authenticated ? (
+              <Link
+                onClick={this.toggleNav}
+                className="Navbar__Mobile--Contents--Item"
+                to="/dashboard"
+              >
+                Dashboard
+              </Link>
+            ) : null}
+            {authenticated ? (
+              <Link
+                onClick={this.toggleNav}
+                className="Navbar__Mobile--Contents--Item"
+                to="/repos"
+              >
+                Repos
+              </Link>
+            ) : null}
+            <Link
+              onClick={this.toggleNav}
+              className="Navbar__Mobile--Contents--Item"
+              to="/about"
+            >
               About
             </Link>
           </div>
@@ -64,6 +96,6 @@ const HeaderLinks = class extends React.Component {
       </div>
     );
   }
-}
+};
 
 export default HeaderLinks;

@@ -21,6 +21,7 @@ class BotFilter extends Component {
     selected: {
       type: this.defaultValues.type,
       repo: this.defaultValues.repo,
+      verified: this.defaultValues.verified,
     },
   };
 
