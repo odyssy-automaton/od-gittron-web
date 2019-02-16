@@ -35,17 +35,16 @@ class BotDetail extends Component {
       bot: data,
     });
 
-    if (!data.mined) {
-      console.log('poopin');
+    if (!data.mined && !data.disabled) {
       let query = {
         txHash: data.txHash,
         tokenId: data.tokenId,
         ghid: data.ghid,
       };
 
-      console.log(query);
-      // const res = await put('tokenstatus', query);
-      // console.log(res);
+      const res = await put('tokenstatus', query);
+      console.log('checking bot status');
+      console.log(res);
     }
   };
 
@@ -72,14 +71,14 @@ class BotDetail extends Component {
               </div>
               <div className="Columns__Column--50">
                 <div className="BotDetail__Info">
-                {unverified && (
-                  <BotVerification
-                    bot={bot}
-                    handleVerification={this.handleVerification}
-                    account={context.account}
-                    web3={new Web3(context.web3js.givenProvider)}
-                  />
-                )}
+                  {unverified && (
+                    <BotVerification
+                      bot={bot}
+                      handleVerification={this.handleVerification}
+                      account={context.account}
+                      web3={new Web3(context.web3js.givenProvider)}
+                    />
+                  )}
                   <h3>{bot.tokenUriData && bot.tokenUriData.name}</h3>
                   <h4 className="Capitalize">{bot.tokenType} Bot</h4>
                   {verified && (
