@@ -89,7 +89,7 @@ class Generator extends Component {
             <p>{tokenId} is generating</p>
             <Loader />
             <img
-              src="https://s3.amazonaws.com/odyssy-assets/Gittron__BotCube.png"
+              src="https://s3.amazonaws.com/odyssy-assets/Gittron__BotCube.svg"
               alt={tokenId}
               height="300px"
             />
@@ -97,8 +97,8 @@ class Generator extends Component {
         ) : (
           <div>
             <p>
-              Enter the clone URL for a Github repo that you own or mangge to
-              receive a Gen 0 Prime bot-cube.
+              Enter the full URL for a Github repo that you own or manage to
+              receive a Gen 0 Prime Bot.
             </p>
             <p>
               Supporters of your repo can donate to your fund of choice and
