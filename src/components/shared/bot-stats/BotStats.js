@@ -6,14 +6,11 @@ class BotStats extends Component {
       const attr = bot.tokenUriData.attributes.find((trait) => {
         return trait.trait_type === traitType;
       });
-
-      if (attr.value) {
-        return (
-          <p>
-            {attr.trait_type} = {attr.value}
-          </p>
-        );
-      }
+      return (
+        <p>
+          {attr.trait_type} = {attr.value || 'None'}
+        </p>
+      );
     }
   };
 
