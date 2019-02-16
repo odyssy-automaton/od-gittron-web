@@ -13,7 +13,7 @@ class Bots extends Component {
   componentDidMount = async () => {
     const { data } = await get(`tokens`);
     this.setState({
-      bots: data,
+      bots: data.filter((bot) => !bot.disabled),
     });
   };
 
