@@ -47,7 +47,7 @@ class BuidlButton extends Component {
 
     const newBot = {
       masterTokenId: bot.tokenId,
-      tokenType: 'worker',
+      tokenType: 'buidl',
       address: this.state.toAccount || this.props.account,
     };
     const res = await post('tokens/workersupporter', newBot);
