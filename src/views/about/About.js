@@ -1,8 +1,9 @@
 import React from 'react';
+import './About.scss';
 
 function About() {
   return (
-    <div className="Page">
+    <div className="Page About">
       <div className="PageHeader">
         <div className="PageHeader__Contents">
           <h1>The year is 3369 and, throughout the universe, all biological life has been decimated. All that's left are Prime Bots that Humans sent to explore space. It's up to the Prime Bots to buidl their own future. They'll need help from the Worker and Support Bots in order to survive.</h1>
@@ -15,7 +16,7 @@ function About() {
         </div>
         <div className="Columns__Column--33">
           <h2>Bots are NFTs</h2>
-          <p>All Bots are unique ERC-721 Non-fungible Tokens.</p>
+          <p>All Bots are unique collectible digital assets known as ERC-721 non-fungible tokens (NFTs).</p>
         </div>
         <div className="Columns__Column--33">
           <h2>Bot DNA is based on Code.</h2>

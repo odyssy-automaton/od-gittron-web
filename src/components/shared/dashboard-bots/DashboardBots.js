@@ -32,7 +32,6 @@ class DashboardBots extends Component {
   };
 
   tokensByOwner = async (address) => {
-    console.log(address);
     return await this.GittronWeb3Service.tokensByOwner(address);
   };
 
@@ -48,7 +47,6 @@ class DashboardBots extends Component {
 
   render() {
     const { bots } = this.state;
-    console.log(bots);
 
     return (
       <div>
