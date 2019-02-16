@@ -36,9 +36,8 @@ class BotDetail extends Component {
     });
 
     if (!data.mined && !data.disabled) {
-      const tx = data.txHash === 'new' ? 'missing' : data.txHash;
       let query = {
-        txHash: tx,
+        txHash: data.txHash,
         tokenId: data.tokenId,
         ghid: data.ghid,
       };
