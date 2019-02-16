@@ -17,7 +17,7 @@ const HeaderLinks = class extends React.Component {
   };
 
   render() {
-    const { authenticated } = this.props;
+    const { authenticated, networkId } = this.props;
     const mobileNavClass = this.state.navOpen
       ? 'Navbar__Mobile Navbar__Mobile--Open'
       : 'Navbar__Mobile';
@@ -33,6 +33,7 @@ const HeaderLinks = class extends React.Component {
           </h1>
         </div>
         <div className="Navbar__Desktop">
+          {networkId === 4 ? <p>Rinkeby</p> : <p>Main</p>}
           <Link to="/" className="Navbar__Desktop--Item">
             Bots
           </Link>

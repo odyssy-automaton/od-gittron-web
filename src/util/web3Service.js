@@ -22,6 +22,10 @@ export default class Web3Service {
     return accounts[0];
   }
 
+  async getNetwork() {
+    return await this.web3.eth.net.getNetworkType();
+  }
+
   async getAccountBalance(address) {
     return await new this.web3.eth.getBalance(address);
   }
