@@ -10,6 +10,7 @@ import Loader from '../loader/loader';
 class Generator extends Component {
   state = {
     tokenId: null,
+    error: null,
   };
 
   componentDidMount() {
@@ -62,6 +63,28 @@ class Generator extends Component {
 
     const res = await post('tokens/new', newBot);
 
+    if (!res) {
+      console.log(res);
+      this.setState({
+        error: 'Is that a valid public repo?',
+        loading: false,
+        tokenId: null,
+      });
+
+      return;
+    }
+
+    if (res.status !== 200) {
+      console.log(res);
+      this.setState({
+        error: res.data,
+        loading: false,
+        tokenId: null,
+      });
+
+      return;
+    }
+
     this.setState({ tokenId: res.data.tokenId });
 
     const botRes = await this.GittronWeb3Service.registerMasterBot(
@@ -73,13 +96,13 @@ class Generator extends Component {
       res.data.ghid,
     );
 
-    if (!botRes.error) {
-      this.props.history.push(`/bots/${this.state.tokenId}`);
+    if (botRes.error) {
+      this.setState({ loading: false, tokenId: null });
     }
   };
 
   render() {
-    const { tokenId } = this.state;
+    const { tokenId, error } = this.state;
     const { account } = this.props;
 
     return (
@@ -108,7 +131,11 @@ class Generator extends Component {
               Set a price for each Support bot here and an address to receive
               the funds.
             </p>
-            <GenerationForm account={account} onSubmit={this.handleSubmit} />
+            <GenerationForm
+              error={error}
+              account={account}
+              onSubmit={this.handleSubmit}
+            />
           </div>
         )}
       </div>

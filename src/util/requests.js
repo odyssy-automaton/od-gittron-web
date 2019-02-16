@@ -22,7 +22,7 @@ export const post = async (endpoint, payload) => {
   try {
     return await instance.post(`/${endpoint}`, payload);
   } catch (err) {
-    throw new Error(err);
+    return err.response;
   }
 };
 
