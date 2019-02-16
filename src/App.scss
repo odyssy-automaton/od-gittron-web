@@ -92,6 +92,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 99;
   &__Contents {
     display: flex;
     flex-direction: column;
@@ -114,7 +115,7 @@ a {
     &--50 {
       flex-basis: 50%;
       @media (max-width: $tablet) {
-        flex-basis: calc(100% - 50px);
+        flex-basis: 100%;
       }
     }
   }
@@ -144,29 +145,34 @@ button:not(.navbar__hamburger) {
     color: white;
   }
 }
+
+// Forms
+
 form {
   padding: 25px;
   border: none;
   border: 2px solid black;
-  label {
-    display: block;
-  }
-  input {
-    background-color: transparent;
-    -webkit-rtl-ordering: logical;
-    cursor: text;
-    padding: -px;
-    border-width: 0px;
-    border-style: none;
-    border-color: transparent;
-    border-image: none;
-    appearance: none;
-    border-bottom: 1px solid black;
-    margin: 10px 0px;
-    width: 100%;
-    font-size: 1.35em;
-    &:focus { outline: none; border-bottom: 1px solid #5f5fff; }
-  }
+}
+
+label {
+  display: block;
+}
+
+input {
+  background-color: transparent;
+  -webkit-rtl-ordering: logical;
+  cursor: text;
+  padding: -px;
+  border-width: 0px;
+  border-style: none;
+  border-color: transparent;
+  border-image: none;
+  appearance: none;
+  border-bottom: 1px solid black;
+  margin: 10px 0px;
+  width: 100%;
+  font-size: 1.35em;
+  &:focus { outline: none; border-bottom: 1px solid #5f5fff; }
 }
 
 fieldset {

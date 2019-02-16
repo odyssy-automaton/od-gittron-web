@@ -53,23 +53,19 @@ class BotVerfication extends Component {
     return (
       <Fragment>
         {ownerOfToken === account ? (
-          <div className="BotVerfication">
-            <h5>Your Prime Bot is unverified</h5>
-            <h6>Verify ownership</h6>
+          <div className="BotVerification Contain">
+            <h5>This Prime Bot is not verified.</h5>
+            <h3>Verify Ownership</h3>
             <p>Repo = {bot.repo}</p>
             <p>
-              To enable Worker and Support clones of your Prime Bot, you need to
-              verify ownership of this repo.
-            </p>
-            <p>
-              To verity you own or manage a repo, create a file in your root
+              To verify you own or manage a repo, create a file in your root
               directory called '.gittron' that contains your public key used to
               register this bot.
             </p>
 
             {statusMessage === 'unverified' ? (
               <p>
-                We're didn't detect the '.gittron' file in your repo. Would you
+                We didn't detect the '.gittron' file in your repo. Would you
                 like to try again?
               </p>
             ) : null}

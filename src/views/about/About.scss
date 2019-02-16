@@ -1,0 +1,10 @@
+@import '../../styles/variables';
+
+.About {
+    h1 {
+        @media (max-width: $tablet){
+            font-size: 1.25em;
+            padding: 15px;
+        }
+    }
+}
