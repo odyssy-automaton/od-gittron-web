@@ -10,7 +10,7 @@ class BotStats extends Component {
       if (attr.value) {
         return (
           <p>
-            {attr.trait_type}: {attr.value}
+            {attr.trait_type} = {attr.value}
           </p>
         );
       }

@@ -54,7 +54,7 @@ function About() {
           <p><strong>How do I get a Buidl Bot?</strong></p>
           <p>The owner of a Prime Bot can gift you a Buidl Bot if they haven't used thm all.</p>
           <p><strong>Who built this silly thing?</strong></p>
-          <p>Odyssy is a decentralized collective sending design and development to blockchain and beyond. Connect with us at <a href="https://odyssy.io" target="_blank">odyssy.io</a></p>
+          <p>Odyssy is a decentralized collective sending design and development to blockchain and beyond. Connect with us at <a href="https://odyssy.io" target="_blank" rel="noopener noreferrer">odyssy.io</a></p>
         </div>
       </div>
     </div>

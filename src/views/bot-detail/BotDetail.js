@@ -77,39 +77,43 @@ class BotDetail extends Component {
                     <p>CAUTION: UNVERIFIED BOT!</p>
                   )}
                   <BotStats bot={bot} />
-                </div>
-                {bot.tokenType === 'prime' ? (
-                  <div className="BotDetail__Actions">
-                    <div className="BotDetail__Actions--Support">
-                      <p>
-                        Support the development of this bot's repo by cloning it
-                        as a support bot.
-                      </p>
-                      <SupportButton
-                        bot={bot}
-                        account={context.account}
-                        web3={new Web3(context.web3js.givenProvider)}
-                      />
-                      <BuidlButton
-                        bot={bot}
-                        account={context.account}
-                        web3={new Web3(context.web3js.givenProvider)}
-                      />
+                
+                  {bot.tokenType === 'prime' ? (
+                    <div className="BotDetail__Actions">
+                      <div className="BotDetail__Actions--Support">
+                        <p>
+                          Support the development of this bot's repo by cloning it
+                          as a support bot.
+                        </p>
+                        <SupportButton
+                          bot={bot}
+                          account={context.account}
+                          web3={new Web3(context.web3js.givenProvider)}
+                        />
+                      </div>
+                      <div className="BotDetail__Actions--Buidl">
+                        <BuidlButton
+                          bot={bot}
+                          account={context.account}
+                          web3={new Web3(context.web3js.givenProvider)}
+                        />
+                      </div>
+                      <div className="BotDetail__Actions--Owner">
+                        <EvolveButton
+                          bot={bot}
+                          account={context.account}
+                          web3={new Web3(context.web3js.givenProvider)}
+                        />
 
-                      <EvolveButton
-                        bot={bot}
-                        account={context.account}
-                        web3={new Web3(context.web3js.givenProvider)}
-                      />
-
-                      <WithdrawButton
-                        bot={bot}
-                        account={context.account}
-                        web3={new Web3(context.web3js.givenProvider)}
-                      />
+                        <WithdrawButton
+                          bot={bot}
+                          account={context.account}
+                          web3={new Web3(context.web3js.givenProvider)}
+                        />
                     </div>
                   </div>
                 ) : null}
+                </div>
               </div>
             </div>
           </Fragment>
