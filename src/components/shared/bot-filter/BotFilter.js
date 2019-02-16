@@ -8,12 +8,12 @@ import './BotFilter.scss';
 class BotFilter extends Component {
   defaultValues = {
     typeOptions: [
-      { value: 'all', label: 'All Types' },
-      { value: 'prime', label: 'Prime Bot' },
-      { value: 'worker', label: 'Worker Bot' },
-      { value: 'supporter', label: 'Support Bot' },
+      { value: 'all', label: 'All Bots' },
+      { value: 'prime', label: 'Prime Bots' },
+      { value: 'worker', label: 'Buidl Bots' },
+      { value: 'support', label: 'Support Bots' },
     ],
-    type: { value: 'all', label: 'All Types' },
+    type: { value: 'all', label: 'All Bots' },
     repo: { value: 'all', label: 'All Repos' },
   };
 

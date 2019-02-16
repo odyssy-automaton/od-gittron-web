@@ -10,16 +10,17 @@
   }
   &__Actions {
     max-width: 300px;
-    padding-left: 25px;
+    border: 2px solid black;
     &--Support {
-      border: 2px solid black;
       padding: 25px;
+      border-bottom: 2px solid black;
     }
-    &--Worker {
-      
+    &--Buidl {
+      padding: 25px;
+      border-bottom: 2px solid black;
     }
-    &--Evolve {
-      
+    &--Owner {
+      padding: 25px;
     }
     button { width: 100%; }
   }
