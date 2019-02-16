@@ -115,6 +115,12 @@ function About() {
             per 'Support' and a Wallet Address to receive the funds. Supporters will get a clone of your Prime Bot with some unique modifications.
           </p>
           <p>
+            <strong>My Prime Bot has Supports. How do I withdraw?</strong>
+          </p>
+          <p>
+            Go to your Prime Bot's page, and at the bottom click the 'Withdraw' button. All funds in the Bot Bank will go to the address you set during generation of your Prime Bot. 20% will go to Gittron to support further development of the framework. This is also to disincentivize Prime Bots from supporting themselves, as they won't be able to get all the funds.
+          </p>
+          <p>
             <strong>How do I get a Buidl Bot?</strong>
           </p>
           <p>
