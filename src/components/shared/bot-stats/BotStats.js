@@ -7,7 +7,7 @@ class BotStats extends Component {
         return trait.trait_type === traitType;
       });
       return (
-        <p>
+        <p className="Stats">
           {attr.trait_type} = {attr.value || 'None'}
         </p>
       );
