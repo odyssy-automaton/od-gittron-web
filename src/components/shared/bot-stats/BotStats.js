@@ -32,9 +32,9 @@ class BotStats extends Component {
         <div className="BotDetail__Info--Rares">
           <h5>Rares</h5>
           {this.renderStat(bot, 'armor')}
-          {this.renderStat(bot, 'planet')}
+          {this.renderStat(bot, 'origin')}
           {this.renderStat(bot, 'energy')}
-          {this.renderStat(bot, 'back')}
+          {this.renderStat(bot, 'backGear')}
         </div>
       </div>
     );
