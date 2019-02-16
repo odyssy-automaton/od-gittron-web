@@ -1,3 +1,5 @@
+@import '../../../styles/variables';
+
 .BotList {
   display: flex;
   flex-direction: row;
@@ -11,5 +13,8 @@
     position: relative;
     flex-basis: 33%;
     margin-bottom: 25px;
+    @media (max-width: $tablet) {
+      flex-basis: 100%;
+    }
   }
 }

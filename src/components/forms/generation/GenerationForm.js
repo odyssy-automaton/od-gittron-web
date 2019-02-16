@@ -64,16 +64,16 @@ class GenerationForm extends Component {
               <input defaultValue="" type="text" name="repoUrl" />
             </div>
             <div>
-              <label>Amount in ETH</label>
+              <label>Set Support Price in ETH</label>
               <input type="text" name="price" defaultValue=".01" />
             </div>
             <div>
-              <label>Ethereum Wallet Address</label>
+              <label>Ethereum Wallet Address to receive the Support funds</label>
               <input type="text" name="withdrawAddr" defaultValue={account} />
               <p>
-                Address Note: Tis is the account that all sales from support
-                bots will withdraw too. Prepopulated with you current account
-                but could be a bounty, grant or multisig.
+                Address Note: This is the account that all funds from support
+                bots will withdraw too. We've prepopulated it with your current account
+                but funds could be diverted to a bounty, grant or multisig.
               </p>
             </div>
             <div>

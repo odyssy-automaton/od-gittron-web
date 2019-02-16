@@ -50,15 +50,12 @@ const HeaderLinks = class extends React.Component {
         </button>
         <div className={mobileNavClass}>
           <div className="Navbar__Mobile--Contents">
-            <Link className="Navbar__Mobile--Contents--Item" to="/">
-              Home
-            </Link>
-            {authenticated ? <Link className="Navbar__Mobile--Contents--Item" to="/dashboard">Dashboard</Link> : null}
-            {authenticated ? <Link className="Navbar__Mobile--Contents--Item" to="/repos">Repos</Link> : null}
-            <Link className="Navbar__Mobile--Contents--Item" to="/bots">
+            <Link onClick={this.toggleNav} className="Navbar__Mobile--Contents--Item" to="/">
               Bots
             </Link>
-            <Link className="Navbar__Mobile--Contents--Item" to="/about">
+            {authenticated ? <Link onClick={this.toggleNav} className="Navbar__Mobile--Contents--Item" to="/dashboard">Dashboard</Link> : null}
+            {authenticated ? <Link onClick={this.toggleNav} className="Navbar__Mobile--Contents--Item" to="/repos">Repos</Link> : null}
+            <Link onClick={this.toggleNav} className="Navbar__Mobile--Contents--Item" to="/about">
               About
             </Link>
           </div>

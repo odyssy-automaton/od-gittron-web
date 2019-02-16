@@ -40,13 +40,6 @@ a {
   }
 }
 
-.Contain {
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 25px;
-}
-
 .PageHeader {
   min-height: 100vh;
   width: 100%;
@@ -79,6 +72,11 @@ a {
 
 .Border-Bottom {
   border-bottom: 2px solid black;
+}
+
+.Box {
+  border: 2px solid black;
+  padding: 15px;
 }
 
 // Components
@@ -145,4 +143,50 @@ button:not(.navbar__hamburger) {
     background: #5F5FFF;
     color: white;
   }
+}
+form {
+  padding: 25px;
+  border: none;
+  border: 2px solid black;
+  label {
+    display: block;
+  }
+  input {
+    background-color: transparent;
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    padding: -px;
+    border-width: 0px;
+    border-style: none;
+    border-color: transparent;
+    border-image: none;
+    appearance: none;
+    border-bottom: 1px solid black;
+    margin: 10px 0px;
+    width: 100%;
+    font-size: 1.35em;
+    &:focus { outline: none; border-bottom: 1px solid #5f5fff; }
+  }
+}
+
+fieldset {
+  display: block;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-block-start: 0px;
+  padding-inline-start: 0px;
+  padding-inline-end: 0px;
+  padding-block-end: 0px;
+  min-inline-size: min-content;
+  border-width: 0px;
+  border-style: none;
+  border-color: transparent;
+  border-image: none;
+}
+
+.Contain {
+  max-width: 1200px;
+  width: calc(100% -  50px);
+  margin: 0 auto;
+  padding: 25px;
 }
