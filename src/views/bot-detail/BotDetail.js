@@ -49,14 +49,6 @@ class BotDetail extends Component {
       <Web3Consumer>
         {(context) => (
           <Fragment>
-            {unverified && (
-              <BotVerification
-                bot={bot}
-                handleVerification={this.handleVerification}
-                account={context.account}
-                web3={new Web3(context.web3js.givenProvider)}
-              />
-            )}
             <div className="BotDetail Columns Contain">
               <div className="Columns__Column--50">
                 <BotCard
@@ -67,6 +59,14 @@ class BotDetail extends Component {
               </div>
               <div className="Columns__Column--50">
                 <div className="BotDetail__Info">
+                {unverified && (
+                  <BotVerification
+                    bot={bot}
+                    handleVerification={this.handleVerification}
+                    account={context.account}
+                    web3={new Web3(context.web3js.givenProvider)}
+                  />
+                )}
                   <h3>{bot.tokenUriData && bot.tokenUriData.name}</h3>
                   <h4 className="Capitalize">{bot.tokenType} Bot</h4>
                   {verified ? (

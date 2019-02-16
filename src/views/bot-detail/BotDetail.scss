@@ -1,9 +1,15 @@
+@import '../../styles/variables';
+
 .BotDetail {
   padding-top: 50px;
   &__Info {
     text-align: left;
     padding-left: 25px;
     flex-basis: 50%;
+    @media (max-width: $tablet){
+      flex-basis: 100%;
+      padding-left: 0px;
+    }
   }
   &__Verification-Badge {
     color: red;

@@ -148,6 +148,8 @@ export default class GittronWeb3Service {
         await this.checkStatus(txHash, tokenId, ghid);
       })
       .then(async (resp) => {
+        console.log('resp', resp);
+
         await this.checkStatus(resp.transactionHash, tokenId, ghid);
         const resSvg = await post('generatepng', {
           ghid: ghid,
@@ -157,7 +159,7 @@ export default class GittronWeb3Service {
         return resSvg;
       })
       .catch(async (err) => {
-        console.log(err);
+        console.log('catch', err);
         await this.checkStatus('rejected', tokenId, ghid);
 
         return { error: 'rejected transaction' };
