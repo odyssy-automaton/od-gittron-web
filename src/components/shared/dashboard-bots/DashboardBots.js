@@ -4,6 +4,8 @@ import { get } from '../../../util/requests';
 import BotList from '../bot-list/BotList';
 import GittronWeb3Service from '../../../util/gittronWeb3';
 
+import './DashboardBots.scss';
+
 class DashboardBots extends Component {
   state = {
     bots: [],
@@ -30,6 +32,7 @@ class DashboardBots extends Component {
   };
 
   tokensByOwner = async (address) => {
+    console.log(address);
     return await this.GittronWeb3Service.tokensByOwner(address);
   };
 
@@ -45,6 +48,7 @@ class DashboardBots extends Component {
 
   render() {
     const { bots } = this.state;
+    console.log(bots);
 
     return (
       <div>
