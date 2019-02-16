@@ -38,3 +38,25 @@
     margin-left: 50px;
   }
 }
+
+.Rinkeby:before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid black;
+  margin-right: 5px;
+  background-color: #5f5fff;
+}
+
+.Mainnet:before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid black;
+  margin-right: 5px;
+  background-color: red;
+}

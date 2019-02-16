@@ -73,26 +73,29 @@ class BotFilter extends Component {
     const repoOptions = this.genRepoOptions();
 
     return (
-      <div className="Contain">
-        <div>
-          <p>{filteredBots.length} Bots</p>
-
-          <h4>Filters</h4>
+      <div>
+        <div>          
           <div className="BotFilter__filters">
-            <Select
-              className="BotFilter__select"
-              options={repoOptions}
-              onChange={(e) => this.handleChange('repo', e)}
-              value={selected.repo}
-              isClearable={true}
-            />
-            <Select
-              className="BotFilter__select"
-              options={typeOptions}
-              onChange={(e) => this.handleChange('type', e)}
-              value={selected.type}
-              isClearable={true}
-            />
+            <div className="Title">
+              <h4>{filteredBots.length} Bots</h4>
+            </div>
+            <div className="BotFilter__filters--Fields">
+              <h4>Filters</h4>
+              <Select
+                className="BotFilter__select"
+                options={repoOptions}
+                onChange={(e) => this.handleChange('repo', e)}
+                value={selected.repo}
+                isClearable={true}
+              />
+              <Select
+                className="BotFilter__select"
+                options={typeOptions}
+                onChange={(e) => this.handleChange('type', e)}
+                value={selected.type}
+                isClearable={true}
+              />
+            </div>
           </div>
         </div>
         <div>

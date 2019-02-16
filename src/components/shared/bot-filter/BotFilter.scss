@@ -1,14 +1,49 @@
+@import '../../../styles/variables';
+
 .BotFilter__filters {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   flex-wrap: wrap;
+  border: 2px solid black;
+  margin: 25px auto;
+  .Title {
+    width: calc(15% - 34px);
+    padding: 15px;
+    border-right: 2px solid black;
+    @media (max-width: $tablet) {
+      width: 100%;
+      border-right: none;
+      border-bottom: 2px solid black;
+      text-align: center;
+    }
+  }
+  .BotFilter__filters--Fields {
+    width: 85%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    h4 {
+      width: 15%;
+      padding-left: 15px;
+    }
+  }
 }
 
 .BotFilter__select {
-  width: 50%;
   padding: 20px;
+  width: 40%;
+  > * {outline: none; }
   @media (max-width:768px){
     width: 100%;
+  }
+  > div:first-of-type {
+    border: 2px solid black !important;
+    border-radius: 0px !important;
+    outline: none !important;
+    &:focus { 
+      border: 2px solid black;
+      border-radius: 0px;
+    }
   }
 }
