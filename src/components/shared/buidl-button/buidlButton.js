@@ -47,7 +47,7 @@ class BuidlButton extends Component {
 
     const newBot = {
       masterTokenId: bot.tokenId,
-      tokenType: 'worker',
+      tokenType: 'buidl',
       address: this.state.toAccount || this.props.account,
     };
     const res = await post('tokens/workersupporter', newBot);
@@ -76,12 +76,12 @@ class BuidlButton extends Component {
 
     return (
       <div>
-        <p>Free buidlbots availible: {buidlAvail}</p>
+        <p>{buidlAvail} Buidl Bots available</p>
         {isLoading ? <Loader /> : null}
         {buidlAvail > 0 && ownerOfToken === account && !isLoading ? (
           <div>
             <div className="hideUnlessClicked">
-              <label>send to address: {toAccount}</label>
+              <label>Send to Address: {toAccount}</label>
               <input
                 type="text"
                 name="toAccount"
@@ -94,10 +94,10 @@ class BuidlButton extends Component {
             </button>
           </div>
         ) : (
-          <p>Get more free BuidlerBots at next metamorph level</p>
+          <p>Get more Buidl Bots at next Metamorph Level.</p>
         )}
         {ownerOfToken !== account ? (
-          <p>you are not the owner of this bot</p>
+          <p>You don't own this Bot.</p>
         ) : null}
       </div>
     );

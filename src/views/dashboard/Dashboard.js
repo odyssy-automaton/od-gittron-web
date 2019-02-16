@@ -11,7 +11,7 @@ function Dashboard() {
   return (
     <Web3Consumer>
       {(context) => (
-        <div className="Contain Columns">
+        <div className="Dashboard Contain Columns">
           <div className="Columns__Column--50">
             {/* <h3>Your Repos</h3>
             <p>There will be a list here</p> */}
