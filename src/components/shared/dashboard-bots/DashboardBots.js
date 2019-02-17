@@ -24,7 +24,15 @@ class DashboardBots extends Component {
   loadContract = async () => {
     const contract = await this.GittronWeb3Service.initContracts();
     const tokens = await this.tokensByOwner(this.props.address);
+
+    console.log('tokens from contract');
+    console.log(tokens);
+
     const res = await this.loadBots(tokens);
+
+    console.log('res');
+    console.log(res);
+
     const bots = res.filter((bot) => bot.data.tokenId).map((bot) => bot.data);
 
     console.log('bots');
