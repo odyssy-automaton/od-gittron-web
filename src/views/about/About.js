@@ -8,17 +8,23 @@ function About() {
         <div className="PageHeader__Contents">
           <h1>
             In the year 3369, the people of Earth built a decentralized
-            autonomous bot factory called Gittron and sent it out to
-            explore the vastness of space. To expand its reach into the farthest edge of the cosmos, it builds
-            self-replicating Prime Bots capable of cloning themselves as Buidl
-            and Support Bots. Together, they buidl the crap out of the universe!
+            autonomous bot factory called Gittron and sent it out to explore the
+            vastness of space. To expand its reach into the farthest edge of the
+            cosmos, it builds self-replicating Prime Bots capable of cloning
+            themselves as Buidl and Support Bots. Together, they buidl the crap
+            out of the universe!
           </h1>
         </div>
       </div>
       <div className="Block Border-Bottom">
         <div className="Block__Contents Contain">
-          <h2>Deploy an autonomous fundraising bot for your open-source project.</h2>
-          <p>Register your repo to add passive income to your project. Just come back later and withdraw.</p>
+          <h2>
+            Deploy an autonomous fundraising bot for your open-source project.
+          </h2>
+          <p>
+            Register your repo to add passive income to your project. Just come
+            back later and withdraw.
+          </p>
         </div>
       </div>
       <div className="Block Columns Contain">
@@ -136,6 +142,16 @@ function About() {
             </a>
           </p>
           <p>
+            Mainnet:{' '}
+            <a
+              href={`https://etherscan.io/address/${
+                process.env.REACT_APP_MAIN_CONTRACT_ADDRESS
+              }`}
+            >
+              {process.env.REACT_APP_MAIN_CONTRACT_ADDRESS}
+            </a>
+          </p>
+          <p>
             <strong>What is an NFT?</strong>
           </p>
           <p>
@@ -242,11 +258,16 @@ function About() {
           <p>
             All Artwork was created by Ven Gist of Odyssy during Buidl Week.
           </p>
-          <p>Contract audit provided by twitter: <a
+          <p>
+            Contract audit provided by twitter:{' '}
+            <a
               href="https://twitter.com/RedragonX"
               target="_blank"
               rel="noopener noreferrer"
-            >@redragonx</a></p>
+            >
+              @redragonx
+            </a>
+          </p>
         </div>
       </div>
     </div>
