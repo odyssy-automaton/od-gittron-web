@@ -57,7 +57,6 @@ class BuidlButton extends Component {
     const botRes = await this.GittronWeb3Service.launchWorkerBot(
       newBot.masterTokenId,
       res.data.tokenId,
-      `${process.env.REACT_APP_API_HOST}uri/${res.data.tokenId}`,
       this.state.toAccount || this.props.account, //receiver,
       this.props.account,
       res.data.ghid,
@@ -96,9 +95,7 @@ class BuidlButton extends Component {
         ) : (
           <p>Get more Buidl Bots at next Metamorph Level.</p>
         )}
-        {ownerOfToken !== account ? (
-          <p>You don't own this Bot.</p>
-        ) : null}
+        {ownerOfToken !== account ? <p>You don't own this Bot.</p> : null}
       </div>
     );
   }
