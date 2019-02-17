@@ -16,8 +16,10 @@ export default class GittronWeb3Service {
 
     if (network === 'main') {
       this.contractAddress = process.env.REACT_APP_MAIN_CONTRACT_ADDRESS;
+      this.apiAddress = process.env.REACT_APP_MAIN_API_HOST;
     } else if (network === 'rinkeby') {
       this.contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
+      this.apiAddress = process.env.REACT_APP_API_HOST;
     }
 
     return (
@@ -117,15 +119,9 @@ export default class GittronWeb3Service {
       });
   }
 
-  async metaMorphBot(
-    baseTokenId,
-    tokenUri,
-    tokenId,
-    price,
-    withdrawAddr,
-    account,
-    ghid,
-  ) {
+  async metaMorphBot(baseTokenId, tokenId, price, withdrawAddr, account, ghid) {
+    const tokenUri = `${this.apiAddress}uri/${tokenId}`;
+
     return await this.gittronContract.methods
       .metamorph(baseTokenId, tokenUri, tokenId, price, withdrawAddr)
       .send({ from: account })
@@ -143,14 +139,8 @@ export default class GittronWeb3Service {
       });
   }
 
-  async registerMasterBot(
-    tokenUri,
-    tokenId,
-    price,
-    withdrawAddr,
-    account,
-    ghid,
-  ) {
+  async registerMasterBot(tokenId, price, withdrawAddr, account, ghid) {
+    const tokenUri = `${this.apiAddress}uri/${tokenId}`;
     return await this.gittronContract.methods
       .launchBaseToken(tokenUri, tokenId, price, withdrawAddr)
       .send({ from: account })
@@ -176,14 +166,9 @@ export default class GittronWeb3Service {
       });
   }
 
-  async launchWorkerBot(
-    baseTokenId,
-    tokenId,
-    tokenUri,
-    receiver,
-    account,
-    ghid,
-  ) {
+  async launchWorkerBot(baseTokenId, tokenId, receiver, account, ghid) {
+    const tokenUri = `${this.apiAddress}uri/${tokenId}`;
+
     return await this.gittronContract.methods
       .launchRareToken(baseTokenId, tokenId, tokenUri, receiver)
       .send({ from: account })
@@ -210,12 +195,12 @@ export default class GittronWeb3Service {
   async launchSupportBot(
     baseTokenId,
     tokenId,
-    tokenUri,
     amount,
     receiver,
     account,
     ghid,
   ) {
+    const tokenUri = `${this.apiAddress}uri/${tokenId}`;
     return await this.gittronContract.methods
       .launchNormalToken(baseTokenId, tokenId, tokenUri, amount, receiver)
       .send({ from: account, value: amount })
