@@ -9,7 +9,7 @@ function About() {
           <h1>
             In the year 3369, the people of Earth built a decentralized
             autonomous bot factory called Gittron. The mission of Gittron was to
-            explore the vast reaches of space. To expand its reach, it builds
+            explore the vastness of space. To expand its reach into the farthest reaches of the cosmos, it builds
             self-replicating Prime Bots capable of cloning themselves as Buidl
             and Support Bots. Together, they buidl the crap out of the universe!
           </h1>
