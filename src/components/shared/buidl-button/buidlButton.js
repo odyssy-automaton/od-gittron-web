@@ -92,10 +92,7 @@ class BuidlButton extends Component {
               Gift BuidlBot
             </button>
           </div>
-        ) : (
-          <p>Get more Buidl Bots at next Metamorph Level.</p>
-        )}
-        {ownerOfToken !== account ? <p>You don't own this Bot.</p> : null}
+        ) : null }
       </div>
     );
   }
