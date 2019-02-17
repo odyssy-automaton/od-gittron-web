@@ -15,6 +15,12 @@ function About() {
           </h1>
         </div>
       </div>
+      <div className="Block Border-Bottom">
+        <div className="Block__Contents Contain">
+          <h2>Deploy an autonomous fundraising bot for your open-source project.</h2>
+          <p>Register your repo to add passive income to your project. Just come back later and withdraw.</p>
+        </div>
+      </div>
       <div className="Block Columns Contain">
         <div className="Columns__Column--33">
           <h2>Support Open Source</h2>
