@@ -33,9 +33,8 @@ class Generator extends Component {
     }
   };
 
-  registerMasterBot = async (tokenUri, tokenId, price, withdrawAddr) => {
+  registerMasterBot = async (tokenId, price, withdrawAddr) => {
     await this.GittronWeb3Service.rigisterMasterBot(
-      tokenUri,
       tokenId,
       price,
       withdrawAddr,
@@ -88,7 +87,6 @@ class Generator extends Component {
     this.setState({ tokenId: res.data.tokenId });
 
     const botRes = await this.GittronWeb3Service.registerMasterBot(
-      `${process.env.REACT_APP_API_HOST}uri/${res.data.tokenId}`,
       `${res.data.tokenId}`,
       bot.price,
       bot.withdrawAddr,

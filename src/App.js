@@ -12,7 +12,7 @@ import screens from './views/default-screens';
 import './App.scss';
 
 class App extends Component {
-  networks = [1, 4];
+  networks = [4];
   render() {
     return (
       <div className="App">
