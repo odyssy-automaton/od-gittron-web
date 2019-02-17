@@ -69,6 +69,7 @@ class SupportButton extends Component {
     if (!botRes.error) {
       this.props.history.push(`/bots/${this.state.supportTokenId}`);
     }
+    this.setState({ loading: false });
   };
 
   render() {
