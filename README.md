@@ -32,5 +32,5 @@ Set up auto-linting and prettier to be run on file save or in real-time in your 
 
 # gittron
 
-![gittron](https://s3.amazonaws.com/od-flat-svg/0x959cd3a31cc611630423f9facf8a9b95.png)
 [Support me](https://gittron.me/bots/0x959cd3a31cc611630423f9facf8a9b95)
+![gittron](https://s3.amazonaws.com/od-flat-svg/0x959cd3a31cc611630423f9facf8a9b95.png)
