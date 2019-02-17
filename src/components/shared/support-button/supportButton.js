@@ -59,7 +59,6 @@ class SupportButton extends Component {
     const botRes = await this.GittronWeb3Service.launchSupportBot(
       bot.tokenId,
       res.data.tokenId,
-      `${process.env.REACT_APP_API_HOST}uri/${res.data.tokenId}`,
       this.state.price, //amount
       this.props.account, //receiver,
       this.props.account,
