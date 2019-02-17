@@ -27,6 +27,9 @@ class DashboardBots extends Component {
     const res = await this.loadBots(tokens);
     const bots = res.filter((bot) => bot.data.tokenId).map((bot) => bot.data);
 
+    console.log('bots');
+    console.log(bots);
+
     if (this._isMounted) {
       this.setState({ contract, tokens, bots });
     }
@@ -38,6 +41,9 @@ class DashboardBots extends Component {
 
   loadBots = async (tokens) => {
     const proms = [];
+
+    console.log('tokens');
+    console.log(tokens);
 
     tokens.map((token) => {
       return proms.push(get(`tokenid/${token}`));
