@@ -2,12 +2,15 @@ import axios from 'axios';
 import Web3 from 'web3';
 
 export const BaseUrl = async () => {
-  const web3 = new Web3(Web3.givenProvider);
-  if (!web3) {
-    console.log('none');
-    return process.env.REACT_APP_MAIN_API_HOST;
+  let network = 'none';
+  try {
+    const web3 = new Web3(Web3.givenProvider);
+    network = await web3.eth.net.getId();
+  } catch (err) {
+    //switch this to mainnet when availible
+    return process.env.REACT_APP_API_HOST;
   }
-  const network = await web3.eth.net.getId();
+  console.log(network);
 
   if (network === 1) {
     console.log('main');
