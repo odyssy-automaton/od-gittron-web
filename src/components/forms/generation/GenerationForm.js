@@ -3,6 +3,7 @@ import React, { Component, Fragment } from 'react';
 class GenerationForm extends Component {
   state = {
     valid: true,
+    priceError: null,
   };
 
   handleSubmit = (e) => {
@@ -18,6 +19,15 @@ class GenerationForm extends Component {
 
     if (this.invalidBot(botDetails)) {
       this.setState({ valid: false });
+
+      return;
+    }
+
+    if (botDetails.price < 0.01 || botDetails.price > 1) {
+      this.setState({
+        valid: false,
+        priceError: 'Set price between .01 and 1',
+      });
 
       return;
     }
@@ -46,7 +56,7 @@ class GenerationForm extends Component {
   };
 
   render() {
-    const { valid } = this.state;
+    const { valid, priceError } = this.state;
     const { account, error } = this.props;
 
     return (
@@ -81,7 +91,7 @@ class GenerationForm extends Component {
             </div>
             <div>
               {error ? <p>* Something went wrong '{error}'</p> : null}
-
+              {priceError ? <p>* '{priceError}'</p> : null}
               <button type="submit">Register Repo</button>
             </div>
           </fieldset>
