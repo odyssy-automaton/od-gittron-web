@@ -236,7 +236,11 @@ function About() {
           <p>
             All Artwork was created by Ven Gist of Odyssy during Buidl Week.
           </p>
-          <p>Contract audit provided by twitter: @redragonx </p>
+          <p>Contract audit provided by twitter: <a
+              href="https://twitter.com/RedragonX"
+              target="_blank"
+              rel="noopener noreferrer"
+            >@redragonx</a></p>
         </div>
       </div>
     </div>
