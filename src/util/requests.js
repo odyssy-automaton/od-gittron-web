@@ -8,7 +8,7 @@ export const BaseUrl = async () => {
     network = await web3.eth.net.getId();
   } catch (err) {
     //switch this to mainnet when availible
-    return process.env.REACT_APP_API_HOST;
+    return process.env.REACT_APP_MAIN_API_HOST;
   }
   console.log(network);
 
