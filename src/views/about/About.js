@@ -26,7 +26,7 @@ function About() {
           <h2>Support Open Source</h2>
           <p>
             Support any open source project (Prime Bot) on Gittron and get a
-            Support Bot NFT as thank you.
+            Support Bot NFT as a thank you.
           </p>
         </div>
         <div className="Columns__Column--33">
