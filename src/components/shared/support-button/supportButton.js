@@ -81,7 +81,7 @@ class SupportButton extends Component {
 
     return (
       <div>
-        <p>Price: {priceInEth}</p>
+        <p>Price = {priceInEth} ETH</p>
         <button onClick={() => this.handleSubmit(bot)}>Support</button>
       </div>
     );
