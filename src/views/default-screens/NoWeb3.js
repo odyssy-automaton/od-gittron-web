@@ -1,12 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-// import Web3Provider from 'web3-react';
 
 import Routes from '../../Routes';
 import Header from '../../components/shared/header/Header';
-
-// import screens from '../default-screens';
 
 class NoWeb3 extends Component {
   render() {
@@ -18,6 +15,17 @@ class NoWeb3 extends Component {
         <BrowserRouter>
           <Fragment>
             <Header authenticated={false} />
+            <p>
+              *You need a web3 enabled browser to participate. Get the Chrome{' '}
+              <a
+                href="https://metamask.io/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                MetaMask
+              </a>{' '}
+              addon or use Brave.
+            </p>
             <Routes />
           </Fragment>
         </BrowserRouter>
