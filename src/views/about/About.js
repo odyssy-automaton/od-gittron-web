@@ -7,7 +7,7 @@ function About() {
       <div className="PageHeader">
         <div className="PageHeader__Contents">
           <h1>
-            In the year 3369, the people of Earth built a decentralized
+            The people of Earth have built a decentralized
             autonomous bot factory called Gittron and sent it out to explore the
             vastness of space. To expand its reach into the farthest edge of the
             cosmos, it builds self-replicating Prime Bots capable of cloning
