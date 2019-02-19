@@ -25,6 +25,11 @@ function About() {
             Register your repo to add passive income to your project. Just come
             back later and withdraw.
           </p>
+          <p><strong>Read more on <a
+              href="https://medium.com/odyssy/hail-open-source-hail-gittron-ae50db8e7031"
+              target="_blank"
+              rel="noopener noreferrer"
+            >Medium</a></strong>.</p>
         </div>
       </div>
       <div className="Block Columns Contain">
