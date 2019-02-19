@@ -123,12 +123,6 @@ function About() {
           </p>
           <p>Of course we also just love collectible digital assets!</p>
           <p>
-            The Gittron framework and its gamified funding mechanism could be
-            applied to other kinds of impact projects. We do think taking a repo
-            of code and generating programatic dna off of that is pretty cool
-            though.
-          </p>
-          <p>
             <strong>What's the Contract Address?</strong>
           </p>
           <p>
