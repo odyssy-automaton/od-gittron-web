@@ -86,7 +86,7 @@ class Generator extends Component {
 
     this.setState({ tokenId: res.data.tokenId });
 
-    let botRes = null;
+    let botRes = {};
     try {
       botRes = await this.GittronWeb3Service.registerMasterBot(
         `${res.data.tokenId}`,
@@ -96,7 +96,7 @@ class Generator extends Component {
         res.data.ghid,
       );
     } catch (err) {
-      botRes = { error: err };
+      botRes.error = err;
     }
 
     if (botRes.error) {
