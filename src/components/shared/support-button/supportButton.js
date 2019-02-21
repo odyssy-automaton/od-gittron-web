@@ -55,15 +55,19 @@ class SupportButton extends Component {
     const res = await post('tokens/workersupporter', newBot);
 
     this.setState({ supportTokenId: res.data.tokenId });
-
-    const botRes = await this.GittronWeb3Service.launchSupportBot(
-      bot.tokenId,
-      res.data.tokenId,
-      this.state.price, //amount
-      this.props.account, //receiver,
-      this.props.account,
-      res.data.ghid,
-    );
+    let botRes = {};
+    try {
+      botRes = await this.GittronWeb3Service.launchSupportBot(
+        bot.tokenId,
+        res.data.tokenId,
+        this.state.price, //amount
+        this.props.account, //receiver,
+        this.props.account,
+        res.data.ghid,
+      );
+    } catch {
+      botRes = { error: 'tx failure' };
+    }
 
     if (!botRes.error) {
       this.props.history.push(`/bots/${this.state.supportTokenId}`);
