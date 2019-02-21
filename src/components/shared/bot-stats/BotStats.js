@@ -19,7 +19,7 @@ class BotStats extends Component {
 
     return (
       <div className="BotStats">
-        <p>Repo = {bot.repo}</p>
+        <p>Repo = <a href={`https://github.com/${bot.repoOwner}/${bot.repo}`}>{bot.repo}</a></p>
         <p>DNA = {bot.dna}</p>
         <p>
           Gen <strong>{bot.generation}</strong>
