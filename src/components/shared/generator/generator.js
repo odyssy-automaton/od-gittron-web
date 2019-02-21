@@ -86,16 +86,25 @@ class Generator extends Component {
 
     this.setState({ tokenId: res.data.tokenId });
 
-    const botRes = await this.GittronWeb3Service.registerMasterBot(
-      `${res.data.tokenId}`,
-      bot.price,
-      bot.withdrawAddr,
-      this.props.account,
-      res.data.ghid,
-    );
+    let botRes = null;
+    try {
+      botRes = await this.GittronWeb3Service.registerMasterBot(
+        `${res.data.tokenId}`,
+        bot.price,
+        bot.withdrawAddr,
+        this.props.account,
+        res.data.ghid,
+      );
+    } catch (err) {
+      botRes = { error: err };
+    }
 
     if (botRes.error) {
-      this.setState({ loading: false, tokenId: null });
+      this.setState({
+        loading: false,
+        tokenId: null,
+        error: botRes.error.toString(),
+      });
     } else {
       this.props.history.push(`/bots/${this.state.tokenId}`);
     }
