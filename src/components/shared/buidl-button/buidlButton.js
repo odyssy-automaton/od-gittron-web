@@ -15,6 +15,7 @@ class BuidlButton extends Component {
     ownerOf: false,
     isLoading: false,
     toAccount: null,
+    error: null,
   };
   async componentDidMount() {
     this._isMounted = true;
@@ -53,14 +54,19 @@ class BuidlButton extends Component {
     const res = await post('tokens/workersupporter', newBot);
 
     this.setState({ workerTokenId: res.data.tokenId });
-
-    const botRes = await this.GittronWeb3Service.launchWorkerBot(
-      newBot.masterTokenId,
-      res.data.tokenId,
-      this.state.toAccount || this.props.account, //receiver,
-      this.props.account,
-      res.data.ghid,
-    );
+    let botRes = null;
+    try {
+      botRes = await this.GittronWeb3Service.launchWorkerBot(
+        newBot.masterTokenId,
+        res.data.tokenId,
+        this.state.toAccount || this.props.account, //receiver,
+        this.props.account,
+        res.data.ghid,
+      );
+    } catch (err) {
+      botRes = { error: 'tx failure' };
+      this.setState({ error: err.toString() });
+    }
 
     if (!botRes.error) {
       this.props.history.push(`/bots/${this.state.workerTokenId}`);
@@ -71,7 +77,13 @@ class BuidlButton extends Component {
 
   render() {
     const { bot, account } = this.props;
-    const { buidlAvail, ownerOfToken, isLoading, toAccount } = this.state;
+    const {
+      buidlAvail,
+      ownerOfToken,
+      isLoading,
+      toAccount,
+      error,
+    } = this.state;
 
     return (
       <div>
@@ -91,8 +103,9 @@ class BuidlButton extends Component {
             <button onClick={() => this.handleSubmit(bot)}>
               Gift BuidlBot
             </button>
+            {error ? <p>{error}</p> : null}
           </div>
-        ) : null }
+        ) : null}
       </div>
     );
   }
