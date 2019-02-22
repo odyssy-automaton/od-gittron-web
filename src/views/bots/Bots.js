@@ -20,7 +20,9 @@ class Bots extends Component {
   render() {
     const { bots } = this.state;
 
-    return <div className="Contain">{bots ? <BotFilter bots={bots} /> : null}</div>;
+    return <div className="Contain">
+    {bots ? <BotFilter bots={bots} /> : null}
+    </div>;
   }
 }
 
