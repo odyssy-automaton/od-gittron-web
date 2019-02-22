@@ -9,7 +9,7 @@ import Header from '../../components/shared/header/Header';
 
 class NoWeb3 extends Component {
   authValue = {
-    web3: false,
+    web3enabled: false,
   };
 
   render() {

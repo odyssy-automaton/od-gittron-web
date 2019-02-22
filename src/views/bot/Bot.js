@@ -57,20 +57,20 @@ class Bot extends Component {
       <AuthConsumer>
         {(authContext) => (
           <Fragment>
-            {authContext.web3 ? (
+            {authContext.web3enabled ? (
               <Web3Consumer>
                 {(context) => (
                   <BotDetail
                     bot={bot}
                     handleVerification={this.handleVerification}
-                    authenticated={authContext.web3}
+                    authenticated={authContext.web3enabled}
                     account={context.account}
                     web3={new Web3(context.web3js.givenProvider)}
                   />
                 )}
               </Web3Consumer>
             ) : (
-              <BotDetail authenticated={authContext.web3} />
+              <BotDetail authenticated={authContext.web3enabled} />
             )}
           </Fragment>
         )}

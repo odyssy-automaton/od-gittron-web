@@ -15,7 +15,7 @@ import './App.scss';
 class App extends Component {
   networks = [1, 4];
   authValue = {
-    web3: true,
+    web3enabled: true,
   };
 
   render() {
