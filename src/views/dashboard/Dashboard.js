@@ -13,8 +13,6 @@ function Dashboard() {
       {(context) => (
         <div className="Dashboard Contain Columns">
           <div className="Columns__Column--50">
-            {/* <h3>Your Repos</h3>
-            <p>There will be a list here</p> */}
             <h4>Generate a Prime Bot</h4>
             <Generator
               account={context.account}
