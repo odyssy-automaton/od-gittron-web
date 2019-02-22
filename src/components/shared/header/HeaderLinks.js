@@ -45,7 +45,11 @@ const HeaderLinks = class extends React.Component {
               Dashboard
             </Link>
           ) : null}
-          {networkId === 4 ? <p className="Rinkeby">Rinkeby</p> : <p className="Mainnet">Main</p>}
+          {networkId === 4 ? (
+            <p className="Rinkeby">Rinkeby</p>
+          ) : (
+            <p className="Mainnet">Main</p>
+          )}
         </div>
         {/* Start Hamburger */}
         <button

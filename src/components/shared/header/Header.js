@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Web3Consumer } from 'web3-react';
 
 import './Header.scss';
 
 import HeaderLinks from './HeaderLinks';
+import { AuthConsumer } from '../../../contexts/AuthContext';
 
 class Header extends Component {
   render() {
@@ -11,7 +12,7 @@ class Header extends Component {
 
     return (
       <div>
-        {authenticated ? (
+        {/* {authenticated ? (
           <Web3Consumer>
             {(context) => (
               <HeaderLinks
@@ -22,7 +23,26 @@ class Header extends Component {
           </Web3Consumer>
         ) : (
           <HeaderLinks authenticated={authenticated} />
-        )}
+        )} */}
+
+        <AuthConsumer>
+          {(authContext) => (
+            <Fragment>
+              {authContext.web3 ? (
+                <Web3Consumer>
+                  {(context) => (
+                    <HeaderLinks
+                      networkId={context.networkId}
+                      authenticated={authContext.web3}
+                    />
+                  )}
+                </Web3Consumer>
+              ) : (
+                <HeaderLinks authenticated={authContext.web3} />
+              )}
+            </Fragment>
+          )}
+        </AuthConsumer>
       </div>
     );
   }

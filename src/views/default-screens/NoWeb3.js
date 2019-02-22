@@ -2,10 +2,17 @@ import React, { Component, Fragment } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
+import { AuthProvider } from '../../contexts/AuthContext';
+
 import Routes from '../../Routes';
 import Header from '../../components/shared/header/Header';
 
 class NoWeb3 extends Component {
+  authValue = {
+    web3: false,
+    poo: 'poopin',
+  };
+
   render() {
     return (
       <div className="App">
@@ -14,19 +21,21 @@ class NoWeb3 extends Component {
         </Helmet>
         <BrowserRouter>
           <Fragment>
-            <Header authenticated={false} />
-            <p>
-              *You need a web3 enabled browser to participate. Get the Chrome{' '}
-              <a
-                href="https://metamask.io/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                MetaMask
-              </a>{' '}
-              addon or use Brave.
-            </p>
-            <Routes />
+            <AuthProvider value={this.authValue}>
+              <Header authenticated={false} />
+              <p>
+                *You need a web3 enabled browser to participate. Get the Chrome{' '}
+                <a
+                  href="https://metamask.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  MetaMask
+                </a>{' '}
+                addon or use Brave.
+              </p>
+              <Routes />
+            </AuthProvider>
           </Fragment>
         </BrowserRouter>
       </div>

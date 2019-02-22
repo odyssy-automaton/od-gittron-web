@@ -19,6 +19,8 @@ class BotDetail extends Component {
 
   componentDidMount = () => {
     this.getBot();
+
+    console.log(this.props);
   };
 
   componentWillUpdate = (nextProps, nextState) => {
@@ -35,6 +37,7 @@ class BotDetail extends Component {
       bot: data,
     });
 
+    //TODO: Make this check better
     if (!data.mined && !data.disabled) {
       let query = {
         txHash: data.txHash,

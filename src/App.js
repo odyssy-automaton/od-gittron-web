@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 import Web3Provider from 'web3-react';
+import { AuthProvider } from './contexts/AuthContext';
 
 import Routes from './Routes';
 import Header from './components/shared/header/Header';
@@ -13,6 +14,11 @@ import './App.scss';
 
 class App extends Component {
   networks = [1, 4];
+  authValue = {
+    web3: true,
+    poo: 'poopin',
+  };
+
   render() {
     return (
       <div className="App">
@@ -22,8 +28,10 @@ class App extends Component {
         <Web3Provider screens={screens} supportedNetworks={this.networks}>
           <BrowserRouter>
             <Fragment>
-              <Header authenticated={true} />
-              <Routes />
+              <AuthProvider value={this.authValue}>
+                <Header authenticated={true} />
+                <Routes />
+              </AuthProvider>
             </Fragment>
           </BrowserRouter>
         </Web3Provider>
