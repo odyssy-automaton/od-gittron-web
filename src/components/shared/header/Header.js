@@ -4,6 +4,7 @@ import { Web3Consumer } from 'web3-react';
 import './Header.scss';
 
 import HeaderLinks from './HeaderLinks';
+import FeedbackBar from '../feedback-bar/FeedbackBar';
 
 class Header extends Component {
   render() {
@@ -11,6 +12,7 @@ class Header extends Component {
 
     return (
       <div>
+        <FeedbackBar />
         {authenticated ? (
           <Web3Consumer>
             {(context) => (
