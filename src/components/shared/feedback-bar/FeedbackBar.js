@@ -11,7 +11,7 @@ class FeedbackBar extends Component {
             Beta
         </div>
         <div className="FeedbackBar__Info">
-            <p>Gittron is currently in Beta. Join the <a href="">Gittron Discord</a> to give us your feedback and bug reports.</p>
+            <p>Gittron is currently in Beta. Join the <a href="https://discordapp.com/channels/546089230133362698/546089230133362700" target="_blank" rel="noopener noreferrer">Gittron Discord</a> to give us your feedback and bug reports.</p>
         </div>
       </div>
     );
