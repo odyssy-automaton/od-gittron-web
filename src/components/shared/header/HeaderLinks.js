@@ -21,10 +21,10 @@ const HeaderLinks = class extends React.Component {
     const mobileNavClass = this.state.navOpen
       ? 'Navbar__Mobile Navbar__Mobile--Open'
       : 'Navbar__Mobile';
-
     const hamburgerClass = this.state.navOpen
       ? 'navbar__hamburger hamburger hamburger--spin is-active'
       : 'navbar__hamburger hamburger hamburger--spin';
+
     return (
       <div className="Header">
         <div className="Logo">
@@ -36,7 +36,6 @@ const HeaderLinks = class extends React.Component {
           <Link to="/" className="Navbar__Desktop--Item">
             Bots
           </Link>
-          {/* {authenticated ? <Link to="/repos" className="Navbar__Desktop--Item">Repos</Link> : null} */}
           <Link to="/about" className="Navbar__Desktop--Item">
             About
           </Link>

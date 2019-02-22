@@ -16,20 +16,19 @@ class App extends Component {
   networks = [1, 4];
   authValue = {
     web3: true,
-    poo: 'poopin',
   };
 
   render() {
     return (
       <div className="App">
         <Helmet>
-          <meta name="description" content="REPO EVO" />
+          <meta name="description" content="gittron" />
         </Helmet>
         <Web3Provider screens={screens} supportedNetworks={this.networks}>
           <BrowserRouter>
             <Fragment>
               <AuthProvider value={this.authValue}>
-                <Header authenticated={true} />
+                <Header />
                 <Routes />
               </AuthProvider>
             </Fragment>

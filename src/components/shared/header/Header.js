@@ -8,23 +8,8 @@ import { AuthConsumer } from '../../../contexts/AuthContext';
 
 class Header extends Component {
   render() {
-    const { authenticated } = this.props;
-
     return (
-      <div>
-        {/* {authenticated ? (
-          <Web3Consumer>
-            {(context) => (
-              <HeaderLinks
-                networkId={context.networkId}
-                authenticated={authenticated}
-              />
-            )}
-          </Web3Consumer>
-        ) : (
-          <HeaderLinks authenticated={authenticated} />
-        )} */}
-
+      <Fragment>
         <AuthConsumer>
           {(authContext) => (
             <Fragment>
@@ -43,7 +28,7 @@ class Header extends Component {
             </Fragment>
           )}
         </AuthConsumer>
-      </div>
+      </Fragment>
     );
   }
 }

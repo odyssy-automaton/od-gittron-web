@@ -10,7 +10,6 @@ import Header from '../../components/shared/header/Header';
 class NoWeb3 extends Component {
   authValue = {
     web3: false,
-    poo: 'poopin',
   };
 
   render() {
@@ -22,7 +21,7 @@ class NoWeb3 extends Component {
         <BrowserRouter>
           <Fragment>
             <AuthProvider value={this.authValue}>
-              <Header authenticated={false} />
+              <Header />
               <p>
                 *You need a web3 enabled browser to participate. Get the Chrome{' '}
                 <a
