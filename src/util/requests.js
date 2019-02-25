@@ -10,20 +10,16 @@ export const BaseUrl = async () => {
     //switch this to mainnet when availible
     return process.env.REACT_APP_MAIN_API_HOST;
   }
-  console.log(network);
 
   if (network === 1) {
-    console.log('main');
     return process.env.REACT_APP_MAIN_API_HOST;
   } else if (network === 4) {
-    console.log('rinkeby');
     return process.env.REACT_APP_API_HOST;
   }
 };
 
 export const get = async (endpoint) => {
   const baseURL = await BaseUrl();
-  console.log(baseURL);
 
   const instance = axios.create({
     baseURL,

@@ -145,12 +145,16 @@ export default class GittronWeb3Service {
       .launchBaseToken(tokenUri, tokenId, price, withdrawAddr)
       .send({ from: account })
       .once('transactionHash', async (txHash) => {
+        //just update transaction hash
+
         await this.checkStatus(txHash, tokenId, ghid);
       })
       .then(async (resp) => {
         console.log('resp', resp);
 
+        //check status and mark mined if we have txhash
         await this.checkStatus(resp.transactionHash, tokenId, ghid);
+
         const resSvg = await post('generatepng', {
           ghid: ghid,
           tokenId: tokenId,

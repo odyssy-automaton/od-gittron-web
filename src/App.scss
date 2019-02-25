@@ -128,7 +128,7 @@ a {
   text-transform: capitalize;
 }
 
-button:not(.navbar__hamburger) {
+button:not(.navbar__hamburger), .button:not(.navbar__hamburger) {
   appearance: none;
   border: none;
   background: black;
