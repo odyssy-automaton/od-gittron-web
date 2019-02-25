@@ -28,7 +28,7 @@ class Bots extends Component {
           <div className="Contain">
             {authContext.web3enabled && (
               <div className="Bots__Intro">
-                <p>Register your open source Github repo to get an autonomous fundraising Prime Bot.</p>
+                <p>Register your open source project to get an autonomous fundraising Prime Bot.</p>
                 <Link className="button generate-bot" to="/dashboard">Generate Prime Bot</Link>
               </div>
             )}
