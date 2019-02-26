@@ -1,14 +1,14 @@
 import GitTronAbi from '../../src/contracts/abi.json';
 import Web3Service from './web3Service';
 import { put, post } from './requests';
+import Web3 from 'web3';
 
 export default class GittronWeb3Service {
   web3Service;
   gittronContract;
-  constructor(web3) {
-    this.web3Service = new Web3Service(web3);
-    // this.selectNetowrkContract(web3);
-    // this.contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
+  constructor() {
+    this.web3 = new Web3(Web3.givenProvider);
+    this.web3Service = new Web3Service();
   }
 
   async initContracts() {

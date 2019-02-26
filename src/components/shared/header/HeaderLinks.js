@@ -36,7 +36,7 @@ function HeaderLinks() {
           )
         )}
         {!context.active ? (
-          <p className="Rinkeby Navbar__Desktop--Item">Not connected</p>
+          <p className="Nonet Navbar__Desktop--Item">Not connected</p>
         ) : context.networkId === 4 ? (
           <p className="Rinkeby Navbar__Desktop--Item">Rinkeby</p>
         ) : (

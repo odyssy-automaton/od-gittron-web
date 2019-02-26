@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import BotCard from '../bot-card/BotCard';
 import SupportButton from '../support-button/supportButton';
 import BuidlButton from '../buidl-button/buidlButton';
@@ -9,18 +9,21 @@ import BotStats from '../bot-stats/BotStats';
 
 import './BotDetail.scss';
 
-class BotDetail extends Component {
-  handleVerification = () => {
-    this.props.handleVerification();
-  };
+function BotDetail(props) {
+  const { account, authenticated, bot, web3 } = props;
+  let unverified, verified;
+  function handleVerification() {
+    props.handleVerification();
+  }
 
-  render() {
-    const { account, authenticated, bot, web3 } = this.props;
-    const unverified = bot.tokenType === 'prime' && !bot.verified;
-    const verified = bot.tokenType === 'prime' && bot.verified;
+  if (bot) {
+    unverified = bot.tokenType === 'prime' && !bot.verified;
+    verified = bot.tokenType === 'prime' && bot.verified;
+  }
 
-    return (
-      <Fragment>
+  return (
+    <Fragment>
+      {bot && (
         <div className="BotDetail Columns Contain">
           <div className="Columns__Column--50">
             <BotCard bot={bot} account={account} web3={web3} />
@@ -32,7 +35,7 @@ class BotDetail extends Component {
                   {unverified && (
                     <BotVerification
                       bot={bot}
-                      handleVerification={this.handleVerification}
+                      handleVerification={handleVerification}
                       account={account}
                       web3={web3}
                     />
@@ -71,9 +74,9 @@ class BotDetail extends Component {
             </div>
           </div>
         </div>
-      </Fragment>
-    );
-  }
+      )}
+    </Fragment>
+  );
 }
 
 export default BotDetail;
