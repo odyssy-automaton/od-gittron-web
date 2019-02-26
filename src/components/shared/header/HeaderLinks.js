@@ -35,6 +35,7 @@ function HeaderLinks() {
             </button>
           )
         )}
+
         {!context.active ? (
           <p className="Nonet Navbar__Desktop--Item">Not connected</p>
         ) : context.networkId === 4 ? (
@@ -42,6 +43,7 @@ function HeaderLinks() {
         ) : (
           <p className="Mainnet Navbar__Desktop--Item">Main</p>
         )}
+        {context.error && <p>{context.error.toString()}</p>}
       </div>
       <HamburgerNav authenticated={context.active} />
     </div>
