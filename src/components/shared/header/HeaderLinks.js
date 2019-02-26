@@ -43,7 +43,11 @@ function HeaderLinks() {
         ) : (
           <p className="Mainnet Navbar__Desktop--Item">Main</p>
         )}
-        {context.error && <p>{context.error.toString()}</p>}
+        {context.error && (
+          <p>
+            {context.error.code}: {context.error.toString()}
+          </p>
+        )}
       </div>
       <HamburgerNav authenticated={context.active} />
     </div>
