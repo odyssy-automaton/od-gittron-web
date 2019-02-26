@@ -39,14 +39,14 @@ class DashboardBots extends Component {
     if (address) return await this.GittronWeb3Service.tokensByOwner(address);
   };
 
-  pad = (num, size) => {
+  leftPadHex = (num, size) => {
     let s = String(num);
     s = s.replace('0x', '');
 
     while (s.length < (size || 2)) {
       s = '0' + s;
     }
-    return s;
+    return '0x' + s;
   };
 
   loadBots = async (tokens) => {
@@ -54,7 +54,7 @@ class DashboardBots extends Component {
     if (!tokens) return;
 
     tokens.map((token) => {
-      const padded = '0x' + this.pad(token, 32);
+      const padded = this.leftPadHex(token, 32);
       return proms.push(get(`tokenid/${padded}`));
     });
 
