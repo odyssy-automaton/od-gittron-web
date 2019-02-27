@@ -1,9 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import Web3 from 'web3';
 import { Web3Consumer } from 'web3-react';
 
 import { get, put } from '../../util/requests';
-import { AuthConsumer } from '../../contexts/AuthContext';
 
 import BotDetail from '../../components/shared/bot-detail/BotDetail';
 
@@ -54,27 +52,22 @@ class Bot extends Component {
     const { bot } = this.state;
 
     return (
-      <AuthConsumer>
-        {(authContext) => (
-          <Fragment>
-            {authContext.web3enabled ? (
-              <Web3Consumer>
-                {(context) => (
-                  <BotDetail
-                    bot={bot}
-                    handleVerification={this.handleVerification}
-                    authenticated={authContext.web3enabled}
-                    account={context.account}
-                    web3={new Web3(context.web3js.givenProvider)}
-                  />
-                )}
-              </Web3Consumer>
+      <Fragment>
+        <Web3Consumer>
+          {(context) =>
+            bot ? (
+              <BotDetail
+                bot={bot}
+                handleVerification={this.handleVerification}
+                authenticated={context.active}
+                account={context.account}
+              />
             ) : (
-              <BotDetail authenticated={authContext.web3enabled} />
-            )}
-          </Fragment>
-        )}
-      </AuthConsumer>
+              <BotDetail authenticated={context.active} />
+            )
+          }
+        </Web3Consumer>
+      </Fragment>
     );
   }
 }

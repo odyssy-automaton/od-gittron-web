@@ -16,27 +16,19 @@ class DashboardBots extends Component {
 
   componentDidMount = async () => {
     this._isMounted = true;
-    this.GittronWeb3Service = new GittronWeb3Service(this.props.web3);
+    this.GittronWeb3Service = new GittronWeb3Service();
 
     this.loadContract();
   };
 
   loadContract = async () => {
+    if (!this.props.authenticated) return;
     const contract = await this.GittronWeb3Service.initContracts();
     const tokens = await this.tokensByOwner(this.props.address);
 
-    console.log('tokens from contract');
-    console.log(tokens);
-
     const res = await this.loadBots(tokens);
 
-    console.log('res');
-    console.log(res);
-
     const bots = res.filter((bot) => bot.data.tokenId).map((bot) => bot.data);
-
-    console.log('bots');
-    console.log(bots);
 
     if (this._isMounted) {
       this.setState({ contract, tokens, bots });
@@ -44,17 +36,26 @@ class DashboardBots extends Component {
   };
 
   tokensByOwner = async (address) => {
-    return await this.GittronWeb3Service.tokensByOwner(address);
+    if (address) return await this.GittronWeb3Service.tokensByOwner(address);
+  };
+
+  leftPadHex = (num, size) => {
+    let s = String(num);
+    s = s.replace('0x', '');
+
+    while (s.length < (size || 2)) {
+      s = '0' + s;
+    }
+    return '0x' + s;
   };
 
   loadBots = async (tokens) => {
     const proms = [];
-
-    console.log('tokens');
-    console.log(tokens);
+    if (!tokens) return;
 
     tokens.map((token) => {
-      return proms.push(get(`tokenid/${token}`));
+      const padded = this.leftPadHex(token, 32);
+      return proms.push(get(`tokenid/${padded}`));
     });
 
     return await Promise.all(proms);

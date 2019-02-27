@@ -19,8 +19,8 @@ class BuidlButton extends Component {
   };
   async componentDidMount() {
     this._isMounted = true;
-    this.GittronWeb3Service = new GittronWeb3Service(this.props.web3);
-    this.web3Service = new Web3Service(this.props.web3);
+    this.GittronWeb3Service = new GittronWeb3Service();
+    this.web3Service = new Web3Service();
 
     this.loadContract();
   }
