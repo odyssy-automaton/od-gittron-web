@@ -40,6 +40,17 @@
   }
 }
 
+.Nonet:before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid black;
+  margin-right: 5px;
+  background-color: #ac0839;
+}
+
 .Rinkeby:before {
   content: '';
   display: inline-block;

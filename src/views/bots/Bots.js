@@ -5,7 +5,7 @@ import { get } from '../../util/requests';
 import BotFilter from '../../components/shared/bot-filter/BotFilter';
 
 import './Bots.scss';
-import { AuthConsumer } from '../../contexts/AuthContext';
+import { Web3Consumer } from 'web3-react';
 
 class Bots extends Component {
   state = {
@@ -23,19 +23,24 @@ class Bots extends Component {
     const { bots } = this.state;
 
     return (
-      <AuthConsumer>
-        {(authContext) => (
+      <Web3Consumer>
+        {(context) => (
           <div className="Contain">
-            {authContext.web3enabled && (
+            {context.active && (
               <div className="Bots__Intro">
-                <p>Register your open source project to get an autonomous fundraising Prime Bot.</p>
-                <Link className="button generate-bot" to="/dashboard">Generate Prime Bot</Link>
+                <p>
+                  Register your open source project to get an autonomous
+                  fundraising Prime Bot.
+                </p>
+                <Link className="button generate-bot" to="/dashboard">
+                  Generate Prime Bot
+                </Link>
               </div>
             )}
             {bots ? <BotFilter bots={bots} /> : null}
           </div>
         )}
-      </AuthConsumer>
+      </Web3Consumer>
     );
   }
 }

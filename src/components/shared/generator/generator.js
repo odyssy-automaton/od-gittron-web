@@ -15,9 +15,9 @@ class Generator extends Component {
 
   componentDidMount() {
     this._isMounted = true;
-    this.web3Service = new Web3Service(this.props.web3);
+    this.web3Service = new Web3Service();
 
-    this.GittronWeb3Service = new GittronWeb3Service(this.props.web3);
+    this.GittronWeb3Service = new GittronWeb3Service();
     this.loadContract();
   }
 

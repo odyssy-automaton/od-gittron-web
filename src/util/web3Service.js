@@ -1,12 +1,12 @@
-// import Web3 from 'web3';
+import Web3 from 'web3';
 
 export default class Web3Service {
   web3;
   web3Remote;
   mainAccount;
 
-  constructor(web3) {
-    this.web3 = web3;
+  constructor() {
+    this.web3 = new Web3(Web3.givenProvider);
   }
 
   async init() {
