@@ -15,6 +15,7 @@ class BotFilter extends Component {
     ],
     type: { value: 'prime', label: 'Prime Bots' },
     repo: { value: 'all', label: 'All Repos' },
+    verified: true,
   };
 
   state = {
@@ -33,11 +34,26 @@ class BotFilter extends Component {
     this.setState({ selected: newSelections });
   };
 
+  handleInputChange = () => {
+    const verified = !this.state.selected.verified;
+    console.log(verified);
+    const selected = this.state.selected;
+    selected.verified = verified;
+
+    this.setState({ selected });
+  };
+
   withFilters = () => {
+    const verifiedBots = !this.state.selected.verified
+      ? this.props.bots
+      : this.props.bots.filter((bot) => {
+          return bot.verified;
+        });
+
     const typeBots =
       this.state.selected.type.value === 'all'
-        ? this.props.bots
-        : this.props.bots.filter((bot) => {
+        ? verifiedBots
+        : verifiedBots.filter((bot) => {
             return bot.tokenType === this.state.selected.type.value;
           });
 
@@ -74,7 +90,7 @@ class BotFilter extends Component {
 
     return (
       <div>
-        <div>          
+        <div>
           <div className="BotFilter__filters">
             <div className="Title">
               <h4>{filteredBots.length} Bots</h4>
@@ -95,6 +111,14 @@ class BotFilter extends Component {
                 value={selected.type}
                 isClearable={true}
               />
+              <div className="BotFilter__checkbox">
+                <label>
+                  Verified:
+                  <button onClick={this.handleInputChange}>
+                    {selected.verified ? 'X' : '_'}
+                  </button>
+                </label>
+              </div>
             </div>
           </div>
         </div>

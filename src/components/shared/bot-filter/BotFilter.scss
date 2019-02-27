@@ -33,15 +33,17 @@
 .BotFilter__select {
   padding: 20px;
   width: 40%;
-  > * {outline: none; }
-  @media (max-width:768px){
+  > * {
+    outline: none;
+  }
+  @media (max-width: 768px) {
     width: 100%;
   }
   > div:first-of-type {
     border: 2px solid black !important;
     border-radius: 0px !important;
     outline: none !important;
-    &:focus { 
+    &:focus {
       border: 2px solid black;
       border-radius: 0px;
     }
