@@ -31,7 +31,7 @@ function HeaderLinks() {
         ) : (
           context.connectorName !== 'MetaMask' && (
             <button onClick={() => context.setConnector('MetaMask')}>
-              Activate MetaMask
+              Activate Web3
             </button>
           )
         )}
@@ -49,7 +49,7 @@ function HeaderLinks() {
           </p>
         )}
       </div>
-      <HamburgerNav authenticated={context.active} />
+      <HamburgerNav context={context} />
     </div>
   );
 }

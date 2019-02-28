@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Web3Consumer } from 'web3-react';
-import Web3 from 'web3';
 
 import { get } from '../../util/requests';
 import RepoList from '../../components/shared/repo-list/RepoList';
@@ -12,6 +11,7 @@ class Repos extends Component {
 
   componentDidMount = async () => {
     const { data } = await get(`tokens`);
+
     this.setState({
       repos: this.uniqueRepos(data),
     });
@@ -20,14 +20,35 @@ class Repos extends Component {
   uniqueRepos = (data) => {
     let hash = {};
 
-    //TODO: might filter by unverified here
-    const repos = data.filter((bot) => {
-      if (hash[bot.ghid]) {
-        return false;
-      }
-      hash[bot.ghid] = true;
-      return true;
-    });
+    const repos = data
+      .filter((bot) => {
+        return bot.tokenType === 'prime' && bot;
+      })
+      .map((bot) => {
+        bot.verified =
+          bot.verified === undefined || !bot.verified ? false : true;
+        return bot;
+      })
+      .sort((x, y) => {
+        return y.verified - x.verified;
+      })
+      .filter((bot) => {
+        if (hash[bot.ghid]) {
+          return false;
+        }
+        hash[bot.ghid] = true;
+        return true;
+      })
+      .map((bot) => {
+        // this doesn't work because unverified duplicates
+        bot.buidlCount = data.filter(
+          (b) => b.tokenType === 'buidl' && b.ghid === bot.ghid,
+        ).length;
+        bot.supportCount = data.filter(
+          (b) => b.tokenType === 'support' && b.ghid === bot.ghid,
+        ).length;
+        return bot;
+      });
 
     return repos;
   };
@@ -40,10 +61,7 @@ class Repos extends Component {
         {(context) => (
           <div className="Contain">
             <h3>Repos ({repos.length})</h3>
-            <RepoList
-              repos={repos}
-              web3={new Web3(context.web3js.givenProvider)}
-            />
+            <RepoList repos={repos} />
           </div>
         )}
       </Web3Consumer>

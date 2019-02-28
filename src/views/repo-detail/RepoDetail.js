@@ -15,11 +15,18 @@ class RepoDetail extends Component {
 
   componentDidMount = async () => {
     const { data } = await get(`tokens/repo/${this.props.match.params.ghid}`);
+    console.log({
+      bots: data,
+      masterBot: data.find((bot) => bot.tokenType === 'prime'),
+      supporters: data.filter((bot) => bot.tokenType === 'support'),
+      workers: data.filter((bot) => bot.tokenType === 'buidl'),
+    });
+
     this.setState({
       bots: data,
       masterBot: data.find((bot) => bot.tokenType === 'prime'),
-      supporters: data.filter((bot) => bot.tokenType === 'supporter'),
-      workers: data.filter((bot) => bot.tokenType === 'worker'),
+      supporters: data.filter((bot) => bot.tokenType === 'support'),
+      workers: data.filter((bot) => bot.tokenType === 'buidl'),
     });
   };
 
@@ -29,7 +36,7 @@ class RepoDetail extends Component {
       <Web3Consumer>
         {(context) => (
           <Fragment>
-            {
+            {Object.keys(masterBot).length && (
               <div>
                 <h2>{masterBot.repo}</h2>
                 <h3>{bots.length} total bots</h3>
@@ -48,7 +55,7 @@ class RepoDetail extends Component {
                   </div>
                 </div>
               </div>
-            }
+            )}
           </Fragment>
         )}
       </Web3Consumer>
