@@ -5,9 +5,7 @@ import './RepoList.scss';
 class RepoList extends Component {
   renderRepos() {
     return this.props.repos.map((repo) => {
-      return (
-        <RepoListItem repo={repo} key={repo.ghid} web3={this.props.web3} />
-      );
+      return <RepoListItem repo={repo} key={repo.ghid} />;
     });
   }
 
@@ -19,6 +17,7 @@ class RepoList extends Component {
         <thead>
           <tr>
             <th>Repo</th>
+            <th>Verified</th>
             <th>Generation</th>
             <th>Worker Bots</th>
             <th>Support Bots</th>
