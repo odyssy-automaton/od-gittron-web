@@ -66,7 +66,7 @@ class HatchButton extends Component {
     return (
       <Fragment>
         {ownerOfToken === account && !isLoading ? (
-          <div>
+          <div className="HatchButton">
             <button onClick={this.handleSubmit}>Hatch Your Bot</button>
           </div>
         ) : null}

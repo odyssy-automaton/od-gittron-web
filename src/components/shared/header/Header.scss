@@ -25,6 +25,8 @@
 .Logo {
   flex-basis: 33%;
   margin-right: auto;
+  display: flex;
+  align-items: center;
   @media (max-width: 889px) {
     flex-basis: 75%;
   }
@@ -40,6 +42,11 @@
   }
 }
 
+.Nonet {
+  display: flex;
+  align-items: center;
+}
+
 .Nonet:before {
   content: '';
   display: inline-block;
@@ -48,7 +55,7 @@
   border-radius: 50%;
   border: 2px solid black;
   margin-right: 5px;
-  background-color: #ac0839;
+  background-color: red;
 }
 
 .Rinkeby:before {
@@ -72,3 +79,4 @@
   margin-right: 5px;
   background-color: limegreen;
 }
+
