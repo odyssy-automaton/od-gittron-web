@@ -1,29 +1,20 @@
-import React, { Fragment, Component } from 'react';
+import React, { Fragment } from 'react';
+import { useWeb3Context } from 'web3-react';
 
 import './Header.scss';
 
 import HeaderLinks from './HeaderLinks';
 import FeedbackBar from '../feedback-bar/FeedbackBar';
 
-const Header = class extends React.Component {
-  state = {
-    errorOpen: false,
-  }
+function Header() {
+  const context = useWeb3Context();
 
-  toggleError = () => {
-    this.setState({
-      errorOpen: !this.state.errorOpen,
-    });
-  };
-
-  render () {
-    return (
-      <Fragment>
-        <FeedbackBar />
-        <HeaderLinks errorOpen={this.state.errorOpen} toggleError={this.toggleError} />
-      </Fragment>
-    );
-  }
+  return (
+    <Fragment>
+      <FeedbackBar />
+      <HeaderLinks context={context} />
+    </Fragment>
+  );
 }
 
 export default Header;

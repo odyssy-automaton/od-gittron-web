@@ -8,12 +8,23 @@ import './Hamburger.scss';
 const HamburgerNav = class extends React.Component {
   state = {
     navOpen: false,
+    errorOpen: true,
   };
 
   toggleNav = () => {
     this.setState({
       navOpen: !this.state.navOpen,
     });
+  };
+
+  closeError = () => {
+    this.setState({
+      errorOpen: false,
+    });
+  };
+
+  isErrorOpen = () => {
+    return this.props.context.error && this.state.errorOpen;
   };
 
   render() {
@@ -24,6 +35,7 @@ const HamburgerNav = class extends React.Component {
     const hamburgerClass = this.state.navOpen
       ? 'navbar__hamburger hamburger hamburger--spin is-active'
       : 'navbar__hamburger hamburger hamburger--spin';
+    const errorOpen = this.isErrorOpen();
 
     return (
       <Fragment>
@@ -63,19 +75,46 @@ const HamburgerNav = class extends React.Component {
               </Link>
             ) : (
               context.connectorName !== 'MetaMask' && (
-                <button className="Navbar__Mobile--Contents--Item" onClick={() => context.setConnector('MetaMask')}>
+                <button
+                  className="Navbar__Mobile--Contents--Item"
+                  onClick={() => context.setConnector('MetaMask')}
+                >
                   Connect
                 </button>
               )
             )}
-            {context.error && (
-            <div className="noWeb3">
-              <div className="noWeb3__Contents">
-                <button>X</button>
+            {errorOpen && (
+              <div className="noWeb3">
+                <div className="noWeb3__Contents">
+                  <button onClick={this.closeError}>X</button>
+                  <p>{context.error.toString()}</p>
                   <p>
-                    {context.error.toString()}
+                    Consider using{' '}
+                    <a
+                      href="https://brave.com/download/"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      Brave
+                    </a>{' '}
+                    or{' '}
+                    <a
+                      href="https://www.google.com/chrome/"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      Chrome
+                    </a>{' '}
+                    with the{' '}
+                    <a
+                      href="https://metamask.io/"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      Metamask
+                    </a>{' '}
+                    extension.
                   </p>
-                  <p>Consider using <a href="https://brave.com/download/" rel="noopener noreferrer" target="_blank">Brave</a> or <a href="https://www.google.com/chrome/" rel="noopener noreferrer" target="_blank">Chrome</a> with the <a href="https://metamask.io/" rel="noopener noreferrer" target="_blank">Metamask</a> extension.</p>
                 </div>
               </div>
             )}
