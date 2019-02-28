@@ -8,12 +8,17 @@ import WithdrawButton from '../withdraw-button/withdrawButton';
 import BotStats from '../bot-stats/BotStats';
 
 import './BotDetail.scss';
+import HatchButton from '../hatch-button/HatchButton';
 
 function BotDetail(props) {
   const { account, authenticated, bot, web3 } = props;
   let unverified, verified;
   function handleVerification() {
     props.handleVerification();
+  }
+
+  function handleHatch() {
+    props.handleHatch();
   }
 
   if (bot) {
@@ -26,6 +31,15 @@ function BotDetail(props) {
       {bot && (
         <div className="BotDetail Columns Contain">
           <div className="Columns__Column--50">
+            {bot.tokenId && !bot.hatched && authenticated ? (
+              <HatchButton
+                bot={bot}
+                account={account}
+                web3={web3}
+                handleHatch={handleHatch}
+              />
+            ) : null}
+
             <BotCard bot={bot} account={account} web3={web3} />
           </div>
           <div className="Columns__Column--50">

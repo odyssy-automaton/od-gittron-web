@@ -10,7 +10,7 @@ class Repos extends Component {
   };
 
   componentDidMount = async () => {
-    const { data } = await get(`tokens`);
+    const { data } = await get(`bots`);
 
     this.setState({
       repos: this.uniqueRepos(data),
