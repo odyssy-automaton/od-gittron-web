@@ -76,14 +76,16 @@ const HamburgerNav = class extends React.Component {
             ) : (
               context.connectorName !== 'MetaMask' && (
                 <button
-                  className="Navbar__Mobile--Contents--Item"
-                  onClick={() => context.setConnector('MetaMask')}
+                  className="Link Navbar__Mobile--Contents--Item"
+                  onClick={() => {this.toggleNav(); context.setConnector('MetaMask');}}
                 >
                   Connect
                 </button>
               )
             )}
-            {errorOpen && (
+          </div>
+        </div>
+        {errorOpen && (
               <div className="noWeb3">
                 <div className="noWeb3__Contents">
                   <button onClick={this.closeError}>X</button>
@@ -118,8 +120,6 @@ const HamburgerNav = class extends React.Component {
                 </div>
               </div>
             )}
-          </div>
-        </div>
       </Fragment>
     );
   }

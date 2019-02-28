@@ -107,6 +107,8 @@ a {
   flex-wrap: wrap;
   &__Column {
     &--33 {
+      position: relative;
+      height: 100%;
       flex-basis: 33%;
       @media (max-width: $tablet) {
         flex-basis: 100%;
@@ -114,6 +116,8 @@ a {
     }
     &--50 {
       flex-basis: 50%;
+      height: 100%;
+      position: relative;
       @media (max-width: $tablet) {
         flex-basis: 100%;
       }
@@ -128,7 +132,7 @@ a {
   text-transform: capitalize;
 }
 
-button:not(.navbar__hamburger), .button:not(.navbar__hamburger) {
+button:not(.navbar__hamburger):not(.Link), .button:not(.navbar__hamburger) {
   appearance: none;
   border: none;
   background: black;
@@ -143,6 +147,23 @@ button:not(.navbar__hamburger), .button:not(.navbar__hamburger) {
   &:hover {
     background: #5F5FFF;
     color: white;
+  }
+}
+
+button.Link {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: white;
+  padding: 0px;
+  outline: none;
+  border: none;
+  transition: all .15s linear;
+  font-family: $base-font;
+  cursor: pointer;
+  &:hover {
+    color: #5F5FFF;
+    background: transparent;
   }
 }
 
@@ -195,4 +216,47 @@ fieldset {
   width: calc(100% -  50px);
   margin: 0 auto;
   padding: 25px;
+}
+
+// Error
+
+.noWeb3 { 
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  z-index: 99;
+  @media (max-width: $tablet) {
+    width: calc(100vw - 50px);
+    padding: 0px 25px;
+  }
+  &__Contents {
+    border: 2px solid white;
+    padding: 25px;
+    position: relative;
+    a {
+      color: #5f5fff;
+    }
+    button { 
+      position: absolute; 
+      top: -44px; 
+      right: -4px; 
+      border: 2px solid white !important;
+     }
+  }
+}
+
+.HatchButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 1;
+  button { padding: 25px!important; width: 100%; }
 }
