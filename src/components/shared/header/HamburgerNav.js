@@ -17,7 +17,7 @@ const HamburgerNav = class extends React.Component {
   };
 
   render() {
-    const { authenticated } = this.props;
+    const { context } = this.props;
     const mobileNavClass = this.state.navOpen
       ? 'Navbar__Mobile Navbar__Mobile--Open'
       : 'Navbar__Mobile';
@@ -45,24 +45,7 @@ const HamburgerNav = class extends React.Component {
             >
               Bots
             </Link>
-            {authenticated ? (
-              <Link
-                onClick={this.toggleNav}
-                className="Navbar__Mobile--Contents--Item"
-                to="/dashboard"
-              >
-                Dashboard
-              </Link>
-            ) : null}
-            {authenticated ? (
-              <Link
-                onClick={this.toggleNav}
-                className="Navbar__Mobile--Contents--Item"
-                to="/repos"
-              >
-                Repos
-              </Link>
-            ) : null}
+
             <Link
               onClick={this.toggleNav}
               className="Navbar__Mobile--Contents--Item"
@@ -70,6 +53,21 @@ const HamburgerNav = class extends React.Component {
             >
               About
             </Link>
+            {context.active ? (
+              <Link
+                onClick={this.toggleNav}
+                className="Navbar__Mobile--Contents--Item"
+                to="/dashboard"
+              >
+                Dashboard
+              </Link>
+            ) : (
+              context.connectorName !== 'MetaMask' && (
+                <button onClick={() => context.setConnector('MetaMask')}>
+                  Activate Web3
+                </button>
+              )
+            )}
           </div>
         </div>
       </Fragment>
