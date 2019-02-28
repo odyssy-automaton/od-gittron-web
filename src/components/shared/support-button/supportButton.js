@@ -56,7 +56,7 @@ class SupportButton extends Component {
       tokenType: 'support',
       address: this.props.account,
     };
-    const res = await post('tokens/workersupporter', newBot);
+    const res = await post('bots/clone', newBot);
 
     this.setState({ supportTokenId: res.data.tokenId });
     let botRes = {};

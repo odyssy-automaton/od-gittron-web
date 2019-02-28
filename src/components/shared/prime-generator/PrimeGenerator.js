@@ -60,7 +60,7 @@ class PrimeGenerator extends Component {
 
     bot.price = await this.web3Service.toWei(bot.price);
 
-    const res = await post('tokens/new', newBot);
+    const res = await post('bots/new-prime', newBot);
 
     if (!res) {
       this.setState({

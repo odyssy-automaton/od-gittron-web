@@ -3,9 +3,6 @@ import React, { Component } from 'react';
 import './BotCard.scss';
 
 class BotCard extends Component {
-  support = () => {
-    console.log('test');
-  };
   render() {
     const { bot } = this.props;
 
@@ -37,7 +34,6 @@ class BotCard extends Component {
         <div className="BotCard__Footer">
           <p className="BotCard__Footer--Type">{bot.tokenType} bot</p>
           <p>Gen {bot.generation}</p>
-          {/* <p>DNA {bot.dna}</p> */}
         </div>
       </div>
     );

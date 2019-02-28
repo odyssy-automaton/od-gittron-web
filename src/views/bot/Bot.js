@@ -24,7 +24,7 @@ class Bot extends Component {
 
   getBot = async (id) => {
     const tokenId = id || this.props.match.params.tokenId;
-    const { data } = await get(`tokenid/${tokenId}`);
+    const { data } = await get(`bots/${tokenId}`);
 
     this.setState({
       bot: data,

@@ -44,22 +44,9 @@ class EvolveButton extends Component {
       tokenType: 'worker',
       address: this.props.account,
     };
-    // const res = await post('tokens/workersupporter', newBot);
+    // const res = need to hit a new evolve endpoint
 
     console.log('newBot', newBot);
-
-    // this.setState({ workerTokenId: res.data.tokenId });
-
-    // await this.GittronWeb3Service.launchWorkerBot(
-    //   newBot.masterTokenId,
-    //   res.data.tokenId,
-    //   `${process.env.REACT_APP_API_HOST}uri/${res.data.tokenId}`,
-    //   this.props.account, //receiver,
-    //   this.props.account,
-    //   res.data.ghid,
-    // );
-
-    // this.props.history.push(`/bots/${this.state.workerTokenId}`);
   };
 
   render() {

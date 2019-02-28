@@ -1,6 +1,6 @@
 import GitTronAbi from '../../src/contracts/abi.json';
 import Web3Service from './web3Service';
-import { put, post } from './requests';
+import { put } from './requests';
 import Web3 from 'web3';
 
 export default class GittronWeb3Service {
@@ -117,17 +117,6 @@ export default class GittronWeb3Service {
     return await put(`bots/update-tx-status/${tokenId}`, minedUpdate);
   }
 
-  //TODO: Remove
-  async checkStatus(txHash, tokenId, ghid) {
-    let query = {
-      txHash: txHash,
-      tokenId: tokenId,
-      ghid: ghid,
-    };
-
-    return await put('tokenstatus', query);
-  }
-
   async withdraw(baseTokenId, account) {
     return await this.gittronContract.methods
       .withdraw(baseTokenId)
@@ -212,24 +201,4 @@ export default class GittronWeb3Service {
         return { error: 'rejected transaction' };
       });
   }
-
-  // async metaMorphBot(baseTokenId, tokenId, price, withdrawAddr, account, ghid) {
-  //   const tokenUri = `${this.apiAddress}uri/${tokenId}`;
-
-  //   return await this.gittronContract.methods
-  //     .metamorph(baseTokenId, tokenUri, tokenId, price, withdrawAddr)
-  //     .send({ from: account })
-  //     .once('transactionHash', async (txHash) => {
-  //       await this.checkStatus(txHash, tokenId, ghid);
-  //     })
-  //     .then(async (resp) => {
-  //       await this.checkStatus(resp.transactionHash, tokenId, ghid);
-  //       const resSvg = await post('generatepng', {
-  //         ghid: ghid,
-  //         tokenId: tokenId,
-  //       });
-
-  //       return resSvg;
-  //     });
-  // }
 }

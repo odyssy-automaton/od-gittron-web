@@ -56,7 +56,7 @@ class BuidlButton extends Component {
       tokenType: 'buidl',
       address: this.state.toAccount || this.props.account,
     };
-    const res = await post('tokens/workersupporter', newBot);
+    const res = await post('bots/clone', newBot);
 
     this.setState({ workerTokenId: res.data.tokenId });
 
@@ -71,6 +71,7 @@ class BuidlButton extends Component {
     } catch (err) {
       await this.GittronWeb3Service.disableBot(res.data.tokenId);
       txRes = { error: 'tx failure' };
+
       this.setState({ error: err.toString() });
     }
 
