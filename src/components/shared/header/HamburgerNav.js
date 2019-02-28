@@ -68,6 +68,17 @@ const HamburgerNav = class extends React.Component {
                 </button>
               )
             )}
+            {context.error && (
+            <div className="noWeb3">
+              <div className="noWeb3__Contents">
+                <button>X</button>
+                  <p>
+                    {context.error.toString()}
+                  </p>
+                  <p>Consider using <a href="https://brave.com/download/" rel="noopener noreferrer" target="_blank">Brave</a> or <a href="https://www.google.com/chrome/" rel="noopener noreferrer" target="_blank">Chrome</a> with the <a href="https://metamask.io/" rel="noopener noreferrer" target="_blank">Metamask</a> extension.</p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </Fragment>

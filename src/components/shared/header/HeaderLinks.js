@@ -7,7 +7,7 @@ import './Navbar.scss';
 import './Hamburger.scss';
 import HamburgerNav from './HamburgerNav';
 
-function HeaderLinks() {
+function HeaderLinks({toggleError}) {
    
   const context = useWeb3Context();
 
@@ -43,7 +43,7 @@ function HeaderLinks() {
         {context.error && (
           <div className="noWeb3">
             <div className="noWeb3__Contents">
-            <button>X</button>
+            <button onClick={this.props.toggleError}>X</button>
               <p>
                 {context.error.toString()}
               </p>

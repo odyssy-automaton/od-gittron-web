@@ -1,17 +1,29 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, Component } from 'react';
 
 import './Header.scss';
 
 import HeaderLinks from './HeaderLinks';
 import FeedbackBar from '../feedback-bar/FeedbackBar';
 
-function Header() {
-  return (
-    <Fragment>
-      <FeedbackBar />
-      <HeaderLinks />
-    </Fragment>
-  );
+const Header = class extends React.Component {
+  state = {
+    errorOpen: false,
+  }
+
+  toggleError = () => {
+    this.setState({
+      errorOpen: !this.state.errorOpen,
+    });
+  };
+
+  render () {
+    return (
+      <Fragment>
+        <FeedbackBar />
+        <HeaderLinks errorOpen={this.state.errorOpen} toggleError={this.toggleError} />
+      </Fragment>
+    );
+  }
 }
 
 export default Header;
