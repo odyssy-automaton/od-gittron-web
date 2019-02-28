@@ -59,21 +59,22 @@ class BuidlButton extends Component {
     const res = await post('tokens/workersupporter', newBot);
 
     this.setState({ workerTokenId: res.data.tokenId });
-    let botRes = null;
+
+    let txRes = null;
     try {
-      botRes = await this.GittronWeb3Service.launchWorkerBot(
+      txRes = await this.GittronWeb3Service.generateBuidlBot(
         newBot.masterTokenId,
         res.data.tokenId,
         this.state.toAccount || this.props.account, //receiver,
         this.props.account,
-        res.data.ghid,
       );
     } catch (err) {
-      botRes = { error: 'tx failure' };
+      await this.GittronWeb3Service.disableBot(res.data.tokenId);
+      txRes = { error: 'tx failure' };
       this.setState({ error: err.toString() });
     }
 
-    if (!botRes.error) {
+    if (!txRes.error) {
       this.props.history.push(`/bots/${this.state.workerTokenId}`);
     }
 

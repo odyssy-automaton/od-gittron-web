@@ -87,12 +87,11 @@ class PrimeGenerator extends Component {
 
     let txRes = {};
     try {
-      txRes = await this.GittronWeb3Service.registerPrimeBot(
+      txRes = await this.GittronWeb3Service.generatePrimeBot(
         `${res.data.tokenId}`,
         bot.price,
         bot.withdrawAddr,
         this.props.account,
-        res.data.ghid,
       );
     } catch (err) {
       await this.GittronWeb3Service.disableBot(res.data.tokenId);
