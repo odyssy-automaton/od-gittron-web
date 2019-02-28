@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Web3Consumer } from 'web3-react';
 
-import { get, put } from '../../util/requests';
+import { get } from '../../util/requests';
 
 import BotDetail from '../../components/shared/bot-detail/BotDetail';
 
@@ -24,27 +24,18 @@ class Bot extends Component {
 
   getBot = async (id) => {
     const tokenId = id || this.props.match.params.tokenId;
-    const { data } = await get(`tokenid/${tokenId}`);
+    const { data } = await get(`bots/${tokenId}`);
 
     this.setState({
       bot: data,
     });
-
-    //TODO: Make this check better
-    if (!data.mined && !data.disabled) {
-      let query = {
-        txHash: data.txHash,
-        tokenId: data.tokenId,
-        ghid: data.ghid,
-      };
-
-      const res = await put('tokenstatus', query);
-      console.log('checking bot status');
-      console.log(res);
-    }
   };
 
   handleVerification = () => {
+    this.getBot();
+  };
+
+  handleHatch = () => {
     this.getBot();
   };
 
@@ -59,6 +50,7 @@ class Bot extends Component {
               <BotDetail
                 bot={bot}
                 handleVerification={this.handleVerification}
+                handleHatch={this.handleHatch}
                 authenticated={context.active}
                 account={context.account}
               />

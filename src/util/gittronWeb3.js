@@ -1,6 +1,6 @@
 import GitTronAbi from '../../src/contracts/abi.json';
 import Web3Service from './web3Service';
-import { put, post } from './requests';
+import { put } from './requests';
 import Web3 from 'web3';
 
 export default class GittronWeb3Service {
@@ -93,14 +93,28 @@ export default class GittronWeb3Service {
     return await this.gittronContract.methods.ownerOf(tokenId).call();
   }
 
-  async checkStatus(txHash, tokenId, ghid) {
-    let query = {
-      txHash: txHash,
-      tokenId: tokenId,
-      ghid: ghid,
+  async disableBot(tokenId) {
+    const disabledUpdate = {
+      disabled: true,
     };
 
-    return await put('tokenstatus', query);
+    return await put(`bots/update-tx-status/${tokenId}`, disabledUpdate);
+  }
+
+  async addTxHash(tokenId, txHash) {
+    const txHashUpdate = {
+      txHash,
+    };
+
+    return await put(`bots/update-tx-status/${tokenId}`, txHashUpdate);
+  }
+
+  async updateMined(tokenId) {
+    const minedUpdate = {
+      mined: true,
+    };
+
+    return await put(`bots/update-tx-status/${tokenId}`, minedUpdate);
   }
 
   async withdraw(baseTokenId, account) {
@@ -119,110 +133,70 @@ export default class GittronWeb3Service {
       });
   }
 
-  async metaMorphBot(baseTokenId, tokenId, price, withdrawAddr, account, ghid) {
+  async generatePrimeBot(tokenId, price, withdrawAddr, account) {
     const tokenUri = `${this.apiAddress}uri/${tokenId}`;
 
-    return await this.gittronContract.methods
-      .metamorph(baseTokenId, tokenUri, tokenId, price, withdrawAddr)
-      .send({ from: account })
-      .once('transactionHash', async (txHash) => {
-        await this.checkStatus(txHash, tokenId, ghid);
-      })
-      .then(async (resp) => {
-        await this.checkStatus(resp.transactionHash, tokenId, ghid);
-        const resSvg = await post('generatepng', {
-          ghid: ghid,
-          tokenId: tokenId,
-        });
-
-        return resSvg;
-      });
-  }
-
-  async registerMasterBot(tokenId, price, withdrawAddr, account, ghid) {
-    const tokenUri = `${this.apiAddress}uri/${tokenId}`;
     return await this.gittronContract.methods
       .launchBaseToken(tokenUri, tokenId, price, withdrawAddr)
       .send({ from: account })
       .once('transactionHash', async (txHash) => {
-        //just update transaction hash
-
-        await this.checkStatus(txHash, tokenId, ghid);
+        await this.addTxHash(tokenId, txHash);
       })
       .then(async (resp) => {
-        console.log('resp', resp);
+        console.log(resp);
+        const res = await this.updateMined(tokenId);
 
-        //check status and mark mined if we have txhash
-        await this.checkStatus(resp.transactionHash, tokenId, ghid);
-
-        const resSvg = await post('generatepng', {
-          ghid: ghid,
-          tokenId: tokenId,
-        });
-
-        return resSvg;
+        return { success: res };
       })
       .catch(async (err) => {
         console.log('catch', err);
-        await this.checkStatus('rejected', tokenId, ghid);
+        await this.disableBot(tokenId);
 
         return { error: 'rejected transaction' };
       });
   }
 
-  async launchWorkerBot(baseTokenId, tokenId, receiver, account, ghid) {
+  async generateBuidlBot(baseTokenId, tokenId, receiver, account) {
     const tokenUri = `${this.apiAddress}uri/${tokenId}`;
 
     return await this.gittronContract.methods
       .launchRareToken(baseTokenId, tokenId, tokenUri, receiver)
       .send({ from: account })
       .once('transactionHash', async (txHash) => {
-        await this.checkStatus(txHash, tokenId, ghid);
+        await this.addTxHash(tokenId, txHash);
       })
       .then(async (resp) => {
-        await this.checkStatus(resp.transactionHash, tokenId, ghid);
-        const resSvg = await post('generatepng', {
-          ghid: ghid,
-          tokenId: tokenId,
-        });
+        console.log(resp);
+        const res = await this.updateMined(tokenId);
 
-        return resSvg;
+        return { success: res };
       })
       .catch(async (err) => {
         console.log(err);
-        await this.checkStatus('rejected', tokenId, ghid);
+        await this.disableBot(tokenId);
 
         return { error: 'rejected transaction' };
       });
   }
 
-  async launchSupportBot(
-    baseTokenId,
-    tokenId,
-    amount,
-    receiver,
-    account,
-    ghid,
-  ) {
+  async generateSupportBot(baseTokenId, tokenId, amount, receiver, account) {
     const tokenUri = `${this.apiAddress}uri/${tokenId}`;
+
     return await this.gittronContract.methods
       .launchNormalToken(baseTokenId, tokenId, tokenUri, amount, receiver)
       .send({ from: account, value: amount })
       .once('transactionHash', async (txHash) => {
-        await this.checkStatus(txHash, tokenId, ghid);
+        await this.addTxHash(tokenId, txHash);
       })
       .then(async (resp) => {
-        await this.checkStatus(resp.transactionHash, tokenId, ghid);
-        const resSvg = await post('generatepng', {
-          ghid: ghid,
-          tokenId: tokenId,
-        });
+        console.log(resp);
+        const res = await this.updateMined(tokenId);
 
-        return resSvg;
+        return { success: res };
       })
       .catch(async (err) => {
         console.log(err);
-        await this.checkStatus('rejected', tokenId, ghid);
+        await this.disableBot(tokenId);
 
         return { error: 'rejected transaction' };
       });
