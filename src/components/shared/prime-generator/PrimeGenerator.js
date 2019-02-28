@@ -7,7 +7,7 @@ import GittronWeb3Service from '../../../util/gittronWeb3';
 import Web3Service from '../../../util/web3Service';
 import Loader from '../loader/loader';
 
-class Generator extends Component {
+class PrimeGenerator extends Component {
   state = {
     tokenId: null,
     error: null,
@@ -63,7 +63,6 @@ class Generator extends Component {
     const res = await post('tokens/new', newBot);
 
     if (!res) {
-      console.log(res);
       this.setState({
         error: 'Is that a valid public repo?',
         loading: false,
@@ -86,9 +85,9 @@ class Generator extends Component {
 
     this.setState({ tokenId: res.data.tokenId });
 
-    let botRes = {};
+    let txRes = {};
     try {
-      botRes = await this.GittronWeb3Service.registerMasterBot(
+      txRes = await this.GittronWeb3Service.registerPrimeBot(
         `${res.data.tokenId}`,
         bot.price,
         bot.withdrawAddr,
@@ -96,14 +95,15 @@ class Generator extends Component {
         res.data.ghid,
       );
     } catch (err) {
-      botRes.error = err;
+      await this.GittronWeb3Service.disableBot(res.data.tokenId);
+      txRes.error = err;
     }
 
-    if (botRes.error) {
+    if (txRes.error) {
       this.setState({
         loading: false,
         tokenId: null,
-        error: botRes.error.toString(),
+        error: txRes.error.toString(),
       });
     } else {
       this.props.history.push(`/bots/${this.state.tokenId}`);
@@ -152,4 +152,4 @@ class Generator extends Component {
   }
 }
 
-export default withRouter(Generator);
+export default withRouter(PrimeGenerator);

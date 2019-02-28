@@ -93,6 +93,15 @@ export default class GittronWeb3Service {
     return await this.gittronContract.methods.ownerOf(tokenId).call();
   }
 
+  async disableBot(tokenId) {
+    const disabledUpdate = {
+      disabled: true,
+    };
+
+    return await put(`bots/update-tx-status/${tokenId}`, disabledUpdate);
+  }
+
+  //TODO: Remove
   async checkStatus(txHash, tokenId, ghid) {
     let query = {
       txHash: txHash,
@@ -119,52 +128,31 @@ export default class GittronWeb3Service {
       });
   }
 
-  async metaMorphBot(baseTokenId, tokenId, price, withdrawAddr, account, ghid) {
+  async registerPrimeBot(tokenId, price, withdrawAddr, account, ghid) {
     const tokenUri = `${this.apiAddress}uri/${tokenId}`;
 
-    return await this.gittronContract.methods
-      .metamorph(baseTokenId, tokenUri, tokenId, price, withdrawAddr)
-      .send({ from: account })
-      .once('transactionHash', async (txHash) => {
-        await this.checkStatus(txHash, tokenId, ghid);
-      })
-      .then(async (resp) => {
-        await this.checkStatus(resp.transactionHash, tokenId, ghid);
-        const resSvg = await post('generatepng', {
-          ghid: ghid,
-          tokenId: tokenId,
-        });
-
-        return resSvg;
-      });
-  }
-
-  async registerMasterBot(tokenId, price, withdrawAddr, account, ghid) {
-    const tokenUri = `${this.apiAddress}uri/${tokenId}`;
     return await this.gittronContract.methods
       .launchBaseToken(tokenUri, tokenId, price, withdrawAddr)
       .send({ from: account })
       .once('transactionHash', async (txHash) => {
-        //just update transaction hash
+        const txUpdate = {
+          txHash: txHash,
+        };
 
-        await this.checkStatus(txHash, tokenId, ghid);
+        await put(`bots/update-tx-status/${tokenId}`, txUpdate);
       })
       .then(async (resp) => {
         console.log('resp', resp);
+        const minedUpdate = {
+          mined: true,
+        };
+        const res = await put(`bots/update-tx-status/${tokenId}`, minedUpdate);
 
-        //check status and mark mined if we have txhash
-        await this.checkStatus(resp.transactionHash, tokenId, ghid);
-
-        const resSvg = await post('generatepng', {
-          ghid: ghid,
-          tokenId: tokenId,
-        });
-
-        return resSvg;
+        return { success: res };
       })
       .catch(async (err) => {
         console.log('catch', err);
-        await this.checkStatus('rejected', tokenId, ghid);
+        await this.disableBot(tokenId);
 
         return { error: 'rejected transaction' };
       });
@@ -227,4 +215,24 @@ export default class GittronWeb3Service {
         return { error: 'rejected transaction' };
       });
   }
+
+  // async metaMorphBot(baseTokenId, tokenId, price, withdrawAddr, account, ghid) {
+  //   const tokenUri = `${this.apiAddress}uri/${tokenId}`;
+
+  //   return await this.gittronContract.methods
+  //     .metamorph(baseTokenId, tokenUri, tokenId, price, withdrawAddr)
+  //     .send({ from: account })
+  //     .once('transactionHash', async (txHash) => {
+  //       await this.checkStatus(txHash, tokenId, ghid);
+  //     })
+  //     .then(async (resp) => {
+  //       await this.checkStatus(resp.transactionHash, tokenId, ghid);
+  //       const resSvg = await post('generatepng', {
+  //         ghid: ghid,
+  //         tokenId: tokenId,
+  //       });
+
+  //       return resSvg;
+  //     });
+  // }
 }

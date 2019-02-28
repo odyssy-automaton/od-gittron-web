@@ -17,12 +17,17 @@ class BuidlButton extends Component {
     toAccount: null,
     error: null,
   };
+
   async componentDidMount() {
     this._isMounted = true;
     this.GittronWeb3Service = new GittronWeb3Service();
     this.web3Service = new Web3Service();
 
     this.loadContract();
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   loadContract = async () => {
@@ -77,13 +82,7 @@ class BuidlButton extends Component {
 
   render() {
     const { bot, account } = this.props;
-    const {
-      buidlAvail,
-      ownerOfToken,
-      isLoading,
-      toAccount,
-      error,
-    } = this.state;
+    const { buidlAvail, ownerOfToken, isLoading, error } = this.state;
 
     return (
       <div>

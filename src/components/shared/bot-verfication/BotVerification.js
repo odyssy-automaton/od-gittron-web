@@ -22,6 +22,10 @@ class BotVerfication extends Component {
     this.loadContract();
   }
 
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
   loadContract = async () => {
     const contract = await this.GittronWeb3Service.initContracts();
 
