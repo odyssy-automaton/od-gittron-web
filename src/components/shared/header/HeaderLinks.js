@@ -8,6 +8,7 @@ import './Hamburger.scss';
 import HamburgerNav from './HamburgerNav';
 
 function HeaderLinks() {
+   
   const context = useWeb3Context();
 
   return (
@@ -17,6 +18,7 @@ function HeaderLinks() {
           <Link to="/">Gittron</Link>
         </h1>
       </div>
+      
       <div className="Navbar__Desktop">
         <Link to="/" className="Navbar__Desktop--Item">
           Bots
@@ -28,26 +30,28 @@ function HeaderLinks() {
           <Link to="/dashboard" className="Navbar__Desktop--Item">
             Dashboard
           </Link>
-        ) : (
-          context.connectorName !== 'MetaMask' && (
-            <button onClick={() => context.setConnector('MetaMask')}>
-              Activate Web3
-            </button>
-          )
-        )}
-
+        ) : null }
         {!context.active ? (
-          <p className="Nonet Navbar__Desktop--Item">Not connected</p>
+          context.connectorName !== 'MetaMask' && (
+          <button className="Nonet" onClick={() => context.setConnector('MetaMask')}>Connect</button>
+          )
         ) : context.networkId === 4 ? (
           <p className="Rinkeby Navbar__Desktop--Item">Rinkeby</p>
         ) : (
           <p className="Mainnet Navbar__Desktop--Item">Main</p>
         )}
         {context.error && (
-          <p>
-            {context.error.code}: {context.error.toString()}
-          </p>
+          <div className="noWeb3">
+            <div className="noWeb3__Contents">
+            <button>X</button>
+              <p>
+                {context.error.toString()}
+              </p>
+              <p>Consider using <a href="https://brave.com/download/" rel="noopener noreferrer" target="_blank">Brave</a> or <a href="https://www.google.com/chrome/" rel="noopener noreferrer" target="_blank">Chrome</a> with the <a href="https://metamask.io/" rel="noopener noreferrer" target="_blank">Metamask</a> extension.</p>
+            </div>
+          </div>
         )}
+
       </div>
       <HamburgerNav context={context} />
     </div>

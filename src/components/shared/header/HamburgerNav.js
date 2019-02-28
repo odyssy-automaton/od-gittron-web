@@ -63,9 +63,9 @@ const HamburgerNav = class extends React.Component {
               </Link>
             ) : (
               context.connectorName !== 'MetaMask' && (
-                <button onClick={() => context.setConnector('MetaMask')}>
-                  Activate Web3
-                </button>
+                <a className="Navbar__Mobile--Contents--Item" onClick={() => context.setConnector('MetaMask')}>
+                  Connect
+                </a>
               )
             )}
           </div>

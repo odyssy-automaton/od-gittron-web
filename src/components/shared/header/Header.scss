@@ -25,6 +25,8 @@
 .Logo {
   flex-basis: 33%;
   margin-right: auto;
+  display: flex;
+  align-items: center;
   @media (max-width: 889px) {
     flex-basis: 75%;
   }
@@ -40,6 +42,11 @@
   }
 }
 
+.Nonet {
+  display: flex;
+  align-items: center;
+}
+
 .Nonet:before {
   content: '';
   display: inline-block;
@@ -48,7 +55,7 @@
   border-radius: 50%;
   border: 2px solid black;
   margin-right: 5px;
-  background-color: #ac0839;
+  background-color: red;
 }
 
 .Rinkeby:before {
@@ -71,4 +78,33 @@
   border: 2px solid black;
   margin-right: 5px;
   background-color: limegreen;
+}
+
+
+.noWeb3 { 
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  z-index: 99;
+  &__Contents {
+    border: 2px solid white;
+    padding: 25px;
+    position: relative;
+    a {
+      color: #5f5fff;
+    }
+    button { 
+      position: absolute; 
+      top: -44px; 
+      right: -4px; 
+      border: 2px solid white !important;
+     }
+  }
 }
