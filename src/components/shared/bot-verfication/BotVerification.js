@@ -22,6 +22,10 @@ class BotVerfication extends Component {
     this.loadContract();
   }
 
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
   loadContract = async () => {
     const contract = await this.GittronWeb3Service.initContracts();
 
@@ -38,7 +42,7 @@ class BotVerfication extends Component {
   checkRepoOwnership = async () => {
     this.setState({ loading: true });
 
-    const res = await put(`verifyrepo/${this.props.bot.tokenId}`);
+    const res = await put(`bots/verify/${this.props.bot.tokenId}`);
     this.setState({ statusMessage: res.data.status, loading: false });
 
     if (res.data.status === 'verified') {

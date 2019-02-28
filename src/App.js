@@ -18,8 +18,6 @@ const Infura = new NetworkOnlyConnector({
 });
 const connectors = { MetaMask, Infura };
 
-console.log(MetaMask);
-
 function App() {
   return (
     <div className="App">

@@ -24,6 +24,10 @@ class SupportButton extends Component {
     this.loadContract();
   }
 
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
   loadContract = async () => {
     const contract = await this.GittronWeb3Service.initContracts();
 
@@ -52,20 +56,20 @@ class SupportButton extends Component {
       tokenType: 'support',
       address: this.props.account,
     };
-    const res = await post('tokens/workersupporter', newBot);
+    const res = await post('bots/clone', newBot);
 
     this.setState({ supportTokenId: res.data.tokenId });
     let botRes = {};
     try {
-      botRes = await this.GittronWeb3Service.launchSupportBot(
+      botRes = await this.GittronWeb3Service.generateSupportBot(
         bot.tokenId,
         res.data.tokenId,
         this.state.price, //amount
         this.props.account, //receiver,
         this.props.account,
-        res.data.ghid,
       );
     } catch {
+      await this.GittronWeb3Service.disableBot(res.data.tokenId);
       botRes = { error: 'tx failure' };
     }
 
