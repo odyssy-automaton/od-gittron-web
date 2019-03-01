@@ -6,8 +6,6 @@ import './GithubBadge.scss';
 
 class GithubBadge extends Component {
   state = {
-    loading: false,
-    statusMessage: '',
     ownerOfToken: false,
     contract: null,
     snippet: null,
@@ -22,9 +20,6 @@ class GithubBadge extends Component {
 
   loadContract = async () => {
     const contract = await this.GittronWeb3Service.initContracts();
-    console.log('tid', this.props.bot.tokenId);
-
-    console.log('tid', this.props.bot.tokenId);
 
     const ownerOfToken = await this.ownerOf(this.props.bot.tokenId);
     const snippet = `<table border="0"><tr>  <td><a href="https://gittron.me/bots/${
