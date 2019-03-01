@@ -13,7 +13,7 @@ class BotFilter extends Component {
       { value: 'buidl', label: 'Buidl Bots' },
       { value: 'support', label: 'Support Bots' },
     ],
-    type: { value: 'prime', label: 'Prime Bots' },
+    type: { value: 'all', label: 'All Bots' },
     repo: { value: 'all', label: 'All Repos' },
   };
 
