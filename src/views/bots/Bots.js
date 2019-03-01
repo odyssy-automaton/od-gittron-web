@@ -14,8 +14,13 @@ class Bots extends Component {
 
   componentDidMount = async () => {
     const { data } = await get(`bots`);
+    const bots = data
+      .filter((bot) => !bot.disabled)
+      .sort((botA, botb) => {
+        return botA.verified === botb.verified ? 0 : botA.verified ? -1 : 1;
+      });
     this.setState({
-      bots: data.filter((bot) => !bot.disabled),
+      bots,
     });
   };
 
