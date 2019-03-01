@@ -1,4 +1,6 @@
 import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
+
 import BotCard from '../bot-card/BotCard';
 import SupportButton from '../support-button/supportButton';
 import BuidlButton from '../buidl-button/buidlButton';
@@ -12,7 +14,7 @@ import HatchButton from '../hatch-button/HatchButton';
 
 function BotDetail(props) {
   const { account, authenticated, bot, web3 } = props;
-  let unverified, verified;
+  let unverified, verified, hasPrimeBot;
   function handleVerification() {
     props.handleVerification();
   }
@@ -24,6 +26,7 @@ function BotDetail(props) {
   if (bot) {
     unverified = bot.tokenType === 'prime' && !bot.verified;
     verified = bot.tokenType === 'prime' && bot.verified;
+    hasPrimeBot = bot.tokenType !== 'prime' && bot.relatedPrimeBot;
   }
 
   return (
@@ -66,6 +69,12 @@ function BotDetail(props) {
               ) : null}
 
               <BotStats bot={bot} />
+
+              {hasPrimeBot ? (
+                <Link to={`/bots/${bot.relatedPrimeBot}`}>
+                  View My Prime Bot
+                </Link>
+              ) : null}
 
               {bot.tokenType === 'prime' && authenticated ? (
                 <div className="BotDetail__Actions">
