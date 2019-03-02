@@ -57,7 +57,7 @@ class GithubBadge extends Component {
             <p>Preview:</p>
             <div className="GithubBadge__Preview" dangerouslySetInnerHTML={{ __html: snippet }} />
             <p>Copy/Paste the following snippet into your README.md</p>
-            <textarea readonly>{snippet}</textarea>
+            <textarea readOnly defaultValue={snippet}></textarea>
             <button onClick={() => this.copyToClipboard(snippet)}>
               Copy Snippet
             </button>

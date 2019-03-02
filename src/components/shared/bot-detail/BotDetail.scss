@@ -15,17 +15,30 @@
     color: red;
   }
   &__Actions {
-    max-width: 300px;
+    width: 100%;
     border: 2px solid black;
+    display: flex;
+    flex-wrap: wrap;
     &--Support {
+      width: calc(50% - 50px);
       padding: 25px;
       border-bottom: 2px solid black;
+      border-right: 2px solid black;
+      @media (max-width: $tablet) {
+        border-right: 0px solid transparent;
+        width: 100%;
+      }
     }
     &--Buidl {
+      width: calc(50% - 52px);
       padding: 25px;
       border-bottom: 2px solid black;
+      @media (max-width: $tablet) {
+        width: 100%;
+      }
     }
     &--Owner {
+      width: 100%;
       padding: 25px;
     }
     button {
