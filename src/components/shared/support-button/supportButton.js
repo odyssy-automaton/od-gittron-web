@@ -16,7 +16,6 @@ class SupportButton extends Component {
 
   async componentDidMount() {
     this._isMounted = true;
-    console.log('props');
 
     this.gittronWeb3Service = this.props.gtContext.gittronWeb3Service;
     this.web3Service = this.props.gtContext.web3Service;

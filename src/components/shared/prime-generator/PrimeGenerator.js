@@ -3,8 +3,6 @@ import { withRouter } from 'react-router-dom';
 import GenerationForm from '../../forms/generation/GenerationForm';
 
 import { post } from '../../../util/requests';
-import GittronWeb3Service from '../../../util/gittronWeb3';
-import Web3Service from '../../../util/web3Service';
 import Loader from '../loader/loader';
 
 class PrimeGenerator extends Component {
@@ -15,26 +13,16 @@ class PrimeGenerator extends Component {
 
   componentDidMount() {
     this._isMounted = true;
-    this.web3Service = new Web3Service();
-
-    this.GittronWeb3Service = new GittronWeb3Service();
-    this.loadContract();
+    this.web3Service = this.props.gtContext.web3Service;
+    this.gittronWeb3Service = this.props.gtContext.gittronWeb3Service;
   }
 
   componentWillUnmount() {
     this._isMounted = false;
   }
 
-  loadContract = async () => {
-    const contract = await this.GittronWeb3Service.initContracts();
-
-    if (this._isMounted) {
-      this.setState({ contract });
-    }
-  };
-
   registerMasterBot = async (tokenId, price, withdrawAddr) => {
-    await this.GittronWeb3Service.rigisterMasterBot(
+    await this.gittronWeb3Service.rigisterMasterBot(
       tokenId,
       price,
       withdrawAddr,
@@ -42,7 +30,7 @@ class PrimeGenerator extends Component {
   };
 
   tokensByOwner = async (address) => {
-    return await this.GittronWeb3Service.tokensByOwner(address);
+    return await this.gittronWeb3Service.tokensByOwner(address);
   };
 
   handleSubmit = async (bot) => {
@@ -87,14 +75,14 @@ class PrimeGenerator extends Component {
 
     let txRes = {};
     try {
-      txRes = await this.GittronWeb3Service.generatePrimeBot(
+      txRes = await this.gittronWeb3Service.generatePrimeBot(
         `${res.data.tokenId}`,
         bot.price,
         bot.withdrawAddr,
         this.props.account,
       );
     } catch (err) {
-      await this.GittronWeb3Service.disableBot(res.data.tokenId);
+      await this.gittronWeb3Service.disableBot(res.data.tokenId);
       txRes.error = err;
     }
 

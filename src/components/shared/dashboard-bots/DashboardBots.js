@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import { get } from '../../../util/requests';
-import GittronWeb3Service from '../../../util/gittronWeb3';
 import BotFilter from '../bot-filter/BotFilter';
 
 import './DashboardBots.scss';
@@ -15,27 +14,24 @@ class DashboardBots extends Component {
 
   componentDidMount = async () => {
     this._isMounted = true;
-    this.GittronWeb3Service = new GittronWeb3Service();
+    this.gittronWeb3Service = this.props.gtContext.gittronWeb3Service;
 
-    this.loadContract();
+    this.loadContractData();
   };
 
-  loadContract = async () => {
+  loadContractData = async () => {
     if (!this.props.authenticated) return;
-    const contract = await this.GittronWeb3Service.initContracts();
-    const tokens = await this.tokensByOwner(this.props.address);
-
-    const res = await this.loadBots(tokens);
-
-    const bots = res.filter((bot) => bot.data.tokenId).map((bot) => bot.data);
 
     if (this._isMounted) {
-      this.setState({ contract, tokens, bots });
+      const tokens = await this.tokensByOwner(this.props.address);
+      const res = await this.loadBots(tokens);
+      const bots = res.filter((bot) => bot.data.tokenId).map((bot) => bot.data);
+      this.setState({ tokens, bots });
     }
   };
 
   tokensByOwner = async (address) => {
-    if (address) return await this.GittronWeb3Service.tokensByOwner(address);
+    if (address) return await this.gittronWeb3Service.tokensByOwner(address);
   };
 
   leftPadHex = (num, size) => {

@@ -3,6 +3,7 @@ import { Web3Consumer } from 'web3-react';
 
 import { get } from '../../util/requests';
 import RepoList from '../../components/shared/repo-list/RepoList';
+import { GittronWeb3Consumer } from '../../contexts/Gittronweb3Context';
 
 class Repos extends Component {
   state = {
@@ -59,10 +60,14 @@ class Repos extends Component {
     return (
       <Web3Consumer>
         {(context) => (
-          <div className="Contain">
-            <h3>Repos ({repos.length})</h3>
-            <RepoList repos={repos} />
-          </div>
+          <GittronWeb3Consumer>
+            {(gtContext) => (
+              <div className="Contain">
+                <h3>Repos ({repos.length})</h3>
+                <RepoList repos={repos} gtContext={gtContext} />
+              </div>
+            )}
+          </GittronWeb3Consumer>
         )}
       </Web3Consumer>
     );
