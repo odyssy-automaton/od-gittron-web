@@ -24,9 +24,9 @@ class GithubBadge extends Component {
     const ownerOfToken = await this.ownerOf(this.props.bot.tokenId);
     const snippet = `<table border="0"><tr>  <td><a href="https://gittron.me/bots/${
       this.props.bot.tokenId
-    }"><img  src="https://s3.amazonaws.com/od-flat-svg/${
+    }"><img src="https://s3.amazonaws.com/od-flat-svg/${
       this.props.bot.tokenId
-    }.png"  alt="gittron"  width="50"/></a></td><td><a href="https://gittron.me/bots/${
+    }.png" alt="gittron" width="50"/></a></td><td><a href="https://gittron.me/bots/${
       this.props.bot.tokenId
     }">SUPPORT US WITH GITTRON</a></td></tr></table>`;
     this.setState({ contract, ownerOfToken, snippet });
@@ -52,13 +52,14 @@ class GithubBadge extends Component {
     return (
       <Fragment>
         {ownerOfToken === account ? (
-          <div className="GitHubBadge Contain">
-            <p>Add a gittron snippet to your readme. example:</p>
-            <div dangerouslySetInnerHTML={{ __html: snippet }} />
-            <p>copy and paste in to github readme</p>
+          <div className="GithubBadge">
+            <h4>Add a Support Link to your README!</h4>
+            <p>Preview:</p>
+            <div className="GithubBadge__Preview" dangerouslySetInnerHTML={{ __html: snippet }} />
+            <p>Copy/Paste the following snippet into your README.md</p>
             <textarea readonly>{snippet}</textarea>
             <button onClick={() => this.copyToClipboard(snippet)}>
-              copy snippet
+              Copy Snippet
             </button>
           </div>
         ) : null}
