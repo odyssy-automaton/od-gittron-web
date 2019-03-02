@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
-import GittronWeb3Service from '../../../util/gittronWeb3';
-import Web3Service from '../../../util/web3Service';
-
 import Loader from '../loader/loader';
 
 class WithdrawButton extends Component {
@@ -19,34 +16,28 @@ class WithdrawButton extends Component {
 
   async componentDidMount() {
     this._isMounted = true;
-    this.GittronWeb3Service = new GittronWeb3Service();
-    this.web3Service = new Web3Service();
-
-    this.loadContract();
-  }
-
-  loadContract = async () => {
-    const contract = await this.GittronWeb3Service.initContracts();
+    this.gittronWeb3Service = this.props.gtContext.gittronWeb3Service;
+    this.web3Service = this.props.gtContext.web3Service;
 
     if (this._isMounted) {
       const botBank = await this.allowedToWithdraw(this.props.bot.tokenId);
       const ownerOfToken = await this.ownerOf(this.props.bot.tokenId);
       const withdrawInEth = await this.web3Service.toEth(botBank);
-      this.setState({ contract, botBank, ownerOfToken, withdrawInEth });
+      this.setState({ botBank, ownerOfToken, withdrawInEth });
     }
-  };
+  }
 
   allowedToWithdraw = async (tokenId) => {
-    return await this.GittronWeb3Service.allowedToWithdraw(tokenId);
+    return await this.gittronWeb3Service.allowedToWithdraw(tokenId);
   };
 
   ownerOf = async (tokenId) => {
-    return await this.GittronWeb3Service.ownerOf(tokenId);
+    return await this.gittronWeb3Service.ownerOf(tokenId);
   };
 
   handleSubmit = async (bot) => {
     this.setState({ isLoading: true });
-    const res = await this.GittronWeb3Service.withdraw(
+    const res = await this.gittronWeb3Service.withdraw(
       bot.tokenId,
       this.props.account,
     );

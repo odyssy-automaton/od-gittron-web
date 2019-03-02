@@ -1,27 +1,16 @@
 import React, { Component } from 'react';
-import GittronWeb3Service from '../util/gittronWeb3';
-import Web3Service from '../util/web3Service';
 
 const GittronWeb3Context = React.createContext();
 
 export default class GittronWeb3Provider extends Component {
-  contructor(props) {
+  constructor(props) {
     super(props);
-    this.staet = {
-      contract: null,
+    this.state = {
+      contract: props.contract,
+      gittronWeb3Service: props.gittronWeb3Service,
+      web3Service: props.web3Service,
     };
-
-    this.GittronWeb3Service = new GittronWeb3Service();
-    this.web3Service = new Web3Service();
-
-    this.loadContract();
   }
-
-  loadContract = async () => {
-    const contract = await this.GittronWeb3Service.initContracts();
-
-    this.setState({ contract });
-  };
 
   render() {
     return (

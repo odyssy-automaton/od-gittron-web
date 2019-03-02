@@ -1,7 +1,5 @@
 import React, { Component, Fragment } from 'react';
 
-import GittronWeb3Service from '../../../util/gittronWeb3';
-
 import './GithubBadge.scss';
 
 class GithubBadge extends Component {
@@ -13,13 +11,8 @@ class GithubBadge extends Component {
 
   async componentDidMount() {
     this._isMounted = true;
-    this.GittronWeb3Service = new GittronWeb3Service();
-
-    this.loadContract();
-  }
-
-  loadContract = async () => {
-    const contract = await this.GittronWeb3Service.initContracts();
+    this.gittronWeb3Service = this.props.gtContext.gittronWeb3Service;
+    this.web3Service = this.props.gtContext.web3Service;
 
     const ownerOfToken = await this.ownerOf(this.props.bot.tokenId);
     const snippet = `<table border="0"><tr>  <td><a href="https://gittron.me/bots/${
@@ -29,11 +22,11 @@ class GithubBadge extends Component {
     }.png" alt="gittron" width="50"/></a></td><td><a href="https://gittron.me/bots/${
       this.props.bot.tokenId
     }">SUPPORT US WITH GITTRON</a></td></tr></table>`;
-    this.setState({ contract, ownerOfToken, snippet });
-  };
+    this.setState({ ownerOfToken, snippet });
+  }
 
   ownerOf = async (tokenId) => {
-    return await this.GittronWeb3Service.ownerOf(tokenId);
+    return await this.gittronWeb3Service.ownerOf(tokenId);
   };
 
   copyToClipboard = (snippet) => {
@@ -55,9 +48,12 @@ class GithubBadge extends Component {
           <div className="GithubBadge">
             <h4>Add a Support Link to your README!</h4>
             <p>Preview:</p>
-            <div className="GithubBadge__Preview" dangerouslySetInnerHTML={{ __html: snippet }} />
+            <div
+              className="GithubBadge__Preview"
+              dangerouslySetInnerHTML={{ __html: snippet }}
+            />
             <p>Copy/Paste the following snippet into your README.md</p>
-            <textarea readOnly defaultValue={snippet}></textarea>
+            <textarea readOnly defaultValue={snippet} />
             <button onClick={() => this.copyToClipboard(snippet)}>
               Copy Snippet
             </button>

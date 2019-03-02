@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
-import GittronWeb3Service from '../../../util/gittronWeb3';
 import { post } from '../../../util/requests';
-import Web3Service from '../../../util/web3Service';
 import Loader from '../loader/loader';
 
 class BuidlButton extends Component {
@@ -20,32 +18,26 @@ class BuidlButton extends Component {
 
   async componentDidMount() {
     this._isMounted = true;
-    this.GittronWeb3Service = new GittronWeb3Service();
-    this.web3Service = new Web3Service();
+    this.gittronWeb3Service = this.props.gtContext.gittronWeb3Service;
+    this.web3Service = this.props.gtContext.web3Service;
 
-    this.loadContract();
+    if (this._isMounted) {
+      const buidlAvail = await this.totalRareAvailible(this.props.bot.tokenId);
+      const ownerOfToken = await this.ownerOf(this.props.bot.tokenId);
+      this.setState({ buidlAvail, ownerOfToken });
+    }
   }
 
   componentWillUnmount() {
     this._isMounted = false;
   }
 
-  loadContract = async () => {
-    const contract = await this.GittronWeb3Service.initContracts();
-
-    if (this._isMounted) {
-      const buidlAvail = await this.totalRareAvailible(this.props.bot.tokenId);
-      const ownerOfToken = await this.ownerOf(this.props.bot.tokenId);
-      this.setState({ contract, buidlAvail, ownerOfToken });
-    }
-  };
-
   totalRareAvailible = async (tokenId) => {
-    return await this.GittronWeb3Service.totalRareAvailible(tokenId);
+    return await this.gittronWeb3Service.totalRareAvailible(tokenId);
   };
 
   ownerOf = async (tokenId) => {
-    return await this.GittronWeb3Service.ownerOf(tokenId);
+    return await this.gittronWeb3Service.ownerOf(tokenId);
   };
 
   handleSubmit = async (bot) => {
@@ -62,14 +54,14 @@ class BuidlButton extends Component {
 
     let txRes = null;
     try {
-      txRes = await this.GittronWeb3Service.generateBuidlBot(
+      txRes = await this.gittronWeb3Service.generateBuidlBot(
         newBot.masterTokenId,
         res.data.tokenId,
         this.state.toAccount || this.props.account, //receiver,
         this.props.account,
       );
     } catch (err) {
-      await this.GittronWeb3Service.disableBot(res.data.tokenId);
+      await this.gittronWeb3Service.disableBot(res.data.tokenId);
       txRes = { error: 'tx failure' };
 
       this.setState({ error: err.toString() });
