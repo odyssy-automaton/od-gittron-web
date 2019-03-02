@@ -11,6 +11,7 @@ import BotStats from '../bot-stats/BotStats';
 
 import './BotDetail.scss';
 import HatchButton from '../hatch-button/HatchButton';
+import GithubBadge from '../github-badge/GithubBadge';
 
 function BotDetail(props) {
   const { account, authenticated, bot, web3 } = props;
@@ -38,7 +39,6 @@ function BotDetail(props) {
               <HatchButton
                 bot={bot}
                 account={account}
-                web3={web3}
                 handleHatch={handleHatch}
               />
             ) : null}
@@ -54,7 +54,6 @@ function BotDetail(props) {
                       bot={bot}
                       handleVerification={handleVerification}
                       account={account}
-                      web3={web3}
                     />
                   )}
                   <h3>{bot.tokenUriData && bot.tokenUriData.name}</h3>
@@ -65,6 +64,7 @@ function BotDetail(props) {
                     </div>
                   )}
                   {unverified && <p>CAUTION: UNVERIFIED BOT!</p>}
+                  {bot.tokenId && <GithubBadge bot={bot} account={account} />}
                 </Fragment>
               ) : null}
 
@@ -83,14 +83,14 @@ function BotDetail(props) {
                       Support the development of this bot's repo by cloning it
                       as a support bot.
                     </p>
-                    <SupportButton bot={bot} account={account} web3={web3} />
+                    <SupportButton bot={bot} account={account} />
                   </div>
                   <div className="BotDetail__Actions--Buidl">
-                    <BuidlButton bot={bot} account={account} web3={web3} />
+                    <BuidlButton bot={bot} account={account} />
                   </div>
                   <div className="BotDetail__Actions--Owner">
-                    <EvolveButton bot={bot} account={account} web3={web3} />
-                    <WithdrawButton bot={bot} account={account} web3={web3} />
+                    <EvolveButton bot={bot} account={account} />
+                    <WithdrawButton bot={bot} account={account} />
                   </div>
                 </div>
               ) : null}
