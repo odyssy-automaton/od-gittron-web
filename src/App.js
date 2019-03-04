@@ -30,7 +30,14 @@ function App() {
   return (
     <div className="App">
       <Helmet>
-        <meta name="description" content="gittron" />
+        <meta name="description" content="Gittron uses NFTs as a gamifies funding mechanism to support Open Source projects. Support Open Source, get NFTs!" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@gittron_" />
+        <meta name="twitter:creator" content="@odyssyautomaton" />
+        <meta property="og:url" content="https://gittron.me" />
+        <meta property="og:title" content="Gittron" />
+        <meta property="og:description" content="Gittron uses NFTs as a gamifies funding mechanism to support Open Source projects. Support Open Source, get NFTs!" />
+        <meta property="og:image" content="https://s3.amazonaws.com/odyssy-assets/Gittron__og-image.jpg" />
       </Helmet>
       <Web3Provider connectors={connectors} libraryName="web3.js">
         <GittronWeb3Provider
