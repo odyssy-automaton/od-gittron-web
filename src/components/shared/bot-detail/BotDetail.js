@@ -69,7 +69,7 @@ function BotDetail(props) {
                         </div>
                       )}
                       {unverified && <p>CAUTION: UNVERIFIED BOT!</p>}
-                      {bot.tokenId && (
+                      {bot.tokenType === 'prime' && bot.tokenId && (
                         <GithubBadge
                           bot={bot}
                           account={account}
