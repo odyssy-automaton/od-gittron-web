@@ -10,6 +10,9 @@ import Header from './components/shared/header/Header';
 // import screens from './views/default-screens';
 
 import './App.scss';
+import GittronWeb3Provider from './contexts/Gittronweb3Context';
+import GittronWeb3Service from './util/gittronWeb3';
+import Web3Service from './util/web3Service';
 
 const { MetaMaskConnector, NetworkOnlyConnector } = Connectors;
 const MetaMask = new MetaMaskConnector({ supportedNetworks: [1, 4] });
@@ -18,6 +21,11 @@ const Infura = new NetworkOnlyConnector({
 });
 const connectors = { MetaMask, Infura };
 
+const gittronWeb3Service = new GittronWeb3Service();
+const web3Service = new Web3Service();
+
+const contract = gittronWeb3Service.initContracts();
+
 function App() {
   return (
     <div className="App">
@@ -25,12 +33,18 @@ function App() {
         <meta name="description" content="gittron" />
       </Helmet>
       <Web3Provider connectors={connectors} libraryName="web3.js">
-        <BrowserRouter>
-          <Fragment>
-            <Header />
-            <Routes />
-          </Fragment>
-        </BrowserRouter>
+        <GittronWeb3Provider
+          contract={contract}
+          gittronWeb3Service={gittronWeb3Service}
+          web3Service={web3Service}
+        >
+          <BrowserRouter>
+            <Fragment>
+              <Header />
+              <Routes />
+            </Fragment>
+          </BrowserRouter>
+        </GittronWeb3Provider>
       </Web3Provider>
     </div>
   );

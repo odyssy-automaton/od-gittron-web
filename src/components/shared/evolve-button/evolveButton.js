@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
-import GittronWeb3Service from '../../../util/gittronWeb3';
 // import { post } from '../../../util/requests';
-import Web3Service from '../../../util/web3Service';
 
 class EvolveButton extends Component {
   state = {
@@ -13,29 +11,23 @@ class EvolveButton extends Component {
   };
   async componentDidMount() {
     this._isMounted = true;
-    this.GittronWeb3Service = new GittronWeb3Service(this.props.web3);
-    this.web3Service = new Web3Service(this.props.web3);
-
-    this.loadContract();
-  }
-
-  loadContract = async () => {
-    const contract = await this.GittronWeb3Service.initContracts();
+    this.gittronWeb3Service = this.props.gtContext.gittronWeb3Service;
+    this.web3Service = this.props.gtContext.web3Service;
 
     if (this._isMounted) {
       const evolveAvail = await this.canMetaMorph(this.props.bot.tokenId);
       const ownerOfToken = await this.ownerOf(this.props.bot.tokenId);
 
-      this.setState({ contract, evolveAvail, ownerOfToken });
+      this.setState({ evolveAvail, ownerOfToken });
     }
-  };
+  }
 
   canMetaMorph = async (tokenId) => {
-    return await this.GittronWeb3Service.canMetaMorph(tokenId);
+    return await this.gittronWeb3Service.canMetaMorph(tokenId);
   };
 
   ownerOf = async (tokenId) => {
-    return await this.GittronWeb3Service.ownerOf(tokenId);
+    return await this.gittronWeb3Service.ownerOf(tokenId);
   };
 
   handleSubmit = async (bot) => {

@@ -12,6 +12,7 @@ import BotStats from '../bot-stats/BotStats';
 import './BotDetail.scss';
 import HatchButton from '../hatch-button/HatchButton';
 import GithubBadge from '../github-badge/GithubBadge';
+import { GittronWeb3Consumer } from '../../../contexts/Gittronweb3Context';
 
 function BotDetail(props) {
   const { account, authenticated, bot, web3 } = props;
@@ -31,74 +32,104 @@ function BotDetail(props) {
   }
 
   return (
-    <Fragment>
-      {bot && (
-        <div className="BotDetail Columns Contain">
-          <div className="Columns__Column--50">
-            {bot.tokenId && !bot.hatched && authenticated ? (
-              <HatchButton
-                bot={bot}
-                account={account}
-                handleHatch={handleHatch}
-              />
-            ) : null}
+    <GittronWeb3Consumer>
+      {(gtContext) => (
+        <Fragment>
+          {bot && (
+            <div className="BotDetail Columns Contain">
+              <div className="Columns__Column--50">
+                {bot.tokenId && !bot.hatched && authenticated ? (
+                  <HatchButton
+                    bot={bot}
+                    account={account}
+                    handleHatch={handleHatch}
+                    gtContext={gtContext}
+                  />
+                ) : null}
 
-            <BotCard bot={bot} account={account} web3={web3} />
-          </div>
-          <div className="Columns__Column--50">
-            <div className="BotDetail__Info">
-              {authenticated ? (
-                <Fragment>
-                  {unverified && (
-                    <BotVerification
-                      bot={bot}
-                      handleVerification={handleVerification}
-                      account={account}
-                    />
-                  )}
-                  <h3>{bot.tokenUriData && bot.tokenUriData.name}</h3>
-                  <h4 className="Capitalize">{bot.tokenType} Bot</h4>
-                  {verified && (
-                    <div className="BotDetail__Verification-Badge">
-                      <p>VERIFIED BOT!</p>
-                    </div>
-                  )}
-                  {unverified && <p>CAUTION: UNVERIFIED BOT!</p>}
-                  {bot.tokenId && <GithubBadge bot={bot} account={account} />}
-                </Fragment>
-              ) : null}
+                <BotCard bot={bot} account={account} web3={web3} />
+              </div>
+              <div className="Columns__Column--50">
+                <div className="BotDetail__Info">
+                  {authenticated ? (
+                    <Fragment>
+                      {unverified && (
+                        <BotVerification
+                          bot={bot}
+                          handleVerification={handleVerification}
+                          account={account}
+                          gtContext={gtContext}
+                        />
+                      )}
+                      <h3>{bot.tokenUriData && bot.tokenUriData.name}</h3>
+                      <h4 className="Capitalize">{bot.tokenType} Bot</h4>
+                      {verified && (
+                        <div className="BotDetail__Verification-Badge">
+                          <p>VERIFIED BOT!</p>
+                        </div>
+                      )}
+                      {unverified && <p>CAUTION: UNVERIFIED BOT!</p>}
+                      {bot.tokenType === 'prime' && bot.tokenId && (
+                        <GithubBadge
+                          bot={bot}
+                          account={account}
+                          gtContext={gtContext}
+                        />
+                      )}
+                    </Fragment>
+                  ) : null}
 
-              <BotStats bot={bot} />
+                  <BotStats bot={bot} />
 
-              {hasPrimeBot ? (
-                <Link to={`/bots/${bot.relatedPrimeBot}`}>
-                  View My Prime Bot
-                </Link>
-              ) : null}
+                  {hasPrimeBot ? (
+                    <Link to={`/bots/${bot.relatedPrimeBot}`}>
+                      View My Prime Bot
+                    </Link>
+                  ) : null}
 
-              {bot.tokenType === 'prime' && authenticated ? (
-                <div className="BotDetail__Actions">
-                  <div className="BotDetail__Actions--Support">
-                    <p>
-                      Support the development of this bot's repo by cloning it
-                      as a support bot.
-                    </p>
-                    <SupportButton bot={bot} account={account} />
-                  </div>
-                  <div className="BotDetail__Actions--Buidl">
-                    <BuidlButton bot={bot} account={account} />
-                  </div>
-                  <div className="BotDetail__Actions--Owner">
-                    <EvolveButton bot={bot} account={account} />
-                    <WithdrawButton bot={bot} account={account} />
-                  </div>
+                  {bot.tokenType === 'prime' && authenticated ? (
+                    <Fragment>
+                      <div className="BotDetail__Actions">
+                        <div className="BotDetail__Actions--Support">
+                          <p>
+                            Support the development of this bot's repo by
+                            cloning it as a support bot.
+                          </p>
+                          <SupportButton
+                            bot={bot}
+                            account={account}
+                            gtContext={gtContext}
+                          />
+                        </div>
+                        <div className="BotDetail__Actions--Buidl">
+                          <BuidlButton
+                            bot={bot}
+                            account={account}
+                            gtContext={gtContext}
+                          />
+                        </div>
+                        <div className="BotDetail__Actions--Owner">
+                          <EvolveButton
+                            bot={bot}
+                            account={account}
+                            gtContext={gtContext}
+                          />
+                          <WithdrawButton
+                            bot={bot}
+                            account={account}
+                            gtContext={gtContext}
+                          />
+                        </div>
+                      </div>
+                    </Fragment>
+                  ) : null}
                 </div>
-              ) : null}
+              </div>
             </div>
-          </div>
-        </div>
+          )}
+        </Fragment>
       )}
-    </Fragment>
+    </GittronWeb3Consumer>
   );
 }
 
