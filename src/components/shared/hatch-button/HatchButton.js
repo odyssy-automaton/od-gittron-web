@@ -1,9 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 
-import GittronWeb3Service from '../../../util/gittronWeb3';
 import { put } from '../../../util/requests';
-import Web3Service from '../../../util/web3Service';
 
 class HatchButton extends Component {
   state = {
@@ -15,27 +13,22 @@ class HatchButton extends Component {
 
   async componentDidMount() {
     this._isMounted = true;
-    this.GittronWeb3Service = new GittronWeb3Service();
-    this.web3Service = new Web3Service();
 
-    this.loadContract();
+    this.gittronWeb3Service = this.props.gtContext.gittronWeb3Service;
+    this.web3Service = this.props.gtContext.web3Service;
+
+    if (this._isMounted) {
+      const ownerOfToken = await this.ownerOf(this.props.bot.tokenId);
+      this.setState({ ownerOfToken });
+    }
   }
 
   componentWillUnmount() {
     this._isMounted = false;
   }
 
-  loadContract = async () => {
-    const contract = await this.GittronWeb3Service.initContracts();
-
-    if (this._isMounted) {
-      const ownerOfToken = await this.ownerOf(this.props.bot.tokenId);
-      this.setState({ contract, ownerOfToken });
-    }
-  };
-
   ownerOf = async (tokenId) => {
-    return await this.GittronWeb3Service.ownerOf(tokenId);
+    return await this.gittronWeb3Service.ownerOf(tokenId);
   };
 
   handleSubmit = async () => {
