@@ -14,7 +14,7 @@ class RepoDetail extends Component {
   };
 
   componentDidMount = async () => {
-    const { data } = await get(`tokens/repo/${this.props.match.params.ghid}`);
+    const { data } = await get(`bots/repo/${this.props.match.params.ghid}`);
     console.log({
       bots: data,
       masterBot: data.find((bot) => bot.tokenType === 'prime'),
