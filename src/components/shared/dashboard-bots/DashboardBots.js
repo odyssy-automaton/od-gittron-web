@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { get } from '../../../util/requests';
+import { post } from '../../../util/requests';
 import BotFilter from '../bot-filter/BotFilter';
 
 import './DashboardBots.scss';
@@ -25,7 +25,10 @@ class DashboardBots extends Component {
     if (this._isMounted) {
       const tokens = await this.tokensByOwner(this.props.address);
       const res = await this.loadBots(tokens);
-      const bots = res.filter((bot) => bot.data.tokenId).map((bot) => bot.data);
+      const bots = res.data.filter((bot) => {
+        return bot && bot.tokenId;
+      });
+
       this.setState({ tokens, bots });
     }
   };
@@ -45,15 +48,11 @@ class DashboardBots extends Component {
   };
 
   loadBots = async (tokens) => {
-    const proms = [];
     if (!tokens) return;
 
-    tokens.map((token) => {
-      const padded = this.leftPadHex(token, 32);
-      return proms.push(get(`bots/${padded}`));
-    });
+    const paddedTokenIds = tokens.map((token) => this.leftPadHex(token, 32));
 
-    return await Promise.all(proms);
+    return await post(`bots/dashboard`, { tokenIds: paddedTokenIds });
   };
 
   render() {
