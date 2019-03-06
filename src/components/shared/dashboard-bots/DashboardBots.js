@@ -19,6 +19,10 @@ class DashboardBots extends Component {
     this.loadContractData();
   };
 
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
   loadContractData = async () => {
     if (!this.props.authenticated) return;
 
