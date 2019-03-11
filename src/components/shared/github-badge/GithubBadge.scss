@@ -1,9 +1,9 @@
 .GithubBadge {
-    border: 2px solid black;
+    border: 1px solid #ccc;
     padding: 25px;
     &__Preview {
         table {
-            border: 2px solid black;
+            border: 1px solid #ccc;
             padding: 0px;
             border-spacing: 0px;
             width: auto;
@@ -11,14 +11,13 @@
                 padding: 0px;
                 tr {
                     td:nth-child(1) {
-                        border-right: 2px solid black;
+                        border-right: 1px solid #ccc;
                         text-align: center;
                         padding: 0px 15px;
                     }
                     td:nth-child(2) {
                         padding: 15px;
-                        background-color: black;
-                        a { color: white; }
+                        a { color: #5f5fff; }
                     }
                 }
             }
