@@ -32,10 +32,4 @@ Set up auto-linting and prettier to be run on file save or in real-time in your 
 
 # gittron
 
-[Support me](https://gittron.me/bots/0x959cd3a31cc611630423f9facf8a9b95)
-![gittron](https://s3.amazonaws.com/od-flat-svg/0x959cd3a31cc611630423f9facf8a9b95.png)
-
-## html test
-
-<h6>gittron html</h6>
-<img src='https://s3.amazonaws.com/od-flat-svg/0x959cd3a31cc611630423f9facf8a9b95.png' width='100px'/>
+<table border="0"><tr>  <td><a href="https://gittron.me/bots/0xf1fcf6233e6637a2ea47ee253da18bf3"><img src="https://s3.amazonaws.com/od-flat-svg/0xf1fcf6233e6637a2ea47ee253da18bf3.png" alt="gittron" width="50"/></a></td><td><a href="https://gittron.me/bots/0xf1fcf6233e6637a2ea47ee253da18bf3">SUPPORT US WITH GITTRON</a></td></tr></table>
