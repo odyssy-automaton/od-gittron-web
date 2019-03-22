@@ -2,6 +2,9 @@ import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import { put } from '../../../util/requests';
+import BotLoader from '../../../img/Bot__Loader.gif';
+
+import './HatchButton.scss';
 
 class HatchButton extends Component {
   state = {
@@ -49,11 +52,11 @@ class HatchButton extends Component {
     const { account } = this.props;
 
     if (error) {
-      return <p>There was an error while hatching your bot. Bummer.</p>;
+      return <p>There was an error while hatching your Bot. Bummer! Sorry about that, please try again.</p>;
     }
 
     if (isLoading) {
-      return <p>Your bot is hatching</p>;
+      return <div className="Bot__Loader"><img alt="Bot Loading" src={BotLoader} /><p>Your Bot is hatching</p></div>;
     }
 
     return (

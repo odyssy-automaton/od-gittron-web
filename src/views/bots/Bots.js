@@ -19,6 +19,7 @@ class Bots extends Component {
       const { data } = await get(`bots`);
       const bots = data
         .filter((bot) => !bot.disabled)
+        .filter((bot) => bot.hatched)
         .sort((botA, botb) => {
           return botA.verified === botb.verified ? 0 : botA.verified ? -1 : 1;
         });
