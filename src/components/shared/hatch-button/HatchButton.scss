@@ -1,0 +1,20 @@
+.HatchButton {
+
+}
+
+.Bot__Loader {
+    text-align: center; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    z-index: 1;
+    background: #fff;
+    height: calc(100% - 4px);
+    width: calc(100% - 4px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    img { }
+}
