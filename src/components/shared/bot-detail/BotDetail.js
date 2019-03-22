@@ -37,7 +37,7 @@ function BotDetail(props) {
         <Fragment>
           {bot && (
             <div className="BotDetail Columns Contain">
-              <div className="Columns__Column--50">
+              <div className="Columns__Column--50 BotDetail__Card">
                 {bot.tokenId && !bot.hatched && authenticated ? (
                   <HatchButton
                     bot={bot}
@@ -129,14 +129,15 @@ function BotDetail(props) {
                   <div className="Columns__Column--50">
                     <div className="BotDetail__Info">
                       {bot.tokenId && !bot.hatched && authenticated ? (
-                        <HatchButton
-                          bot={bot}
-                          account={account}
-                          handleHatch={handleHatch}
-                          gtContext={gtContext}
-                        />
+                        <div>
+                          <h3>Your Bot is ready to hatch!</h3>
+                          <p>Click the Hatch button on your Bot's card to hatch it and reveal your Bot.</p>
+                        </div>
                       ) : (
-                        <p>Bot still in incubation.</p>
+                        <div>
+                          <p>This Bot is in incubation until its owner hatches it.</p>
+                          <p>If you <i>are</i> the owner, Connect your wallet to hatch it.</p>
+                        </div>
                       )}
                     </div>
                   </div>
