@@ -42,7 +42,7 @@ class WithdrawButton extends Component {
       this.props.account,
     );
     if (!res.error) {
-      this.setState({ isLoading: false, botBank: 0 });
+      this.setState({ isLoading: false, botBank: 0, withdrawInEth: 0 });
     } else {
       this.setState({ isLoading: false });
     }
