@@ -50,80 +50,97 @@ function BotDetail(props) {
                 <BotCard bot={bot} account={account} web3={web3} />
               </div>
               <div className="Columns__Column--50">
-                <div className="BotDetail__Info">
-                  {authenticated ? (
-                    <Fragment>
-                      {unverified && (
-                        <BotVerification
+                {bot.hatched ? (
+                  <div className="BotDetail__Info">
+                    {authenticated ? (
+                      <Fragment>
+                        {unverified && (
+                          <BotVerification
+                            bot={bot}
+                            handleVerification={handleVerification}
+                            account={account}
+                            gtContext={gtContext}
+                          />
+                        )}
+                        <h3>{bot.tokenUriData && bot.tokenUriData.name}</h3>
+                        <h4 className="Capitalize">{bot.tokenType} Bot</h4>
+                        {verified && (
+                          <div className="BotDetail__Verification-Badge">
+                            <p>VERIFIED BOT!</p>
+                          </div>
+                        )}
+                        {unverified && <p>CAUTION: UNVERIFIED BOT!</p>}
+                        {bot.tokenType === 'prime' && bot.tokenId && (
+                          <GithubBadge
+                            bot={bot}
+                            account={account}
+                            gtContext={gtContext}
+                          />
+                        )}
+                      </Fragment>
+                    ) : null}
+
+                    <BotStats bot={bot} />
+
+                    {hasPrimeBot ? (
+                      <Link to={`/bots/${bot.relatedPrimeBot}`}>
+                        View My Prime Bot
+                      </Link>
+                    ) : null}
+
+                    {bot.tokenType === 'prime' && authenticated ? (
+                      <Fragment>
+                        <div className="BotDetail__Actions">
+                          <div className="BotDetail__Actions--Support">
+                            <p>
+                              Support the development of this bot's repo by
+                              cloning it as a support bot.
+                            </p>
+                            <SupportButton
+                              bot={bot}
+                              account={account}
+                              gtContext={gtContext}
+                            />
+                          </div>
+                          <div className="BotDetail__Actions--Buidl">
+                            <BuidlButton
+                              bot={bot}
+                              account={account}
+                              gtContext={gtContext}
+                            />
+                          </div>
+                          <div className="BotDetail__Actions--Owner">
+                            <EvolveButton
+                              bot={bot}
+                              account={account}
+                              gtContext={gtContext}
+                            />
+                            <WithdrawButton
+                              bot={bot}
+                              account={account}
+                              gtContext={gtContext}
+                            />
+                          </div>
+                        </div>
+                      </Fragment>
+                    ) : null}
+                  </div>
+                ) : (
+                  <div className="Columns__Column--50">
+                    <div className="BotDetail__Info">
+                      {bot.tokenId && !bot.hatched && authenticated ? (
+                        <HatchButton
                           bot={bot}
-                          handleVerification={handleVerification}
                           account={account}
+                          handleHatch={handleHatch}
                           gtContext={gtContext}
                         />
+                      ) : (
+                        <p>Bot still in incubation.</p>
                       )}
-                      <h3>{bot.tokenUriData && bot.tokenUriData.name}</h3>
-                      <h4 className="Capitalize">{bot.tokenType} Bot</h4>
-                      {verified && (
-                        <div className="BotDetail__Verification-Badge">
-                          <p>VERIFIED BOT!</p>
-                        </div>
-                      )}
-                      {unverified && <p>CAUTION: UNVERIFIED BOT!</p>}
-                      {bot.tokenType === 'prime' && bot.tokenId && (
-                        <GithubBadge
-                          bot={bot}
-                          account={account}
-                          gtContext={gtContext}
-                        />
-                      )}
-                    </Fragment>
-                  ) : null}
-
-                  <BotStats bot={bot} />
-
-                  {hasPrimeBot ? (
-                    <Link to={`/bots/${bot.relatedPrimeBot}`}>
-                      View My Prime Bot
-                    </Link>
-                  ) : null}
-
-                  {bot.tokenType === 'prime' && authenticated ? (
-                    <Fragment>
-                      <div className="BotDetail__Actions">
-                        <div className="BotDetail__Actions--Support">
-                          <p>
-                            Support the development of this bot's repo by
-                            cloning it as a support bot.
-                          </p>
-                          <SupportButton
-                            bot={bot}
-                            account={account}
-                            gtContext={gtContext}
-                          />
-                        </div>
-                        <div className="BotDetail__Actions--Buidl">
-                          <BuidlButton
-                            bot={bot}
-                            account={account}
-                            gtContext={gtContext}
-                          />
-                        </div>
-                        <div className="BotDetail__Actions--Owner">
-                          <EvolveButton
-                            bot={bot}
-                            account={account}
-                            gtContext={gtContext}
-                          />
-                          <WithdrawButton
-                            bot={bot}
-                            account={account}
-                            gtContext={gtContext}
-                          />
-                        </div>
-                      </div>
-                    </Fragment>
-                  ) : null}
-                </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           )}
