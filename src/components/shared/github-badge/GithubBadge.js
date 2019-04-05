@@ -6,7 +6,8 @@ class GithubBadge extends Component {
   state = {
     ownerOfToken: false,
     contract: null,
-    snippet: null,
+    supportSnippet: null,
+    supportBotBadge: null,
   };
 
   async componentDidMount() {
@@ -15,20 +16,28 @@ class GithubBadge extends Component {
     this.web3Service = this.props.gtContext.web3Service;
 
     const ownerOfToken = await this.ownerOf(this.props.bot.tokenId);
-    const snippet = `<table border="0"><tr>  <td><a href="https://gittron.me/bots/${
+    const supportBotCount = await this.supportBotCounts(this.props.bot.tokenId);
+    const supportSnippet = `<table border="0"><tr>  <td><a href="https://gittron.me/bots/${
       this.props.bot.tokenId
     }"><img src="https://s3.amazonaws.com/od-flat-svg/${
       this.props.bot.tokenId
     }.png" alt="gittron" width="50"/></a></td><td><a href="https://gittron.me/bots/${
       this.props.bot.tokenId
     }">SUPPORT US WITH GITTRON</a></td></tr></table>`;
-    this.setState({ ownerOfToken, snippet });
+    const supportBotBadge = `<img src="https://img.shields.io/badge/Support%20Bots-${
+      supportBotCount
+    }-brightgreen.svg"/>`;
+    this.setState({ ownerOfToken, supportSnippet, supportBotBadge });
+    
   }
 
   ownerOf = async (tokenId) => {
     return await this.gittronWeb3Service.ownerOf(tokenId);
   };
 
+  supportBotCounts = async (baseTokenId) => {
+    return await this.gittronWeb3Service.totalSupports(baseTokenId);
+  }
   copyToClipboard = (snippet) => {
     var textField = document.createElement('textarea');
     textField.innerText = snippet;
@@ -40,7 +49,7 @@ class GithubBadge extends Component {
 
   render() {
     const { account } = this.props;
-    const { ownerOfToken, snippet } = this.state;
+    const { ownerOfToken, supportSnippet, supportBotBadge } = this.state;
 
     return (
       <Fragment>
@@ -50,13 +59,14 @@ class GithubBadge extends Component {
             <p>Preview:</p>
             <div
               className="GithubBadge__Preview"
-              dangerouslySetInnerHTML={{ __html: snippet }}
+              dangerouslySetInnerHTML={{ __html: supportSnippet }}
             />
             <p>Copy/Paste the following snippet into your README.md</p>
-            <textarea readOnly defaultValue={snippet} />
-            <button onClick={() => this.copyToClipboard(snippet)}>
+            <textarea readOnly defaultValue={supportSnippet} />
+            <button onClick={() => this.copyToClipboard(supportSnippet)}>
               Copy Snippet
             </button>
+            <div dangerouslySetInnerHTML={{ __html: supportBotBadge }}/>
           </div>
         ) : null}
       </Fragment>
