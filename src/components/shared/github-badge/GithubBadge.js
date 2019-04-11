@@ -6,7 +6,7 @@ class GithubBadge extends Component {
   state = {
     ownerOfToken: false,
     contract: null,
-    supportSnippet: null,
+    snippet: null,
   };
 
   async componentDidMount() {
@@ -32,9 +32,6 @@ class GithubBadge extends Component {
     return await this.gittronWeb3Service.ownerOf(tokenId);
   };
 
-  supportBotCounts = async (baseTokenId) => {
-    return await this.gittronWeb3Service.totalSupports(baseTokenId);
-  }
   copyToClipboard = (snippet) => {
     var textField = document.createElement('textarea');
     textField.innerText = snippet;
