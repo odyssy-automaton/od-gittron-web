@@ -23,7 +23,7 @@ class GithubBadge extends Component {
       this.props.bot.tokenId
     }">SUPPORT US WITH GITTRON</a></td> <td><img src="https://badgen.net/https/data.gittron.me/dev/bots/supporter-count/${
       this.props.bot.tokenId
-      }></td></tr></table>`;
+      }"></td></tr></table>`;
     this.setState({ ownerOfToken, snippet});
     
   }
