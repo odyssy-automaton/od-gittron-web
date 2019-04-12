@@ -21,9 +21,11 @@ class GithubBadge extends Component {
       this.props.bot.tokenId
     }.png" alt="gittron" width="50"/></a></td><td><a href="https://gittron.me/bots/${
       this.props.bot.tokenId
-    }">SUPPORT US WITH GITTRON</a></td> <td><img src="https://badgen.net/https/data.gittron.me/dev/bots/supporter-count/${
+    }">SUPPORT US WITH GITTRON</a></td> <td><a href="https://gittron.me/bots/${
       this.props.bot.tokenId
-      }"></td></tr></table>`;
+    }"><img src="https://badgen.net/https/data.gittron.me/dev/bots/supporter-count/${
+      this.props.bot.tokenId
+      }" alt="support bots" /></a></td></tr></table>`;
     this.setState({ ownerOfToken, snippet});
     
   }
