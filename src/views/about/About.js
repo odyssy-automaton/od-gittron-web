@@ -217,6 +217,16 @@ function About() {
             the Prime Bot with some ETH. When the transaction completes, you'll
             get a unique Support Bot.
           </p>
+          <p> <strong>
+            How do I show the universe how many Support Bots have been cloned from my Prime Bot?
+          </strong> </p>
+          <p>
+            Copy the below HTML snippet into your Github repo's readme and replace "MyBotId" with your Prime Bot ID (the "0x..." section  of the "gittron.me/bots/0x...." URL that is your Prime Bot profile page)
+            <pre><code>
+            &lt;a href="https://gittron.me/bots/MyBotID">
+            &lt;img src="https://badgen.net/https/data.gittron.me/v1/bots/supporter-count/MyBotID" alt="support bots"/>&lt;/a>
+            </code></pre>
+          </p>
           <p>
             <strong>
               My Prime Bot ran out of Buidl Bots. How do I get more?
