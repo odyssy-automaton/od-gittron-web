@@ -19,9 +19,13 @@ class SupportButton extends Component {
 
     this.gittronWeb3Service = this.props.gtContext.gittronWeb3Service;
     this.web3Service = this.props.gtContext.web3Service;
+    const price = await this.getBaseTokenPrice(this.props.bot.tokenId.toString());
+      console.log(this.props.bot.tokenId.toString(32), price);
 
     if (this._isMounted) {
-      const price = await this.getBaseTokenPrice(this.props.bot.tokenId);
+      const price = await this.getBaseTokenPrice(this.props.bot.tokenId.toString());
+      console.log(this.props.bot.tokenId, price);
+      
       const priceInEth = await this.web3Service.toEth(price);
       this.setState({ price, priceInEth });
     }
@@ -36,7 +40,13 @@ class SupportButton extends Component {
   };
 
   getBaseTokenPrice = async (tokenId) => {
-    return await this.gittronWeb3Service.baseTokenPrice(tokenId);
+
+      const price = await this.gittronWeb3Service.baseTokenPrice(tokenId);
+      console.log(price);
+      
+      return price;
+
+
   };
 
   handleSubmit = async (bot) => {
