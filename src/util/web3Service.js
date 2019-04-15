@@ -47,10 +47,10 @@ export default class Web3Service {
   }
 
   async toEth(amount) {
-    if(!amount){
+    if (!amount) {
       return 0;
     }
-    return await this.web3.utils.fromWei(amount.toString(), 'ether');
+    return await this.web3.utils.fromWei(amount, 'ether');
   }
 
   fromAscii(value) {
