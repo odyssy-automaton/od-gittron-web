@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 class RepoListItem extends Component {
@@ -14,17 +14,17 @@ class RepoListItem extends Component {
     const { armyBot } = this.props;
 
     return (
-      <tr>
+        <Fragment>
         {armyBot && (
-          <td>
+          <div>
             <Link to={`/bots/${armyBot.tokenId}`}>
               <p>ID: {armyBot.tokenId}</p>
-              <p>image: {armyBot.tokenUriData.image}</p>
-              <img alt="army bot" src={armyBot.tokenUriData.image} />
+              <p>generation: {armyBot.generation}</p>
+              <img alt="army bot" src={armyBot.tokenUriData.image} height="300px" />
             </Link>
-          </td>
+          </div>
         )}
-      </tr>
+        </Fragment>
     );
   }
 }

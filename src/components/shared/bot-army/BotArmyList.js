@@ -13,9 +13,9 @@ class BotArmyList extends Component {
     const army = this.renderArmy();
 
     return (
-      <table>
-        <tbody>{army}</tbody>
-      </table>
+      <div className="ArmyList">
+        {army}
+      </div>
     );
   }
 }
