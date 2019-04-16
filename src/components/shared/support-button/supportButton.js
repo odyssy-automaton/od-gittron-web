@@ -89,8 +89,7 @@ class SupportButton extends Component {
       <div>
         {priceInEth > 0 && (
           <Fragment>
-            <p>Price = {priceInEth} ETH</p>
-            <button onClick={() => this.handleSubmit(bot)}>Support</button>
+            <button onClick={() => this.handleSubmit(bot)}>Support <span className="Price">| {priceInEth} ETH</span></button>
           </Fragment>
         )}
       </div>
