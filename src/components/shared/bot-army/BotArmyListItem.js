@@ -1,6 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
+import './BotArmyListItem.scss';
+
+
 class RepoListItem extends Component {
   componentDidMount() {
     this._isMounted = true;
@@ -16,11 +19,15 @@ class RepoListItem extends Component {
     return (
         <Fragment>
         {armyBot && (
-          <div>
+          <div className="ArmyBot">
             <Link to={`/bots/${armyBot.tokenId}`}>
-              <p>ID: {armyBot.tokenId}</p>
-              <p>generation: {armyBot.generation}</p>
-              <img alt="army bot" src={armyBot.tokenUriData.image} height="300px" />
+              <div className="ArmyBotCard__Header">
+                <p className="BotCard__Header--Name">{armyBot.tokenId}</p>
+              </div>
+              <img alt="army bot" src={armyBot.tokenUriData.image} height="210px" />
+              <div className="BotCard__Footer">
+                <p>Gen: {armyBot.generation}</p>
+              </div>
             </Link>
           </div>
         )}

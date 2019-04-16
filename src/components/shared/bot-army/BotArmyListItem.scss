@@ -1,0 +1,27 @@
+.ArmyBot {
+  text-align: center;
+  border: 2px solid black;
+  margin-bottom: 25px;
+  width: 180px;
+}
+
+.ArmyBotCard__Header {
+  padding: 5px 5px;
+  border-bottom: 2px solid black;
+}
+
+.ArmyBotCard__Header p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 5px;
+}
+
+.BotCard__Footer {
+  padding: 5px 5px;
+}
+
+.BotCard__Footer p {
+  padding: 5px 5px;
+  margin: 0px;
+}
