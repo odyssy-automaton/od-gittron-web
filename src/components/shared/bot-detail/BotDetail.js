@@ -13,6 +13,7 @@ import './BotDetail.scss';
 import HatchButton from '../hatch-button/HatchButton';
 import GithubBadge from '../github-badge/GithubBadge';
 import { GittronWeb3Consumer } from '../../../contexts/Gittronweb3Context';
+import BotArmy from '../bot-army/BotArmy';
 
 function BotDetail(props) {
   const { account, authenticated, bot, web3 } = props;
@@ -145,6 +146,12 @@ function BotDetail(props) {
               </div>
             </div>
           )}
+                      
+          {bot.tokenType === 'prime' ? (
+              <div>
+                <BotArmy relatedPrimeBot={bot.tokenId}></BotArmy>
+              </div>
+          ) : null}
         </Fragment>
       )}
     </GittronWeb3Consumer>
