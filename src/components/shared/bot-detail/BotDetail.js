@@ -149,7 +149,7 @@ function BotDetail(props) {
                       
           {bot.tokenType === 'prime' ? (
               <div>
-                <BotArmy relatedPrimeBot={bot.tokenId}></BotArmy>
+                <BotArmy relatedPrimeBot={bot}></BotArmy>
               </div>
           ) : null}
         </Fragment>

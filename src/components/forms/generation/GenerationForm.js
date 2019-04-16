@@ -57,7 +57,7 @@ class GenerationForm extends Component {
 
   render() {
     const { valid, priceError } = this.state;
-    const { account, error } = this.props;
+    const { account, error, bot } = this.props;
 
     return (
       <Fragment>
@@ -69,13 +69,24 @@ class GenerationForm extends Component {
           autoComplete="off"
         >
           <fieldset>
+            {!bot && (
+              <div>
+                <label>Repo Url</label>
+                <input
+                  defaultValue=''
+                  type="text"
+                  name="repoUrl"
+                />
+              </div>
+            )}
+
             <div>
-              <label>Repo Url</label>
-              <input defaultValue="" type="text" name="repoUrl" />
-            </div>
-            <div>
-              <label>Set Support Price in ETH</label>
-              <input type="text" name="price" defaultValue=".01" />
+              <label>Set Support Price in ETH </label>
+              <input
+                type="text"
+                name="price"
+                defaultValue={bot ? bot.botPrice : '.01'}
+              />
             </div>
             <div>
               <label>
@@ -92,7 +103,8 @@ class GenerationForm extends Component {
             <div>
               {error ? <p>* Something went wrong '{error}'</p> : null}
               {priceError ? <p>* '{priceError}'</p> : null}
-              <button type="submit">Register Repo</button>
+
+              <button type="submit">{bot ? 'MORPH' : 'Register Repo'}</button>
             </div>
           </fieldset>
         </form>
