@@ -12,16 +12,17 @@ class BotCard extends Component {
           <p className="BotCard__Header--Name">
             {bot.tokenUriData && bot.tokenUriData.name}
           </p>
+          <p className="BotCard__Header--Details">{bot.tokenType} Bot | Gen {bot.generation}</p>
           <p>{bot.mined}</p>
-        </div>
-        {bot.verified ? (
+          {bot.verified ? (
           <div className="Verified">
             <img
               src="https://s3.amazonaws.com/odyssy-assets/Bot--Verified.svg"
               alt="Verified"
             />
           </div>
-        ) : null}
+          ) : null}
+        </div>
         {bot.hatched ? (
           <img src={bot.tokenUriData.image} alt={bot.tokenId} height="300px" />
         ) : (
@@ -31,10 +32,6 @@ class BotCard extends Component {
             height="300px"
           />
         )}
-        <div className="BotCard__Footer">
-          <p className="BotCard__Footer--Type">{bot.tokenType} bot</p>
-          <p>Gen {bot.generation}</p>
-        </div>
       </div>
     );
   }
