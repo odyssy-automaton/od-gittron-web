@@ -2,7 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import { put } from '../../../util/requests';
-import BotLoader from '../../../img/Bot__Loader.gif';
+import BotLoop from '../../../img/Bot__Loop.gif';
+import BotLoopOut from '../../../img/Bot__LoopOut.gif';
 
 import './HatchButton.scss';
 
@@ -56,7 +57,10 @@ class HatchButton extends Component {
     }
 
     if (isLoading) {
-      return <div className="Bot__Loader"><img alt="Bot Loading" src={BotLoader} /><p>Your Bot is hatching</p></div>;
+      return <div className="Bot__Loader"><img alt="Bot Hatching" src={BotLoop} /><p>Your Bot is hatching</p></div>;
+      // if done loading, transition to BotLoopOut and remove after playing once (no loop)
+      // after removing, the hatched Bot should be revealed.
+      // <div className="Bot__Loader"><img alt="Bot Hatched" src={BotLoopOut} /></div>
     }
 
     return (
