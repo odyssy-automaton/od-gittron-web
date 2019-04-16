@@ -8,6 +8,11 @@
       width: 100%;
       text-transform: capitalize;
     }
+    &--Details {
+      text-transform: capitalize;
+      font-size: 0.85em;
+      margin-top: -10px;
+    }
   }
   img {
     width: 100%;
@@ -24,8 +29,8 @@
   }
   .Verified {
     position: absolute;
-    top: 90px;
-    left: 15px;
+    top: 20px;
+    right: 15px;
     img { width: 30px; }
   }
 }

@@ -26,7 +26,7 @@ class RepoListItem extends Component {
               </div>
               <img alt="army bot" src={armyBot.tokenUriData.image} height="210px" />
               <div className="BotCard__Footer">
-                <p>Gen: {armyBot.generation}</p>
+                <p>Gen {armyBot.generation}</p>
               </div>
             </Link>
           </div>
