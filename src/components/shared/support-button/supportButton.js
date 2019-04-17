@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import { post } from '../../../util/requests';
@@ -22,6 +22,7 @@ class SupportButton extends Component {
 
     if (this._isMounted) {
       const price = await this.getBaseTokenPrice(this.props.bot.tokenId);
+
       const priceInEth = await this.web3Service.toEth(price);
       this.setState({ price, priceInEth });
     }
@@ -32,11 +33,15 @@ class SupportButton extends Component {
   }
 
   tokensByOwner = async (address) => {
+
     return await this.gittronWeb3Service.tokensByOwner(address);
   };
 
   getBaseTokenPrice = async (tokenId) => {
-    return await this.gittronWeb3Service.baseTokenPrice(tokenId);
+
+    const price = await this.gittronWeb3Service.baseTokenPrice(tokenId);
+
+    return price;
   };
 
   handleSubmit = async (bot) => {
@@ -82,8 +87,11 @@ class SupportButton extends Component {
 
     return (
       <div>
-        <p>Price = {priceInEth} ETH</p>
-        <button onClick={() => this.handleSubmit(bot)}>Support</button>
+        {priceInEth > 0 && (
+          <Fragment>
+            <button onClick={() => this.handleSubmit(bot)}>Support <span className="Price">| {priceInEth} ETH</span></button>
+          </Fragment>
+        )}
       </div>
     );
   }

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
+import { GittronWeb3Consumer } from '../../../contexts/Gittronweb3Context';
+import { Web3Consumer } from 'web3-react';
 
 import BotList from '../bot-list/BotList';
 
@@ -74,7 +76,7 @@ class BotFilter extends Component {
 
     return (
       <div>
-        <div>          
+        <div>
           <div className="BotFilter__filters">
             <div className="Title">
               <h4>{filteredBots.length} Bots</h4>
@@ -99,7 +101,19 @@ class BotFilter extends Component {
           </div>
         </div>
         <div>
-          <BotList bots={filteredBots} />
+          <GittronWeb3Consumer>
+            {(gtContext) => (
+              <Web3Consumer>
+                {(w3context) => (
+                  <BotList
+                    bots={filteredBots}
+                    w3context={w3context}
+                    context={gtContext}
+                  />
+                )}
+              </Web3Consumer>
+            )}
+          </GittronWeb3Consumer>
         </div>
       </div>
     );

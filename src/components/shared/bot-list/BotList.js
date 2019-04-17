@@ -4,14 +4,34 @@ import { Link } from 'react-router-dom';
 import BotCard from '../bot-card/BotCard';
 
 import './BotList.scss';
+import SupportButton from '../support-button/supportButton';
 
 class BotList extends Component {
   renderBots() {
     return this.props.bots.map((bot) => {
       return (
-        <Link to={`bots/${bot.tokenId}`} key={bot.tokenId}>
-          <BotCard bot={bot} />
-        </Link>
+        <div key={bot.tokenId} className="BotItem">
+          <Link to={`bots/${bot.tokenId}`}>
+            <BotCard bot={bot} />
+            <div className="BotItem__Hover">
+              <div className="BotItem__Hover--Inner">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+                    <path d="M24 8l-2.83 2.83L32.34 22H8v4h24.34L21.17 37.17 24 40l16-16z"/>
+                </svg>
+                <p>View Bot</p>
+              </div>
+            </div>
+          </Link>
+          {bot.verified && bot.tokenType === 'prime' && this.props.w3context.active && (
+            <div className="SupportButtonHolder">
+              <SupportButton
+                bot={bot}
+                account={this.props.w3context.account}
+                gtContext={this.props.context}
+              />
+            </div>
+          )}
+        </div>
       );
     });
   }
@@ -21,7 +41,6 @@ class BotList extends Component {
 
     return (
       <div>
-        <div />
         <div className="BotList">{botCards}</div>
       </div>
     );
