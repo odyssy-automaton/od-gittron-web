@@ -10,6 +10,8 @@ import './Bot.scss';
 class Bot extends Component {
   state = {
     bot: {},
+    botLoading: false,
+    hatching: false,
   };
 
   componentDidMount = () => {
@@ -23,11 +25,14 @@ class Bot extends Component {
   };
 
   getBot = async (id) => {
+    this.setState({
+      botLoading: true
+    });
     const tokenId = id || this.props.match.params.tokenId;
     const { data } = await get(`bots/${tokenId}`);
-
     this.setState({
       bot: data,
+      botLoading: false
     });
   };
 
@@ -40,7 +45,7 @@ class Bot extends Component {
   };
 
   render() {
-    const { bot } = this.state;
+    const { bot, botLoading } = this.state;
 
     return (
       <Fragment>
@@ -53,6 +58,7 @@ class Bot extends Component {
                 handleHatch={this.handleHatch}
                 authenticated={context.active}
                 account={context.account}
+                botLoading={botLoading}
               />
             ) : (
               <BotDetail authenticated={context.active} />

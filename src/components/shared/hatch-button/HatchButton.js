@@ -12,6 +12,8 @@ class HatchButton extends Component {
     contract: null,
     ownerOf: false,
     isLoading: false,
+    loopOutplaying: false,
+    hatched: false,
     error: null,
   };
 
@@ -41,31 +43,47 @@ class HatchButton extends Component {
     const res = await put(`bots/hatch/${this.props.bot.tokenId}`);
 
     if (res.data.hash) {
+      this.showLoopOut();
       this.setState({ isLoading: false });
-      this.props.handleHatch();
     } else {
       this.setState({ isLoading: false, error: res });
     }
   };
 
+  showLoopOut(){
+    this.setState( prevState => ({
+      loopOutplaying: true
+    }));
+    
+    setTimeout( () => {
+      this.setState( prevState => ({
+        loopOutplaying: false,
+        hatched: true
+      }));
+      this.props.handleHatch();
+      
+    }, 2500);
+  }
+
   render() {
-    const { ownerOfToken, isLoading, error } = this.state;
+    const { ownerOfToken, isLoading, loopOutplaying, hatched, error } = this.state;
     const { account } = this.props;
 
     if (error) {
       return <p>There was an error while hatching your Bot. Bummer! Sorry about that, please try again.</p>;
     }
 
-    if (isLoading) {
+    if (isLoading && !loopOutplaying) {
       return <div className="Bot__Loader"><img alt="Bot Hatching" src={BotLoop} /><p>Your Bot is hatching</p></div>;
-      // if done loading, transition to BotLoopOut and remove after playing once (no loop)
-      // after removing, the hatched Bot should be revealed.
-      // <div className="Bot__Loader"><img alt="Bot Hatched" src={BotLoopOut} /></div>
+    }
+
+    if (loopOutplaying){
+      return <div className="Bot__Loader"><img alt="Bot Hatched" src={BotLoopOut} /></div>
     }
 
     return (
       <Fragment>
-        {ownerOfToken === account && !isLoading ? (
+        {ownerOfToken === account && !isLoading && !hatched ? (
           <div className="HatchButton">
             <button onClick={this.handleSubmit}>Hatch Your Bot</button>
           </div>
