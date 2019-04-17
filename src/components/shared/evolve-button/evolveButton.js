@@ -10,6 +10,7 @@ class EvolveButton extends Component {
     contract: null,
     tokenId: null,
     evolveAvail: null,
+    hasNotEvolved: null,
     error: null,
     bot: null,
   };
@@ -20,6 +21,7 @@ class EvolveButton extends Component {
 
     if (this._isMounted) {
       const evolveAvail = await this.canMetaMorph(this.props.bot.tokenId);
+      const hasNotEvolved = await this.hasNotMorphed(this.props.bot.tokenId);
       const ownerOfToken = await this.ownerOf(this.props.bot.tokenId);
 
       // get the price of the old bot
@@ -30,7 +32,12 @@ class EvolveButton extends Component {
 
       this.props.bot.botPrice = ethBotPrice;
 
-      this.setState({ evolveAvail, ownerOfToken, bot: this.props.bot });
+      this.setState({
+        hasNotEvolved,
+        evolveAvail,
+        ownerOfToken,
+        bot: this.props.bot,
+      });
     }
   }
 
@@ -42,18 +49,25 @@ class EvolveButton extends Component {
     return await this.gittronWeb3Service.canMetaMorph(tokenId);
   };
 
+  hasNotMorphed = async (tokenId) => {
+    return await this.gittronWeb3Service.hasNotMorphed(tokenId);
+  };
+
   ownerOf = async (tokenId) => {
     return await this.gittronWeb3Service.ownerOf(tokenId);
   };
 
   handleSubmit = async (bot) => {
+    console.log(this.state.bot);
+    
     const newBot = {
-      repo: bot.repo,
-      repoOwner: bot.repoOwner,
+      repo: this.state.bot.repo,
+      repoOwner: this.state.bot.repoOwner,
       address: this.props.account,
-      generation: bot.generation + 1,
+      generation: parseInt(this.state.bot.generation) + 1,
       generated: false,
     };
+
     console.log('newBot', newBot);
 
     bot.price = await this.web3Service.toWei(bot.price);
@@ -109,11 +123,11 @@ class EvolveButton extends Component {
 
   render() {
     const { account } = this.props;
-    const { evolveAvail, ownerOfToken, error, bot } = this.state;
+    const { hasNotEvolved, evolveAvail, ownerOfToken, error, bot } = this.state;
 
     return (
       <div>
-        {evolveAvail && ownerOfToken === account ? (
+        {evolveAvail && ownerOfToken === account && hasNotEvolved && (
           <Fragment>
             <GenerationForm
               error={error}
@@ -122,9 +136,9 @@ class EvolveButton extends Component {
               onSubmit={this.handleSubmit}
             />
           </Fragment>
-        ) : (
-          <p>Metamorph feature is coming soon!</p>
         )}
+
+        {!hasNotEvolved && (<p>This bot is disabled and has already morphed!</p>)}
       </div>
     );
   }

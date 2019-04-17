@@ -47,6 +47,11 @@ class GenerationForm extends Component {
   };
 
   getGitFromUrl = (url) => {
+
+    if(this.props.bot){
+      return false;
+    }
+
     const gitStuff = url.split('/');
 
     return {

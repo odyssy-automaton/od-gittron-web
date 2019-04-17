@@ -9,10 +9,30 @@
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
-  > a {
+  > .BotItem {
     position: relative;
     flex-basis: 33%;
     margin-bottom: 25px;
+    a .BotItem__Hover {
+      opacity: 0;
+      transition: all .15s linear;
+      position: absolute;
+      text-align: center;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 150px;
+      height: 150px;
+      border-radius: 50px;
+      background-color: #000;
+      svg path { fill: #fff; }
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    a:hover .BotItem__Hover {
+      opacity: 1;
+    }
     @media (max-width: 1100px) {
       flex-basis: 50%;
     }
@@ -20,4 +40,11 @@
       flex-basis: 100%;
     }
   }
+}
+
+.SupportButtonHolder button {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
 }

@@ -54,9 +54,22 @@ export default class GittronWeb3Service {
   }
 
   async baseTokenPrice(baseTokenId) {
+    const isBaseToken = await this.isBaseToken(baseTokenId);
+
+    if (!isBaseToken) {
+      return '0';
+    }
     return await this.gittronContract.methods
       .baseTokenPrice(baseTokenId)
       .call();
+  }
+
+  async isBaseToken(baseTokenId) {
+    try {
+      return await this.gittronContract.methods.isBaseToken(baseTokenId).call();
+    } catch (err) {
+      return false;
+    }
   }
 
   async baseTokenParent(baseTokenId) {
@@ -73,6 +86,12 @@ export default class GittronWeb3Service {
 
   async canMetaMorph(baseTokenId) {
     return await this.gittronContract.methods.canMetaMorph(baseTokenId).call();
+  }
+
+  async hasNotMorphed(baseTokenId) {
+    return await this.gittronContract.methods
+      .isBaseTokenEnabled(baseTokenId)
+      .call();
   }
 
   async allowedToWithdraw(baseTokenId) {
