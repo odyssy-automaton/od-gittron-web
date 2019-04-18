@@ -58,23 +58,19 @@ class EvolveButton extends Component {
   };
 
   handleSubmit = async (bot) => {
-    console.log(this.state.bot);
+    console.log('old bot', this.state.bot);
     
     const newBot = {
-      repo: this.state.bot.repo,
-      repoOwner: this.state.bot.repoOwner,
       address: this.props.account,
-      generation: '0',
-      generated: false,
+      ancestorTokenId: this.state.bot.tokenId,
     };
 
     console.log('newBot', newBot);
-    console.log('newBot account', this.props.account);
 
     bot.price = await this.web3Service.toWei(bot.price);
 
     // use new endpoint
-    const res = await post('bots/new-prime', newBot);
+    const res = await post('bots/morph', newBot);
     console.log(res);
     
 
