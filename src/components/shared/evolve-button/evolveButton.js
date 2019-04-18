@@ -64,15 +64,19 @@ class EvolveButton extends Component {
       repo: this.state.bot.repo,
       repoOwner: this.state.bot.repoOwner,
       address: this.props.account,
-      generation: parseInt(this.state.bot.generation) + 1,
+      generation: '0',
       generated: false,
     };
 
     console.log('newBot', newBot);
+    console.log('newBot account', this.props.account);
 
     bot.price = await this.web3Service.toWei(bot.price);
 
+    // use new endpoint
     const res = await post('bots/new-prime', newBot);
+    console.log(res);
+    
 
     if (!res) {
       this.setState({
@@ -100,6 +104,7 @@ class EvolveButton extends Component {
     let txRes = {};
     try {
       txRes = await this.gittronWeb3Service.morphPrimeBot(
+        this.state.bot.tokenId,
         `${res.data.tokenId}`,
         bot.price,
         bot.withdrawAddr,

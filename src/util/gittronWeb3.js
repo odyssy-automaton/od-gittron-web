@@ -178,6 +178,9 @@ export default class GittronWeb3Service {
   async morphPrimeBot(primeTokenId, tokenId, price, withdrawAddr, account) {
     const tokenUri = `${this.apiAddress}uri/${tokenId}`;
 
+    console.log('morph', account);
+    
+
     return await this.gittronContract.methods
       .metamorph(primeTokenId, tokenUri, tokenId, price, withdrawAddr)
       .send({ from: account })
@@ -187,7 +190,6 @@ export default class GittronWeb3Service {
       .then(async (resp) => {
         console.log(resp);
         // this should be some other flag that disables bot for copies
-        await this.disableBot(primeTokenId);
 
         const res = await this.updateMined(tokenId);
 

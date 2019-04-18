@@ -39,7 +39,10 @@ class BotArmy extends Component {
     // get parent prime dna and ghid
     const generations = data
       .filter((bot) => bot.botType === 'prime')
-      .filter((bot) => bot.dna === this.props.relatedPrimeBot.dna)
+      .filter(
+        (bot) =>
+          bot.dna.substring(3) === this.props.relatedPrimeBot.dna.substring(3),
+      )
       .filter((bot) => bot.ghid === this.props.relatedPrimeBot.ghid)
       .sort((a, b) => a.generation - b.generation);
 
