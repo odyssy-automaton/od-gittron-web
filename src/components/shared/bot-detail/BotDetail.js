@@ -132,12 +132,21 @@ function BotDetail(props) {
                       {bot.tokenId && !bot.hatched && authenticated ? (
                         <div>
                           <h3>Your Bot is ready to hatch!</h3>
-                          <p>Click the Hatch button on your Bot's card to hatch it and reveal your Bot.</p>
+                          <p>
+                            Click the Hatch button on your Bot's card to hatch
+                            it and reveal your Bot.
+                          </p>
                         </div>
                       ) : (
                         <div>
-                          <p>This Bot is in incubation until its owner hatches it.</p>
-                          <p>If you <i>are</i> the owner, Connect your wallet to hatch it.</p>
+                          <p>
+                            This Bot is in incubation until its owner hatches
+                            it.
+                          </p>
+                          <p>
+                            If you <i>are</i> the owner, Connect your wallet to
+                            hatch it.
+                          </p>
                         </div>
                       )}
                     </div>
@@ -146,11 +155,11 @@ function BotDetail(props) {
               </div>
             </div>
           )}
-                      
+
           {bot.tokenType === 'prime' ? (
-              <div>
-                <BotArmy relatedPrimeBot={bot}></BotArmy>
-              </div>
+            <div>
+              <BotArmy primeBot={bot} />
+            </div>
           ) : null}
         </Fragment>
       )}
