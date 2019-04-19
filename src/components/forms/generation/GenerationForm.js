@@ -84,6 +84,7 @@ class GenerationForm extends Component {
                 />
               </div>
             )}
+              {bot && (<h3>Metamorph</h3>)}
 
             <div>
               <label>Set Support Price in ETH </label>
@@ -104,6 +105,7 @@ class GenerationForm extends Component {
                 account but funds could be diverted to a bounty, grant or
                 multisig.
               </p>
+              {bot && (<p>Note on Metamorphing: your current botbank will stay with the old bot you can withdraw it at anytime.</p>)}
             </div>
             <div>
               {error ? <p>* Something went wrong '{error}'</p> : null}
