@@ -71,7 +71,7 @@ function BotDetail(props) {
                           </div>
                         )}
                         {unverified && <p>CAUTION: UNVERIFIED BOT!</p>}
-                        {bot.tokenType === 'prime' && bot.tokenId && (
+                        {verified && bot.tokenId && !bot.relatedChildBot && (
                           <GithubBadge
                             bot={bot}
                             account={account}
@@ -83,6 +83,18 @@ function BotDetail(props) {
 
                     <BotStats bot={bot} />
 
+                    {bot.relatedAncestorBot ? (
+                      <Link to={`/bots/${bot.relatedAncestorBot}`}>
+                        View My Ancestor
+                      </Link>
+                    ) : null}
+
+                    {bot.relatedChildBot ? (
+                      <Link to={`/bots/${bot.relatedChildBot}`}>
+                        View My Child
+                      </Link>
+                    ) : null}
+
                     {hasPrimeBot ? (
                       <Link to={`/bots/${bot.relatedPrimeBot}`}>
                         View My Prime Bot
@@ -92,30 +104,39 @@ function BotDetail(props) {
                     {bot.tokenType === 'prime' && authenticated ? (
                       <Fragment>
                         <div className="BotDetail__Actions">
-                          <div className="BotDetail__Actions--Support">
-                            <p>
-                              Support the development of this bot's repo by
-                              cloning it as a support bot.
-                            </p>
-                            <SupportButton
-                              bot={bot}
-                              account={account}
-                              gtContext={gtContext}
-                            />
-                          </div>
-                          <div className="BotDetail__Actions--Buidl">
-                            <BuidlButton
-                              bot={bot}
-                              account={account}
-                              gtContext={gtContext}
-                            />
-                          </div>
+                          {!bot.relatedChildBot ? (
+                            <Fragment>
+                              <div className="BotDetail__Actions--Support">
+                                <p>
+                                  Support the development of this bot's repo by
+                                  cloning it as a support bot.
+                                </p>
+                                <SupportButton
+                                  bot={bot}
+                                  account={account}
+                                  gtContext={gtContext}
+                                />
+                              </div>
+                              <div className="BotDetail__Actions--Buidl">
+                                <BuidlButton
+                                  bot={bot}
+                                  account={account}
+                                  gtContext={gtContext}
+                                />
+                              </div>
+                            </Fragment>
+                          ) : null}
+
                           <div className="BotDetail__Actions--Owner">
-                            <EvolveButton
-                              bot={bot}
-                              account={account}
-                              gtContext={gtContext}
-                            />
+                            {!bot.relatedChildBot ? (
+                              <Fragment>
+                                <EvolveButton
+                                  bot={bot}
+                                  account={account}
+                                  gtContext={gtContext}
+                                />
+                              </Fragment>
+                            ) : null}
                             <WithdrawButton
                               bot={bot}
                               account={account}
@@ -132,12 +153,21 @@ function BotDetail(props) {
                       {bot.tokenId && !bot.hatched && authenticated ? (
                         <div>
                           <h3>Your Bot is ready to hatch!</h3>
-                          <p>Click the Hatch button on your Bot's card to hatch it and reveal your Bot.</p>
+                          <p>
+                            Click the Hatch button on your Bot's card to hatch
+                            it and reveal your Bot.
+                          </p>
                         </div>
                       ) : (
                         <div>
-                          <p>This Bot is in incubation until its owner hatches it.</p>
-                          <p>If you <i>are</i> the owner, Connect your wallet to hatch it.</p>
+                          <p>
+                            This Bot is in incubation until its owner hatches
+                            it.
+                          </p>
+                          <p>
+                            If you <i>are</i> the owner, Connect your wallet to
+                            hatch it.
+                          </p>
                         </div>
                       )}
                     </div>
@@ -146,11 +176,11 @@ function BotDetail(props) {
               </div>
             </div>
           )}
-                      
+
           {bot.tokenType === 'prime' ? (
-              <div>
-                <BotArmy relatedPrimeBot={bot.tokenId}></BotArmy>
-              </div>
+            <div>
+              <BotArmy primeBot={bot} />
+            </div>
           ) : null}
         </Fragment>
       )}

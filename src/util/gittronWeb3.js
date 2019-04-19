@@ -85,7 +85,26 @@ export default class GittronWeb3Service {
   }
 
   async canMetaMorph(baseTokenId) {
-    return await this.gittronContract.methods.canMetaMorph(baseTokenId).call();
+    // this is returning tru when it shouldn't
+    const res = await this.gittronContract.methods.canMetaMorph(baseTokenId).call();
+    return res; 
+  }
+
+  async canMetaMorphNoContract(level, supportBotsCount) {   
+    const levels = [2,4,8,16,32,64,128,256,512,1024];
+    return supportBotsCount > levels[level];
+  }
+
+  async nextMorph(level) {   
+    const levels = [2,4,8,16,32,64,128,256,512,1024];
+    
+    return levels[+level];
+  }
+
+  async hasNotMorphed(baseTokenId) {
+    return await this.gittronContract.methods
+      .isBaseTokenEnabled(baseTokenId)
+      .call();
   }
 
   async allowedToWithdraw(baseTokenId) {
@@ -157,6 +176,34 @@ export default class GittronWeb3Service {
       })
       .then(async (resp) => {
         console.log(resp);
+        const res = await this.updateMined(tokenId);
+
+        return { success: res };
+      })
+      .catch(async (err) => {
+        console.log('catch', err);
+        await this.disableBot(tokenId);
+
+        return { error: 'rejected transaction' };
+      });
+  }
+
+  async morphPrimeBot(primeTokenId, tokenId, price, withdrawAddr, account) {
+    const tokenUri = `${this.apiAddress}uri/${tokenId}`;
+
+    console.log('morph', account);
+    
+
+    return await this.gittronContract.methods
+      .metamorph(primeTokenId, tokenUri, tokenId, price, withdrawAddr)
+      .send({ from: account })
+      .once('transactionHash', async (txHash) => {
+        await this.addTxHash(tokenId, txHash);
+      })
+      .then(async (resp) => {
+        console.log(resp);
+        // this should be some other flag that disables bot for copies
+
         const res = await this.updateMined(tokenId);
 
         return { success: res };
