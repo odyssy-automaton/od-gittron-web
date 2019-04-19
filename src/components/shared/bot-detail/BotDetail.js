@@ -17,7 +17,7 @@ import BotArmy from '../bot-army/BotArmy';
 
 function BotDetail(props) {
   const { account, authenticated, bot, web3 } = props;
-  let unverified, verified, hasPrimeBot, hasAncestor, hasChild;
+  let unverified, verified, hasPrimeBot;
   function handleVerification() {
     props.handleVerification();
   }
@@ -30,8 +30,6 @@ function BotDetail(props) {
     unverified = bot.tokenType === 'prime' && !bot.verified;
     verified = bot.tokenType === 'prime' && bot.verified;
     hasPrimeBot = bot.tokenType !== 'prime' && bot.relatedPrimeBot;
-    hasAncestor = bot.relatedAncestorBot;
-    hasChild = bot.relatedChildBot;
   }
 
   return (
@@ -139,11 +137,11 @@ function BotDetail(props) {
                                 />
                               </Fragment>
                             ) : null}
-                              <WithdrawButton
-                                bot={bot}
-                                account={account}
-                                gtContext={gtContext}
-                              />
+                            <WithdrawButton
+                              bot={bot}
+                              account={account}
+                              gtContext={gtContext}
+                            />
                           </div>
                         </div>
                       </Fragment>
