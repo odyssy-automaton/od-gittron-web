@@ -23,7 +23,7 @@ class BotCard extends Component {
           </div>
           ) : null}
         </div>
-        {bot.hatched ? (
+        {bot.hatched && !bot.hatching ? (
           <img src={bot.tokenUriData.image} alt={bot.tokenId} height="300px" />
         ) : (
           <img

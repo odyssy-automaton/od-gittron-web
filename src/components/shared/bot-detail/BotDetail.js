@@ -16,7 +16,7 @@ import { GittronWeb3Consumer } from '../../../contexts/Gittronweb3Context';
 import BotArmy from '../bot-army/BotArmy';
 
 function BotDetail(props) {
-  const { account, authenticated, bot, web3 } = props;
+  const { account, authenticated, bot, web3, botLoading } = props;
   let unverified, verified, hasPrimeBot;
   function handleVerification() {
     props.handleVerification();
@@ -36,7 +36,7 @@ function BotDetail(props) {
     <GittronWeb3Consumer>
       {(gtContext) => (
         <Fragment>
-          {bot && (
+          {bot && !botLoading && (
             <div className="BotDetail Columns Contain">
               <div className="Columns__Column--50 BotDetail__Card">
                 {bot.tokenId && !bot.hatched && authenticated ? (
