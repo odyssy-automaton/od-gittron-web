@@ -103,40 +103,47 @@ function BotDetail(props) {
                       </Link>
                     ) : null}
 
-                    {bot.tokenType === 'prime' &&
-                    !bot.relatedChildBot &&
-                    authenticated ? (
+                    {bot.tokenType === 'prime' && authenticated ? (
                       <Fragment>
                         <div className="BotDetail__Actions">
-                          <div className="BotDetail__Actions--Support">
-                            <p>
-                              Support the development of this bot's repo by
-                              cloning it as a support bot.
-                            </p>
-                            <SupportButton
-                              bot={bot}
-                              account={account}
-                              gtContext={gtContext}
-                            />
-                          </div>
-                          <div className="BotDetail__Actions--Buidl">
-                            <BuidlButton
-                              bot={bot}
-                              account={account}
-                              gtContext={gtContext}
-                            />
-                          </div>
+                          {!bot.relatedChildBot ? (
+                            <Fragment>
+                              <div className="BotDetail__Actions--Support">
+                                <p>
+                                  Support the development of this bot's repo by
+                                  cloning it as a support bot.
+                                </p>
+                                <SupportButton
+                                  bot={bot}
+                                  account={account}
+                                  gtContext={gtContext}
+                                />
+                              </div>
+                              <div className="BotDetail__Actions--Buidl">
+                                <BuidlButton
+                                  bot={bot}
+                                  account={account}
+                                  gtContext={gtContext}
+                                />
+                              </div>
+                            </Fragment>
+                          ) : null}
+
                           <div className="BotDetail__Actions--Owner">
-                            <EvolveButton
-                              bot={bot}
-                              account={account}
-                              gtContext={gtContext}
-                            />
-                            <WithdrawButton
-                              bot={bot}
-                              account={account}
-                              gtContext={gtContext}
-                            />
+                            {!bot.relatedChildBot ? (
+                              <Fragment>
+                                <EvolveButton
+                                  bot={bot}
+                                  account={account}
+                                  gtContext={gtContext}
+                                />
+                              </Fragment>
+                            ) : null}
+                              <WithdrawButton
+                                bot={bot}
+                                account={account}
+                                gtContext={gtContext}
+                              />
                           </div>
                         </div>
                       </Fragment>
