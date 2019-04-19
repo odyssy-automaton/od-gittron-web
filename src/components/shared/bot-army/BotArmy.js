@@ -13,43 +13,53 @@ class BotArmy extends Component {
     generations: [],
   };
 
-  componentDidMount = () => {
-    this.getArmy();
-  };
-
-  getArmy = async () => {
+  componentDidMount = async () => {
     const { data } = await get(`bots`);
 
     this.setState({
-      buidlArmy: this.army(data, 'buidl'),
-      supportArmy: this.army(data, 'support'),
-      generations: this.generations(data),
+      ...this.sortArmy(data),
     });
   };
 
-  army = (data, botType) => {
-    const army = data
-      .filter((bot) => {
-        return bot.tokenType === botType && bot.hatched && bot && !bot.disabled;
-      })
-      .filter((bot) => {
-        return bot.relatedPrimeBot === this.props.primeBot.tokenId;
-      });
+  sortArmy = (data) => {
+    const buidlArmy = [];
+    const supportArmy = [];
+    const primes = [];
 
-    return army;
-  };
+    data.forEach((bot) => {
+      let belongsTo = bot.relatedPrimeBot === this.props.primeBot.tokenId;
 
-  generations = (data) => {
-    const generations = data
-      .filter((bot) => bot.tokenType === 'prime')
-      .filter((bot) => {
-        return (
-          bot.tokenId === this.props.primeBot.relatedChildBot ||
-          bot.tokenId === this.props.primeBot.relatedAncestorBot
-        );
-      });
+      if (!bot.disabled && bot.tokenType === 'buidl' && belongsTo) {
+        buidlArmy.push(bot);
+      }
 
-    return generations;
+      if (!bot.disabled && bot.tokenType === 'support' && belongsTo) {
+        supportArmy.push(bot);
+      }
+
+      if (!bot.disabled && bot.tokenType === 'prime') {
+        primes.push(bot);
+      }
+    });
+
+    const primeDna = this.props.primeBot.dna.split('-');
+    primeDna.shift();
+    const primeDnaString = primeDna.join();
+    const rawGenerations = primes.filter((bot) => {
+      const dna = bot.dna.split('-');
+      dna.shift();
+      const dnaString = dna.join();
+      return (
+        primeDnaString === dnaString &&
+        bot.tokenId !== this.props.primeBot.tokenId
+      );
+    });
+
+    const generations = rawGenerations.sort((a, b) => {
+      return a.generation - b.generation;
+    });
+
+    return { buidlArmy, supportArmy, generations };
   };
 
   render() {
