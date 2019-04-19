@@ -10,14 +10,15 @@ class BotArmy extends Component {
   state = {
     buidlArmy: [],
     supportArmy: [],
-    generations: [],
+    generations: []
   };
 
   componentDidMount = async () => {
     const { data } = await get(`bots`);
 
+
     this.setState({
-      ...this.sortArmy(data),
+      ...this.sortArmy(data)
     });
   };
 

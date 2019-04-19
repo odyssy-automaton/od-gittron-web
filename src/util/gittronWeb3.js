@@ -85,7 +85,20 @@ export default class GittronWeb3Service {
   }
 
   async canMetaMorph(baseTokenId) {
-    return await this.gittronContract.methods.canMetaMorph(baseTokenId).call();
+    // this is returning tru when it shouldn't
+    const res = await this.gittronContract.methods.canMetaMorph(baseTokenId).call();
+    return res; 
+  }
+
+  async canMetaMorphNoContract(level, supportBotsCount) {   
+    const levels = [2,4,8,16,32,64,128,256,512,1024];
+    return supportBotsCount > levels[level];
+  }
+
+  async nextMorph(level) {   
+    const levels = [2,4,8,16,32,64,128,256,512,1024];
+    
+    return levels[+level];
   }
 
   async hasNotMorphed(baseTokenId) {

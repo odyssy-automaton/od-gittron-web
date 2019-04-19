@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import GenerationForm from '../../forms/generation/GenerationForm';
 import { post } from '../../../util/requests';
+import Loader from '../loader/loader';
 
 // import { post } from '../../../util/requests';
 
@@ -11,6 +12,8 @@ class EvolveButton extends Component {
     tokenId: null,
     evolveAvail: null,
     hasNotEvolved: null,
+    totalSupports: null,
+    nextMorphAt: null,
     error: null,
     bot: null,
   };
@@ -21,7 +24,15 @@ class EvolveButton extends Component {
     this.web3Service = this.props.gtContext.web3Service;
 
     if (this._isMounted) {
-      const evolveAvail = await this.canMetaMorph(this.props.bot.tokenId);
+      const totalSupports = await this.gittronWeb3Service.totalSupports(
+        this.props.bot.tokenId,
+      );
+      const level = await this.gittronWeb3Service.baseTokenLevel(
+        this.props.bot.tokenId,
+      );
+      const evolveAvail = await this.canMetaMorph(totalSupports, level);
+      const nextMorphAt = await this.nextMorph(level);
+
       const hasNotEvolved = await this.hasNotMorphed(this.props.bot.tokenId);
       const ownerOfToken = await this.ownerOf(this.props.bot.tokenId);
 
@@ -37,6 +48,8 @@ class EvolveButton extends Component {
         hasNotEvolved,
         evolveAvail,
         ownerOfToken,
+        totalSupports,
+        nextMorphAt,
         bot: this.props.bot,
       });
     }
@@ -46,8 +59,13 @@ class EvolveButton extends Component {
     return await this.gittronWeb3Service.baseTokenPrice(tokenId);
   };
 
-  canMetaMorph = async (tokenId) => {
-    return await this.gittronWeb3Service.canMetaMorph(tokenId);
+  canMetaMorph = async (count, level) => {
+    return await this.gittronWeb3Service.canMetaMorphNoContract(level, count);
+    //return await this.gittronWeb3Service.canMetaMorph(tokenId);
+  };
+
+  nextMorph = async (level) => {
+    return await this.gittronWeb3Service.nextMorph(level);
   };
 
   hasNotMorphed = async (tokenId) => {
@@ -59,20 +77,19 @@ class EvolveButton extends Component {
   };
 
   handleSubmit = async (bot) => {
-    console.log('old bot', this.state.bot);
+    this.setState({
+      loading: true,
+    });
 
     const newBot = {
       address: this.props.account,
       ancestorTokenId: this.state.bot.tokenId,
     };
 
-    console.log('newBot', newBot);
-
     bot.price = await this.web3Service.toWei(bot.price);
 
     // use new endpoint
     const res = await post('bots/morph', newBot);
-    console.log(res);
 
     if (!res) {
       this.setState({
@@ -124,10 +141,32 @@ class EvolveButton extends Component {
 
   render() {
     const { account } = this.props;
-    const { hasNotEvolved, evolveAvail, ownerOfToken, error, bot } = this.state;
+    const {
+      hasNotEvolved,
+      evolveAvail,
+      ownerOfToken,
+      error,
+      bot,
+      loading,
+      totalSupports,
+      nextMorphAt,
+    } = this.state;
 
     return (
       <div>
+        <h3>Total Support Bots ({totalSupports})</h3>
+
+        {loading && (
+          <div>
+            <p>{bot.tokenId} is generating</p>
+            <Loader />
+            <img
+              src="https://s3.amazonaws.com/odyssy-assets/Gittron__BotCube.svg"
+              alt={bot.tokenId}
+              height="300px"
+            />
+          </div>
+        )}
         {evolveAvail && ownerOfToken === account && hasNotEvolved && (
           <Fragment>
             <GenerationForm
@@ -139,7 +178,17 @@ class EvolveButton extends Component {
           </Fragment>
         )}
 
-        {!hasNotEvolved && <p>This bot is disabled and has already morphed!</p>}
+        {!hasNotEvolved ? (
+          <p>
+            This bot is disabled and has already morphed! Go to the latest
+            Generation.
+          </p>
+        ) : (
+          <p>
+            Next metamorph availible{' '}
+            {totalSupports < nextMorphAt && <span>at({ nextMorphAt })</span>}{''}
+          </p>
+        )}
       </div>
     );
   }
