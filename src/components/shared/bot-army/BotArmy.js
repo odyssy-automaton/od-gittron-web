@@ -17,14 +17,14 @@ class BotArmy extends Component {
     this.getArmy();
   };
 
-  componentWillUpdate = (nextProps, nextState) => {
-    if (
-      this.props.primeBot &&
-      this.props.primeBot.tokenId !== nextProps.primeBot.tokenId
-    ) {
-      this.getArmy();
-    }
-  };
+  // componentWillUpdate = (nextProps, nextState) => {
+  //   if (
+  //     this.props.primeBot &&
+  //     this.props.primeBot.tokenId !== nextProps.primeBot.tokenId
+  //   ) {
+  //     this.getArmy();
+  //   }
+  // };
 
   getArmy = async () => {
     const { data } = await get(`bots`);

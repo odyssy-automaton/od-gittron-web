@@ -13,8 +13,16 @@ class Bot extends Component {
   };
 
   componentDidMount = () => {
-    this.getBot();
+    this._isMounted = true;
+
+    if (this._isMounted) {
+      this.getBot();
+    }
   };
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
 
   componentWillUpdate = (nextProps, nextState) => {
     if (this.props.match.params.tokenId !== nextProps.match.params.tokenId) {
@@ -48,6 +56,7 @@ class Bot extends Component {
           {(context) =>
             bot ? (
               <BotDetail
+                key={bot.tokenId}
                 bot={bot}
                 handleVerification={this.handleVerification}
                 handleHatch={this.handleHatch}
