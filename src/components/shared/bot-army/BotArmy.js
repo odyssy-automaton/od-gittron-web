@@ -13,7 +13,11 @@ class BotArmy extends Component {
     generations: [],
   };
 
-  componentDidMount = async () => {
+  componentDidMount = () => {
+    this.getArmy();
+  };
+
+  getArmy = async () => {
     const { data } = await get(`bots`);
 
     this.setState({
@@ -26,25 +30,24 @@ class BotArmy extends Component {
   army = (data, botType) => {
     const army = data
       .filter((bot) => {
-        return bot.tokenType === botType && bot.hatched && bot;
+        return bot.tokenType === botType && bot.hatched && bot && !bot.disabled;
       })
       .filter((bot) => {
-        return bot.relatedPrimeBot === this.props.relatedPrimeBot.tokenId;
+        return bot.relatedPrimeBot === this.props.primeBot.tokenId;
       });
 
     return army;
   };
 
   generations = (data) => {
-    // get parent prime dna and ghid
     const generations = data
-      .filter((bot) => bot.botType === 'prime')
-      .filter(
-        (bot) =>
-          bot.dna.substring(3) === this.props.relatedPrimeBot.dna.substring(3),
-      )
-      .filter((bot) => bot.ghid === this.props.relatedPrimeBot.ghid)
-      .sort((a, b) => a.generation - b.generation);
+      .filter((bot) => bot.tokenType === 'prime')
+      .filter((bot) => {
+        return (
+          bot.tokenId === this.props.primeBot.relatedChildBot ||
+          bot.tokenId === this.props.primeBot.relatedAncestorBot
+        );
+      });
 
     return generations;
   };

@@ -14,6 +14,7 @@ class EvolveButton extends Component {
     error: null,
     bot: null,
   };
+
   async componentDidMount() {
     this._isMounted = true;
     this.gittronWeb3Service = this.props.gtContext.gittronWeb3Service;
@@ -59,7 +60,7 @@ class EvolveButton extends Component {
 
   handleSubmit = async (bot) => {
     console.log('old bot', this.state.bot);
-    
+
     const newBot = {
       address: this.props.account,
       ancestorTokenId: this.state.bot.tokenId,
@@ -72,7 +73,6 @@ class EvolveButton extends Component {
     // use new endpoint
     const res = await post('bots/morph', newBot);
     console.log(res);
-    
 
     if (!res) {
       this.setState({
@@ -139,7 +139,7 @@ class EvolveButton extends Component {
           </Fragment>
         )}
 
-        {!hasNotEvolved && (<p>This bot is disabled and has already morphed!</p>)}
+        {!hasNotEvolved && <p>This bot is disabled and has already morphed!</p>}
       </div>
     );
   }
