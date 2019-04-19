@@ -47,6 +47,11 @@ class GenerationForm extends Component {
   };
 
   getGitFromUrl = (url) => {
+
+    if(this.props.bot){
+      return false;
+    }
+
     const gitStuff = url.split('/');
 
     return {
@@ -57,7 +62,7 @@ class GenerationForm extends Component {
 
   render() {
     const { valid, priceError } = this.state;
-    const { account, error } = this.props;
+    const { account, error, bot } = this.props;
 
     return (
       <Fragment>
@@ -69,13 +74,25 @@ class GenerationForm extends Component {
           autoComplete="off"
         >
           <fieldset>
+            {!bot && (
+              <div>
+                <label>Repo Url</label>
+                <input
+                  defaultValue=''
+                  type="text"
+                  name="repoUrl"
+                />
+              </div>
+            )}
+              {bot && (<h3>Metamorph</h3>)}
+
             <div>
-              <label>Repo Url</label>
-              <input defaultValue="" type="text" name="repoUrl" />
-            </div>
-            <div>
-              <label>Set Support Price in ETH</label>
-              <input type="text" name="price" defaultValue=".01" />
+              <label>Set Support Price in ETH </label>
+              <input
+                type="text"
+                name="price"
+                defaultValue={bot ? bot.botPrice : '.01'}
+              />
             </div>
             <div>
               <label>
@@ -88,11 +105,13 @@ class GenerationForm extends Component {
                 account but funds could be diverted to a bounty, grant or
                 multisig.
               </p>
+              {bot && (<p>Note on Metamorphing: your current botbank will stay with the old bot you can withdraw it at anytime.</p>)}
             </div>
             <div>
               {error ? <p>* Something went wrong '{error}'</p> : null}
               {priceError ? <p>* '{priceError}'</p> : null}
-              <button type="submit">Register Repo</button>
+
+              <button type="submit">{bot ? 'MORPH' : 'Register Repo'}</button>
             </div>
           </fieldset>
         </form>

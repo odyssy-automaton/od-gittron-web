@@ -22,7 +22,6 @@ class SupportButton extends Component {
 
     if (this._isMounted) {
       const price = await this.getBaseTokenPrice(this.props.bot.tokenId);
-
       const priceInEth = await this.web3Service.toEth(price);
       this.setState({ price, priceInEth });
     }
@@ -33,12 +32,10 @@ class SupportButton extends Component {
   }
 
   tokensByOwner = async (address) => {
-
     return await this.gittronWeb3Service.tokensByOwner(address);
   };
 
   getBaseTokenPrice = async (tokenId) => {
-
     const price = await this.gittronWeb3Service.baseTokenPrice(tokenId);
 
     return price;
@@ -89,7 +86,9 @@ class SupportButton extends Component {
       <div>
         {priceInEth > 0 && (
           <Fragment>
-            <button onClick={() => this.handleSubmit(bot)}>Support <span className="Price">| {priceInEth} ETH</span></button>
+            <button onClick={() => this.handleSubmit(bot)}>
+              Support <span className="Price">| {priceInEth} ETH</span>
+            </button>
           </Fragment>
         )}
       </div>
