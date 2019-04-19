@@ -17,7 +17,7 @@ import BotArmy from '../bot-army/BotArmy';
 
 function BotDetail(props) {
   const { account, authenticated, bot, web3 } = props;
-  let unverified, verified, hasPrimeBot;
+  let unverified, verified, hasPrimeBot, hasAncestor, hasChild;
   function handleVerification() {
     props.handleVerification();
   }
@@ -30,6 +30,8 @@ function BotDetail(props) {
     unverified = bot.tokenType === 'prime' && !bot.verified;
     verified = bot.tokenType === 'prime' && bot.verified;
     hasPrimeBot = bot.tokenType !== 'prime' && bot.relatedPrimeBot;
+    hasAncestor = bot.relatedAncestorBot;
+    hasChild = bot.relatedChildBot;
   }
 
   return (
@@ -71,7 +73,7 @@ function BotDetail(props) {
                           </div>
                         )}
                         {unverified && <p>CAUTION: UNVERIFIED BOT!</p>}
-                        {bot.tokenType === 'prime' && bot.tokenId && (
+                        {verified && bot.tokenId && !bot.relatedChildBot && (
                           <GithubBadge
                             bot={bot}
                             account={account}
@@ -83,13 +85,27 @@ function BotDetail(props) {
 
                     <BotStats bot={bot} />
 
+                    {bot.relatedAncestorBot ? (
+                      <Link to={`/bots/${bot.relatedAncestorBot}`}>
+                        View My Ancestor
+                      </Link>
+                    ) : null}
+
+                    {bot.relatedChildBot ? (
+                      <Link to={`/bots/${bot.relatedChildBot}`}>
+                        View My Child
+                      </Link>
+                    ) : null}
+
                     {hasPrimeBot ? (
                       <Link to={`/bots/${bot.relatedPrimeBot}`}>
                         View My Prime Bot
                       </Link>
                     ) : null}
 
-                    {bot.tokenType === 'prime' && authenticated ? (
+                    {bot.tokenType === 'prime' &&
+                    !bot.relatedChildBot &&
+                    authenticated ? (
                       <Fragment>
                         <div className="BotDetail__Actions">
                           <div className="BotDetail__Actions--Support">
