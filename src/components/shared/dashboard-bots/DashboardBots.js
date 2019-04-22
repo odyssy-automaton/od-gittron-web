@@ -10,6 +10,7 @@ class DashboardBots extends Component {
     bots: [],
     contract: null,
     tokens: [],
+    loading: false,
   };
 
   componentDidMount = async () => {
@@ -27,7 +28,10 @@ class DashboardBots extends Component {
     if (!this.props.authenticated) return;
 
     if (this._isMounted) {
+      this.setState({ loading: true });
       const tokens = await this.tokensByOwner(this.props.address);
+      this.setState({ loading: false });
+
       const res = await this.loadBots(tokens);
       const bots = res.data.filter((bot) => {
         return bot && bot.tokenId;
@@ -60,13 +64,17 @@ class DashboardBots extends Component {
   };
 
   render() {
-    const { bots } = this.state;
+    const { bots, loading } = this.state;
 
     return (
       <div>
-        <div className="DashboardBots">
-          {bots ? <BotFilter bots={bots} /> : null}
-        </div>
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <div className="DashboardBots">
+            {bots ? <BotFilter bots={bots} /> : null}
+          </div>
+        )}
       </div>
     );
   }

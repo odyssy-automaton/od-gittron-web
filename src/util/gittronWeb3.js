@@ -86,18 +86,20 @@ export default class GittronWeb3Service {
 
   async canMetaMorph(baseTokenId) {
     // this is returning tru when it shouldn't
-    const res = await this.gittronContract.methods.canMetaMorph(baseTokenId).call();
-    return res; 
+    const res = await this.gittronContract.methods
+      .canMetaMorph(baseTokenId)
+      .call();
+    return res;
   }
 
-  async canMetaMorphNoContract(level, supportBotsCount) {   
-    const levels = [2,4,8,16,32,64,128,256,512,1024];
+  async canMetaMorphNoContract(level, supportBotsCount) {
+    const levels = [2, 4, 8, 16, 32, 64, 128, 256, 512, 1024];
     return supportBotsCount > levels[level];
   }
 
-  async nextMorph(level) {   
-    const levels = [2,4,8,16,32,64,128,256,512,1024];
-    
+  async nextMorph(level) {
+    const levels = [2, 4, 8, 16, 32, 64, 128, 256, 512, 1024];
+
     return levels[+level];
   }
 
@@ -114,10 +116,22 @@ export default class GittronWeb3Service {
   }
 
   async tokensByOwner(address) {
-    let tokens = await this.gittronContract.methods
-      .tokensByOwner(address)
-      .call();
 
+    let tokens = [];
+    let valid = true;
+    let bot = '';
+    let index = 0;
+    while (valid) {
+      try {
+        bot = await this.gittronContract.methods
+          .tokenOfOwnerByIndex(address, index)
+          .call();
+        tokens.push(bot);
+        index++;
+      } catch (err) {
+        valid = false;
+      }
+    }
     return tokens.map((item) => this.web3Service.numberToHex(item));
   }
 
@@ -192,7 +206,6 @@ export default class GittronWeb3Service {
     const tokenUri = `${this.apiAddress}uri/${tokenId}`;
 
     console.log('morph', account);
-    
 
     return await this.gittronContract.methods
       .metamorph(primeTokenId, tokenUri, tokenId, price, withdrawAddr)

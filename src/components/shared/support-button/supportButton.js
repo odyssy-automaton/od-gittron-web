@@ -31,10 +31,6 @@ class SupportButton extends Component {
     this._isMounted = false;
   }
 
-  tokensByOwner = async (address) => {
-    return await this.gittronWeb3Service.tokensByOwner(address);
-  };
-
   getBaseTokenPrice = async (tokenId) => {
     const price = await this.gittronWeb3Service.baseTokenPrice(tokenId);
 

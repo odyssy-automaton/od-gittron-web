@@ -29,10 +29,6 @@ class PrimeGenerator extends Component {
     );
   };
 
-  tokensByOwner = async (address) => {
-    return await this.gittronWeb3Service.tokensByOwner(address);
-  };
-
   handleSubmit = async (bot) => {
     this.setState({
       loading: true,
