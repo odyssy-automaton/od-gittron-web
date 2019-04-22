@@ -185,7 +185,7 @@ class EvolveButton extends Component {
           </p>
         ) : (
           <p>
-            Next metamorph availible{' '}
+            Next Metamorph available{' '}
             {totalSupports <= nextMorphAt && <span>at({ +nextMorphAt + 1 })</span>}{''}
           </p>
         )}
