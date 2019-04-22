@@ -17,13 +17,27 @@ function Dashboard() {
               {(gtContext) => (
                 <div className="Dashboard Contain Columns">
                   <div className="Columns__Column--50">
-                    <h4>Generate a Prime Bot</h4>
+                    <h3>Generate a Prime Bot</h3>
+                    <p>
+                      Enter the full URL for a Github repo that you own or manage to
+                      receive a Gen 0 Prime Bot.
+                    </p>
+                    <p>
+                      Supporters of your repo can donate to your fund of choice and
+                      they'll get a clone in the form of a Support Bot.
+                    </p>
+                    <p>
+                      Set a price for each Support bot and an address to receive
+                      the funds.
+                    </p>
+                  </div>
+                  <div className="Columns__Column--50">
                     <PrimeGenerator
                       gtContext={gtContext}
                       account={context.account}
                     />
                   </div>
-                  <div className="Columns__Column--50">
+                  <div className="Columns__Column--100">
                     <h3>Your Bots</h3>
                     <DashboardBots
                       gtContext={gtContext}
