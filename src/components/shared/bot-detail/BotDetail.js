@@ -83,23 +83,25 @@ function BotDetail(props) {
 
                     <BotStats bot={bot} />
 
-                    {bot.relatedAncestorBot ? (
-                      <Link to={`/bots/${bot.relatedAncestorBot}`}>
-                        View My Ancestor
-                      </Link>
-                    ) : null}
+                    <div className="Ancestry">
+                      {bot.relatedAncestorBot ? (
+                        <Link to={`/bots/${bot.relatedAncestorBot}`}>
+                          View My Ancestor
+                        </Link>
+                      ) : null}
 
-                    {bot.relatedChildBot ? (
-                      <Link to={`/bots/${bot.relatedChildBot}`}>
-                        View My Child
-                      </Link>
-                    ) : null}
+                      {bot.relatedChildBot ? (
+                        <Link to={`/bots/${bot.relatedChildBot}`}>
+                          View My Child
+                        </Link>
+                      ) : null}
 
-                    {hasPrimeBot ? (
-                      <Link to={`/bots/${bot.relatedPrimeBot}`}>
-                        View My Prime Bot
-                      </Link>
-                    ) : null}
+                      {hasPrimeBot ? (
+                        <Link to={`/bots/${bot.relatedPrimeBot}`}>
+                          View My Prime Bot
+                        </Link>
+                      ) : null}
+                    </div>
 
                     {bot.tokenType === 'prime' && authenticated ? (
                       <Fragment>
