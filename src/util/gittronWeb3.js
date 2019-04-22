@@ -115,23 +115,44 @@ export default class GittronWeb3Service {
       .call();
   }
 
+  getOwnerTokensFromLog(addr){
+        // topic: 0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef
+     return this.gittronContract.getPastEvents('Transfer', {
+         fromBlock: 0,
+         toBlock: 'latest'
+     })
+     .then((events) => {
+         const tlog = events;
+         const lTokens = {};
+         tlog.forEach((event) => {
+           if(event.returnValues.to === addr){
+            lTokens[event.returnValues.tokenId] = event.returnValues.to;
+           }
+         })
+         console.log('addr', addr);
+         console.log(tlog);
+         console.log(lTokens);
+         
+         return Object.keys(lTokens)
+         
+     
+     //     eturnValues: Result
+     // 0: "0x0000000000000000000000000000000000000000"
+     // 1: "0x83aB8e31df35AA3281d630529C6F4bf5AC7f7aBF"
+     // 2: "8621468555037052742002011300373675401"
+     // from: "0x0000000000000000000000000000000000000000"
+     // to: "0x83aB8e31df35AA3281d630529C6F4bf5AC7f7aBF"
+     // tokenId: "8621468555037052742002011300373675401"
+     });
+
+
+  }
+
   async tokensByOwner(address) {
 
-    let tokens = [];
-    let valid = true;
-    let bot = '';
-    let index = 0;
-    while (valid) {
-      try {
-        bot = await this.gittronContract.methods
-          .tokenOfOwnerByIndex(address, index)
-          .call();
-        tokens.push(bot);
-        index++;
-      } catch (err) {
-        valid = false;
-      }
-    }
+    const tokens = await this.getOwnerTokensFromLog(address);
+    // is not working when changing addr
+    console.log(tokens);
     return tokens.map((item) => this.web3Service.numberToHex(item));
   }
 
