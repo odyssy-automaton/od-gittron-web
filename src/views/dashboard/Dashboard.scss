@@ -1,6 +1,6 @@
 @import '../../styles/variables';
 
-.Dashboard .Columns__Column--50:first-of-type > div {
+.Dashboard .Columns__Column--50:first-of-type > p {
     padding-right: 25px;
     @media (max-width: $tablet) {
       padding-right: 0px;

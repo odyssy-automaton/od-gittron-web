@@ -115,18 +115,6 @@ class PrimeGenerator extends Component {
           </div>
         ) : (
           <div>
-            <p>
-              Enter the full URL for a Github repo that you own or manage to
-              receive a Gen 0 Prime Bot.
-            </p>
-            <p>
-              Supporters of your repo can donate to your fund of choice and
-              they'll get a clone in the form of a Support Bot.
-            </p>
-            <p>
-              Set a price for each Support bot here and an address to receive
-              the funds.
-            </p>
             <GenerationForm
               error={error}
               account={account}
