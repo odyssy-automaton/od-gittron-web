@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import GittronAvatar from '../../../img/Gittron__Avatar.png';
 
 import './Header.scss';
 import './Navbar.scss';
@@ -28,9 +29,10 @@ const HeaderLinks = class extends Component {
     return (
       <div className="Header">
         <div className="Logo">
-          <h1 className="Header__title">
-            <Link to="/">Gittron</Link>
-          </h1>
+          <Link to="/">
+            <img src={GittronAvatar} alt="Gittron Avatar"/>
+            <h1 className="Header__title">Gittron</h1>
+          </Link>
         </div>
 
         <div className="Navbar__Desktop">
