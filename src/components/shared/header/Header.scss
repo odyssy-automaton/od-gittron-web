@@ -11,24 +11,26 @@
   position: relative;
 }
 
-.Header__title {
-  color: black;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  font-size: 2em;
-  font-weight: 300;
-  @media (max-width: 889px) {
-    font-size: 1.5em;
-  }
-}
-
 .Logo {
-  flex-basis: 33%;
   margin-right: auto;
-  display: flex;
-  align-items: center;
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img { height: 60px; margin-right: 5px;  }
+    .Header__title {
+      color: black;
+      margin-top: 0px;
+      margin-bottom: 0px;
+      font-size: 2em;
+      font-weight: 300;
+      @media (max-width: 889px) {
+        font-size: 1.5em;
+      }
+    }
+  }
   @media (max-width: 889px) {
-    flex-basis: 75%;
+    // flex-basis: 75%;
   }
 }
 
