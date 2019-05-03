@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import Loader from '../loader/loader';
@@ -54,15 +54,17 @@ class WithdrawButton extends Component {
 
     return (
       <div>
-        <p>Bot bank: {withdrawInEth}</p>
         {isLoading ? <Loader /> : null}
+        {botBank == 0 && ownerOfToken === account && !isLoading ? (
+          <Fragment>
+            <button>Bot Bank = {withdrawInEth} ETH</button>
+          </Fragment>
+        ) : null}
 
         {botBank > 0 && ownerOfToken === account && !isLoading ? (
-          <div>
-            <p>20% of withdraw goes to dev fund</p>
-
-            <button onClick={() => this.handleSubmit(bot)}>Withdraw</button>
-          </div>
+          <Fragment>
+            <button onClick={() => this.handleSubmit(bot)}>Withdraw <span className="Price">| {withdrawInEth} ETH</span></button>
+          </Fragment>
         ) : null}
       </div>
     );
