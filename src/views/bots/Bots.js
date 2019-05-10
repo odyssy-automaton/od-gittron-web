@@ -6,6 +6,7 @@ import BotFilter from '../../components/shared/bot-filter/BotFilter';
 
 import './Bots.scss';
 import { Web3Consumer } from 'web3-react';
+import BotFeatured from '../../components/shared/bot-featured/BotFeatured';
 
 class Bots extends Component {
   state = {
@@ -51,7 +52,7 @@ class Bots extends Component {
                 </Link>
               </div>
             )}
-            {bots ? <BotFilter bots={bots} /> : null}
+            {bots ? <BotFeatured bots={bots} /> : null}
           </div>
         )}
       </Web3Consumer>
