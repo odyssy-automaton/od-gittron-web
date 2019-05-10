@@ -36,6 +36,7 @@ class Bots extends Component {
 
   render() {
     const { bots } = this.state;
+    const { filter } = this.props.match.params;
 
     return (
       <Web3Consumer>
@@ -52,7 +53,9 @@ class Bots extends Component {
                 </Link>
               </div>
             )}
-            {bots ? <BotFeatured bots={bots} /> : null}
+
+            {bots && !filter && <BotFeatured bots={bots} />}
+            {bots && filter === 'all' && <BotFilter bots={bots} />}
           </div>
         )}
       </Web3Consumer>

@@ -11,6 +11,7 @@ import Dashboard from './views/dashboard/Dashboard';
 const Routes = () => (
   <Switch>
     <Route path="/" exact component={Bots} />
+    <Route path="/filter/:filter" exact component={Bots} />
     <Route path="/bots/:tokenId" exact component={Bot} />
     <Route path="/repos" exact component={Repos} />
     <Route path="/repos/:ghid" exact component={RepoDetail} />

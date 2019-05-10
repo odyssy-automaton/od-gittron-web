@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
+import { Link } from 'react-router-dom';
+
 import { GittronWeb3Consumer } from '../../../contexts/Gittronweb3Context';
 import { Web3Consumer } from 'web3-react';
 
@@ -100,6 +102,12 @@ class BotFilter extends Component {
             </div>
           </div>
         </div>
+        <div>
+          <Link className="button" to="/">
+            View Only Featured and Verified Bots
+          </Link>
+        </div>
+
         <div>
           <GittronWeb3Consumer>
             {(gtContext) => (
