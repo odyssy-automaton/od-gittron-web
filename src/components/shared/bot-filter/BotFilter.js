@@ -102,7 +102,7 @@ class BotFilter extends Component {
             </div>
           </div>
         </div>
-        <div>
+        <div className="Button__holder">
           <Link className="button" to="/">
             View Only Featured and Verified Bots
           </Link>

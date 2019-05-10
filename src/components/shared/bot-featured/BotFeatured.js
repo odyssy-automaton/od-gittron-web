@@ -22,7 +22,7 @@ class BotFeatured extends Component {
 
     return (
       <div>
-        <div>
+        <div className="Button__holder">
           <p>
             Below is a list of featured bot, they have been verified by the
             owner and curated by Gittron. they are worthy of you support
