@@ -1,7 +1,18 @@
-.Button__holder {
-  margin-bottom: 15px;
-  text-align: center;
-  a {
-    display: block;
+.Hero {
+  background-color: #000;
+  padding-top: 75px;
+  padding-bottom: 75px;
+  margin-bottom: 75px;
+  color: white;
+  .Columns__Column--50 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
   }
+}
+
+.Featured__Intro {
+  a { display: block; width: 200px; }
+  margin-bottom: 50px; 
 }

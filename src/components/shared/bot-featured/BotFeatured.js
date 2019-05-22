@@ -22,13 +22,21 @@ class BotFeatured extends Component {
 
     return (
       <div>
-        <div className="Button__holder">
+        <div className="Hero Columns">
+          <div className="Columns__Column--50">
+            <h1>Gittron Rulz</h1>
+          </div>
+          <div className="Columns__Column--50">
+            <iframe title="G-I-T-T-R-O-N video" src="https://player.vimeo.com/video/331858758" width="640" height="360" frameBorder="0" allow="autoplay; fullscreen" allowFullScreen></iframe>
+          </div>
+        </div>
+        <div className="Featured__Intro">
+          <h2>Featured Projects</h2>
           <p>
-            Below is a list of featured bot, they have been verified by the
-            owner and curated by Gittron. they are worthy of you support
+            These bots have been verified by the owner and curated by Gittron. They are worthy of your support!
           </p>
           <Link className="button" to="/filter/all">
-            View All Bots Including Ones Not Featured
+            View All Bots
           </Link>
         </div>
         <div>
