@@ -38,20 +38,26 @@ class Home extends Component {
 
     return (
       <div>
-        <div className="Hero Columns">
-          <div className="Columns__Column--50">
-            <h1>Gittron Rulz</h1>
-          </div>
-          <div className="Columns__Column--50">
-            <iframe
-              title="G-I-T-T-R-O-N video"
-              src="https://player.vimeo.com/video/331858758"
-              width="640"
-              height="360"
-              frameBorder="0"
-              allow="autoplay; fullscreen"
-              allowFullScreen
-            />
+        <div className="Hero">
+          <div className="Columns">
+            <div className="Columns__Column--50">
+              <h1>Support Open Source</h1>
+              <p>Support any open source project (Prime Bots) on Gittron and get a Support Bot NFT as a thank you.</p>
+              <h2>Project Owners</h2>
+              <p>Register your repo to add passive income to your project. Just come back later and withdraw.</p>
+              <p><a href="/about">Read More =></a></p>
+            </div>
+            <div className="Columns__Column--50">
+              <iframe
+                title="G-I-T-T-R-O-N video"
+                src="https://player.vimeo.com/video/331858758"
+                width="640"
+                height="360"
+                frameBorder="0"
+                allow="autoplay; fullscreen"
+                allowFullScreen
+              />
+            </div>
           </div>
         </div>
         <Web3Consumer>
@@ -60,7 +66,7 @@ class Home extends Component {
               {context.active && (
                 <div className="Bots__Intro">
                   <p>
-                    Register your open source project (FREE!) to get an
+                    Register your open source project to get a FREE
                     autonomous fundraising Prime Bot.
                   </p>
                   <Link className="button generate-bot" to="/dashboard">
@@ -73,9 +79,6 @@ class Home extends Component {
             </div>
           )}
         </Web3Consumer>
-        <Link className="button" to="/all">
-          View All Bots
-        </Link>
       </div>
     );
   }
