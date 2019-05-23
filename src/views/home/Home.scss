@@ -1,0 +1,22 @@
+@import '../../styles/variables';
+
+.generate-bot {
+    @media (max-width: $phone){
+        width: 100%;
+        margin: 15px 0px;
+    }
+}
+
+.Bots__Intro {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    p { 
+        margin: 50px 0px; 
+        font-size: 1.25em;
+        @media (max-width: $phone){
+            margin: 25px 0px;
+        } 
+    }
+}

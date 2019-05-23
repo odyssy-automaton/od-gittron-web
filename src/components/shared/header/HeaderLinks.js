@@ -36,8 +36,11 @@ const HeaderLinks = class extends Component {
         </div>
 
         <div className="Navbar__Desktop">
-          <Link to="/" className="Navbar__Desktop--Item">
+          <Link to="/all" className="Navbar__Desktop--Item">
             Bots
+          </Link>
+          <Link to="/" className="Navbar__Desktop--Item">
+            Featured
           </Link>
           <Link to="/about" className="Navbar__Desktop--Item">
             About
@@ -69,11 +72,11 @@ const HeaderLinks = class extends Component {
                 <p>
                   Consider using{' '}
                   <a
-                    href="https://brave.com/download/"
+                    href="https://www.opera.com/"
                     rel="noopener noreferrer"
                     target="_blank"
                   >
-                    Brave
+                    Opera
                   </a>{' '}
                   or{' '}
                   <a
