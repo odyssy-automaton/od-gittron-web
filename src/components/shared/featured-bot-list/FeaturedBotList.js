@@ -15,9 +15,9 @@ class FeaturedBotList extends Component {
           <div className="Columns">
             <div className="Columns__Column--50">
               <div className="Featured_Desc">
-                <h2>bot.featuredTitle</h2>
+                <h2>{bot.featuredTitle}</h2>
                 <p>{bot.featuredDesc}</p>
-                <p>bot.generations | bot.supports | bot.buidlers</p>
+                <p>generation: {bot.generation} | supports: {bot.supports} | buidler: {bot.buidls}</p>
                 {bot.verified &&
                 bot.tokenType === 'prime' &&
                 this.props.w3context.active &&
