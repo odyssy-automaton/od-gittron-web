@@ -7,6 +7,15 @@
     }
 }
 
+.Hero {
+    a { color: white; font-size: 1.35em; }
+    .Columns {
+    max-width: 1200px;
+    margin: 0 auto;
+    &__Column--50:first-of-type { flex-basis: calc(45% - 35px); padding-right: 35px; }
+    }
+}
+
 .Bots__Intro {
     display: flex;
     align-items: center;
