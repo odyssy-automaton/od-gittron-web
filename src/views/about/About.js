@@ -133,6 +133,8 @@ function About() {
           <p>
             Rinkeby:{' '}
             <a
+              target="_blank"
+              rel="noopener noreferrer"
               href={`https://rinkeby.etherscan.io/address/${
                 process.env.REACT_APP_CONTRACT_ADDRESS
               }`}
@@ -143,6 +145,8 @@ function About() {
           <p>
             Mainnet:{' '}
             <a
+              target="_blank"
+              rel="noopener noreferrer"
               href={`https://etherscan.io/address/${
                 process.env.REACT_APP_MAIN_CONTRACT_ADDRESS
               }`}

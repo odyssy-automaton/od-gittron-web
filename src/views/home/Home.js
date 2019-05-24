@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
+
 
 import { get } from '../../util/requests';
 
@@ -43,7 +45,7 @@ class Home extends Component {
             <div className="Columns__Column--50">
               <h1>Hail Open Source!</h1>
               <p>Support any Open Source project (Prime Bots) on Gittron and get a Support Bot NFT as a thank you.</p>
-              <p><Link to="/about/#support-bot">What can I do with a Support Bot NFT?</Link></p>
+              <p><HashLink to="/about#support-bot">What can I do with a Support Bot NFT?</HashLink></p>
               <h2>Project Owners</h2>
               <p>Register your repo to generate a Prime Bot and add passive income to your project. Just come back later and withdraw.</p>
               <p><Link to="/dashboard">Generate Prime =></Link></p>
