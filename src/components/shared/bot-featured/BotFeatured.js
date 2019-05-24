@@ -24,8 +24,6 @@ class BotFeatured extends Component {
 
   firstAncestor = (primeBotId) => {
     let bot = this.props.bots.find((bot)=> bot.tokenId===primeBotId);
-    console.log('ab', bot.relatedAncestorBot);
-
     if(bot && bot.relatedAncestorBot){
       return this.firstAncestor(bot.relatedAncestorBot);
     }
@@ -35,8 +33,6 @@ class BotFeatured extends Component {
   generations = (primeBotId, generations = []) => {
     generations.push(primeBotId);
     let bot = this.props.bots.find((bot)=> bot.tokenId===primeBotId);
-    console.log('cb', bot);
-    
     if(bot && bot.relatedChildBot){
       return this.generations(bot.relatedChildBot, generations);
     }
@@ -48,10 +44,22 @@ class BotFeatured extends Component {
     return this.props.bots.filter((bot) => {
       return bot.featured;
     }).map((bot) => {
+
+      const fa = this.firstAncestor(bot.tokenId);
+      const gens = this.generations(fa);
+      const latest = gens[gens.length-1];
+
+      if(bot.tokenId !== latest){
+        const newbot = this.props.bots.find((abot)=>abot.tokenId===latest) || bot;
+        newbot.featuredTitle = bot.featuredTitle;
+        newbot.featuredDesc = bot.featuredDesc;
+        bot = newbot
+      }
+      bot.totalSupports = gens.map((id)=>this.countSupports(id))
+        .reduce((total, num)=>total + num);
+
       bot.supports = this.countSupports(bot.tokenId);
       bot.buidls = this.countBuidls(bot.tokenId);
-      // let fa = this.firstAncestor(bot.tokenId);
-      // bot.generations = this.generations(fa);
       return bot;
     })
   };

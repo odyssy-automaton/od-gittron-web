@@ -8,6 +8,7 @@ import SupportButton from '../support-button/supportButton';
 import WithdrawButton from '../withdraw-button/withdrawButton';
 
 class FeaturedBotList extends Component {
+
   renderBots() {
     return this.props.bots.map((bot) => {
       return (
@@ -17,19 +18,32 @@ class FeaturedBotList extends Component {
               <div className="Featured_Desc">
                 <h2>{bot.featuredTitle}</h2>
                 <p>{bot.featuredDesc}</p>
-                <p>generation: {bot.generation} | supports: {bot.supports} | buidler: {bot.buidls}</p>
-                {bot.verified &&
-                bot.tokenType === 'prime' &&
-                this.props.w3context.active &&
-                this.props.w3context.account !== bot.orignalOwnerAddress && (
-                  <div className="SupportButtonHolder">
-                    <SupportButton
-                      bot={bot}
-                      account={this.props.w3context.account}
-                      gtContext={this.props.context}
-                    />
-                  </div>
+                <p>
+                  generation: {bot.generation} | supports: {bot.totalSupports} |
+                  buidler: {bot.buidls}
+                </p>
+                {this.props.w3context.connectorName !== 'MetaMask' && (
+                <button
+                className="SupportButtonHolder"
+                  onClick={() => {
+                    this.props.w3context.setConnector('MetaMask');
+                  }}
+                >
+                  Connect to Support
+                </button>
                 )}
+                {bot.verified &&
+                  bot.tokenType === 'prime' &&
+                  this.props.w3context.active &&
+                  this.props.w3context.account !== bot.orignalOwnerAddress && (
+                    <div className="SupportButtonHolder">
+                      <SupportButton
+                        bot={bot}
+                        account={this.props.w3context.account}
+                        gtContext={this.props.context}
+                      />
+                    </div>
+                  )}
                 {bot.verified &&
                   bot.tokenType === 'prime' &&
                   this.props.w3context.active &&
@@ -42,7 +56,12 @@ class FeaturedBotList extends Component {
                       />
                     </div>
                   )}
-                  <p>View Repo => <a href={`https://github.com/${bot.repoOwner}/${bot.repo}`}>{bot.repo}</a></p>
+                <p>
+                  View Repo =>{' '}
+                  <a href={`https://github.com/${bot.repoOwner}/${bot.repo}`}>
+                    {bot.repo}
+                  </a>
+                </p>
               </div>
             </div>
             <div className="Columns__Column--50">
