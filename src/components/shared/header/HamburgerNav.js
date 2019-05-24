@@ -84,7 +84,10 @@ const HamburgerNav = class extends React.Component {
               context.connectorName !== 'MetaMask' && (
                 <button
                   className="Link Navbar__Mobile--Contents--Item"
-                  onClick={() => {this.toggleNav(); context.setConnector('MetaMask');}}
+                  onClick={() => {
+                    this.toggleNav();
+                    context.setConnector('MetaMask');
+                  }}
                 >
                   Connect
                 </button>
@@ -93,40 +96,40 @@ const HamburgerNav = class extends React.Component {
           </div>
         </div>
         {errorOpen && (
-              <div className="noWeb3">
-                <div className="noWeb3__Contents">
-                  <button onClick={this.closeError}>X</button>
-                  <p>{context.error.toString()}</p>
-                  <p>
-                    Consider using{' '}
-                    <a
-                      href="https://brave.com/download/"
-                      rel="noopener noreferrer"
-                      target="_blank"
-                    >
-                      Brave
-                    </a>{' '}
-                    or{' '}
-                    <a
-                      href="https://www.google.com/chrome/"
-                      rel="noopener noreferrer"
-                      target="_blank"
-                    >
-                      Chrome
-                    </a>{' '}
-                    with the{' '}
-                    <a
-                      href="https://metamask.io/"
-                      rel="noopener noreferrer"
-                      target="_blank"
-                    >
-                      Metamask
-                    </a>{' '}
-                    extension.
-                  </p>
-                </div>
-              </div>
-            )}
+          <div className="noWeb3">
+            <div className="noWeb3__Contents">
+              <button onClick={this.closeError}>X</button>
+              <p>{context.error.toString()}</p>
+              <p>
+                Consider using{' '}
+                <a
+                  href="https://www.opera.com/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  Opera
+                </a>{' '}
+                or{' '}
+                <a
+                  href="https://www.google.com/chrome/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  Chrome
+                </a>{' '}
+                with the{' '}
+                <a
+                  href="https://metamask.io/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  Metamask
+                </a>{' '}
+                extension.
+              </p>
+            </div>
+          </div>
+        )}
       </Fragment>
     );
   }
