@@ -123,8 +123,8 @@ function About() {
             Bot NFT as a thank you. The Gittron framework and its gamified
             funding mechanism could be applied to other kinds of impact
             projects. We do think taking a repo of code and generating
-            programatic dna off of that is pretty cool though. Any data source
-            could be used though.
+            programatic dna off of that is pretty cool though, but any data source
+            could be used.
           </p>
           <p>Of course we also just love collectible digital assets!</p>
           <p>
@@ -133,6 +133,8 @@ function About() {
           <p>
             Rinkeby:{' '}
             <a
+              target="_blank"
+              rel="noopener noreferrer"
               href={`https://rinkeby.etherscan.io/address/${
                 process.env.REACT_APP_CONTRACT_ADDRESS
               }`}
@@ -143,6 +145,8 @@ function About() {
           <p>
             Mainnet:{' '}
             <a
+              target="_blank"
+              rel="noopener noreferrer"
               href={`https://etherscan.io/address/${
                 process.env.REACT_APP_MAIN_CONTRACT_ADDRESS
               }`}
@@ -166,11 +170,11 @@ function About() {
             </a>
             .
           </p>
-          <p>
-            <strong>Can I buy or sell Bots?</strong>
+          <p id="support-bot">
+            <strong>What can I do with a Bot NFT?</strong>
           </p>
           <p>
-            Of course! You can buy <i>and</i> sell Bots on{' '}
+            1. All bots can be bought <i>and</i> sold on marketplaces like{' '}
             <a
               href="https://opensea.io/"
               target="_blank"
@@ -180,6 +184,8 @@ function About() {
             </a>
             .
           </p>
+          <p>2. Hold it as a 'tangible talisman of your love for open source'.</p>
+          <p>3. Save it for use in the upcoming Gittron game, where all Bots will become playable characters!</p>
           <p>
             <strong>How do I generate a Prime Bot?</strong>
           </p>

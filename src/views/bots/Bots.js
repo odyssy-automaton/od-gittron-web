@@ -43,7 +43,7 @@ class Bots extends Component {
             {context.active && (
               <div className="Bots__Intro">
                 <p>
-                  Register your open source project to get an autonomous
+                  Register your open source project (FREE!) to get an autonomous
                   fundraising Prime Bot.
                 </p>
                 <Link className="button generate-bot" to="/dashboard">
@@ -51,7 +51,8 @@ class Bots extends Component {
                 </Link>
               </div>
             )}
-            {bots ? <BotFilter bots={bots} /> : null}
+
+            {bots && <BotFilter bots={bots} />}
           </div>
         )}
       </Web3Consumer>

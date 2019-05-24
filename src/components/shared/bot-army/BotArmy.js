@@ -5,20 +5,21 @@ import { get } from '../../../util/requests';
 import BotArmyList from './BotArmyList';
 
 import './BotArmy.scss';
+import BotHelper from '../../../util/botHelper'
 
 class BotArmy extends Component {
   state = {
     buidlArmy: [],
     supportArmy: [],
-    generations: []
+    generations: [],
+    totalSupports: undefined
   };
 
   componentDidMount = async () => {
     const { data } = await get(`bots`);
-
-
     this.setState({
-      ...this.sortArmy(data)
+      ...this.sortArmy(data),
+      totalSupports: BotHelper.totalSupports(this.props.primeBot.tokenId, data)
     });
   };
 
@@ -64,7 +65,7 @@ class BotArmy extends Component {
   };
 
   render() {
-    const { buidlArmy, supportArmy, generations } = this.state;
+    const { buidlArmy, supportArmy, generations, totalSupports } = this.state;
 
     return (
       <div className="Contain">
@@ -75,7 +76,7 @@ class BotArmy extends Component {
           </Fragment>
         ) : null}
 
-        <h3>Support Bots ({supportArmy.length})</h3>
+        <h3>Support Bots ({supportArmy.length}) Total of all generations ({totalSupports})</h3>
         <BotArmyList army={supportArmy} />
         {supportArmy.length < 1 && (
           <p>No Support Bots have been generated for this repo.</p>

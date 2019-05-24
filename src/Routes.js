@@ -7,10 +7,12 @@ import Repos from './views/repos/Repos';
 import RepoDetail from './views/repo-detail/RepoDetail';
 import About from './views/about/About';
 import Dashboard from './views/dashboard/Dashboard';
+import Home from './views/home/Home';
 
 const Routes = () => (
   <Switch>
-    <Route path="/" exact component={Bots} />
+    <Route path="/" exact component={Home} />
+    <Route path="/all" exact component={Bots} />
     <Route path="/bots/:tokenId" exact component={Bot} />
     <Route path="/repos" exact component={Repos} />
     <Route path="/repos/:ghid" exact component={RepoDetail} />

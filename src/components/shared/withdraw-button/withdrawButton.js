@@ -55,7 +55,7 @@ class WithdrawButton extends Component {
     return (
       <div>
         {isLoading ? <Loader /> : null}
-        {botBank == 0 && ownerOfToken === account && !isLoading ? (
+        {botBank === 0 && ownerOfToken === account && !isLoading ? (
           <Fragment>
             <button>Bot Bank = {withdrawInEth} ETH</button>
           </Fragment>
