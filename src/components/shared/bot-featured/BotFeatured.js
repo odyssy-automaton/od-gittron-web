@@ -5,49 +5,21 @@ import { Web3Consumer } from 'web3-react';
 
 import FeaturedBotList from '../featured-bot-list/FeaturedBotList';
 
+import BotHelper from '../../../util/botHelper'
+
 import './BotFeatured.scss';
 
 class BotFeatured extends Component {
   state = {};
 
-  countSupports = (primeBotId) => {
-    return this.props.bots.filter((bot) => bot.tokenType === 'support')
-      .filter((bot)=> bot.relatedPrimeBot===primeBotId)
-      .length;
-  }
-
-  countBuidls = (primeBotId) => {
-    return this.props.bots.filter((bot) => bot.tokenType === 'buidl')
-      .filter((bot)=> bot.relatedPrimeBot===primeBotId)
-      .length;
-  }
-
-  firstAncestor = (primeBotId) => {
-    let bot = this.props.bots.find((bot)=> bot.tokenId===primeBotId);
-    if(bot && bot.relatedAncestorBot){
-      return this.firstAncestor(bot.relatedAncestorBot);
-    }
-    return primeBotId;
-  }
-
-  generations = (primeBotId, generations = []) => {
-    generations.push(primeBotId);
-    let bot = this.props.bots.find((bot)=> bot.tokenId===primeBotId);
-    if(bot && bot.relatedChildBot){
-      return this.generations(bot.relatedChildBot, generations);
-    }
-
-    return generations;
-  }
+  
 
   withFilters = () => {
     return this.props.bots.filter((bot) => {
       return bot.featured;
     }).map((bot) => {
 
-      const fa = this.firstAncestor(bot.tokenId);
-      const gens = this.generations(fa);
-      const latest = gens[gens.length-1];
+      const latest = BotHelper.latestBot(bot.tokenId, this.props.bots);
 
       if(bot.tokenId !== latest){
         const newbot = this.props.bots.find((abot)=>abot.tokenId===latest) || bot;
@@ -55,11 +27,10 @@ class BotFeatured extends Component {
         newbot.featuredDesc = bot.featuredDesc;
         bot = newbot
       }
-      bot.totalSupports = gens.map((id)=>this.countSupports(id))
-        .reduce((total, num)=>total + num);
-
-      bot.supports = this.countSupports(bot.tokenId);
-      bot.buidls = this.countBuidls(bot.tokenId);
+      bot.totalSupports = BotHelper.totalSupports(bot.tokenId, this.props.bots)
+      
+      bot.supports = BotHelper.countSupports(bot.tokenId, this.props.bots);
+      bot.buidls = BotHelper.countBuidls(bot.tokenId, this.props.bots);
       return bot;
     })
   };
