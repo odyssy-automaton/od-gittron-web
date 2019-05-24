@@ -18,10 +18,6 @@ class FeaturedBotList extends Component {
               <div className="Featured_Desc">
                 <h2>{bot.featuredTitle}</h2>
                 <p>{bot.featuredDesc}</p>
-                <p>
-                  generation: {bot.generation} | supports: {bot.totalSupports} |
-                  buidler: {bot.buidls}
-                </p>
                 {this.props.w3context.connectorName !== 'MetaMask' && (
                 <button
                 className="SupportButtonHolder"
@@ -57,10 +53,12 @@ class FeaturedBotList extends Component {
                     </div>
                   )}
                 <p>
-                  View Repo =>{' '}
-                  <a href={`https://github.com/${bot.repoOwner}/${bot.repo}`}>
-                    {bot.repo}
-                  </a>
+                  Generation {bot.generation} | {bot.totalSupports} Supporters | {bot.buidls} Buidlers
+                </p>
+                <p>
+                  <Link className="Link" to={`bots/${bot.tokenId}`}>View Bot =></Link> | <Link className="Link" to={`https://github.com/${bot.repoOwner}/${bot.repo}`}>
+                  View Repo =>
+                  </Link>
                 </p>
               </div>
             </div>
