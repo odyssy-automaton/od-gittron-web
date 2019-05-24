@@ -21,6 +21,7 @@
       justify-content: flex-end;
     }
     .BotCard { max-width: 320px; max-height: 250px; overflow: hidden;  }
+    a { position: relative; }
     a .BotItem__Hover {
       opacity: 0;
       transition: all .15s linear;
