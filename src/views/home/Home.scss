@@ -1,0 +1,31 @@
+@import '../../styles/variables';
+
+.generate-bot {
+    @media (max-width: $phone){
+        width: 100%;
+        margin: 15px 0px;
+    }
+}
+
+.Hero {
+    a { color: white; font-size: 1.25em; }
+    .Columns {
+    max-width: 1200px;
+    margin: 0 auto;
+    &__Column--50:first-of-type { flex-basis: calc(45% - 35px); padding-right: 35px; }
+    }
+}
+
+.Bots__Intro {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    p { 
+        margin: 50px 0px; 
+        font-size: 1.35em;
+        @media (max-width: $phone){
+            margin: 25px 0px;
+        } 
+    }
+}

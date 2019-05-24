@@ -1,0 +1,81 @@
+@import '../../../styles/variables';
+
+.FeaturedBotList {
+  display: flex;
+  flex-direction: row;
+  align-content: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  > .BotItem {
+    position: relative;
+    flex-basis: 100%;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    border-top: 2px solid #000;
+    .Columns {
+      flex-wrap: wrap;
+      @media (max-width: $tablet) {
+        flex-direction: column;       
+      }
+    }
+    .Columns__Column--50:nth-of-type(2) {
+      display: flex;
+      align-content: center;
+      justify-content: flex-end;
+      @media (max-width: $tablet) {
+        justify-content: center;        
+      }
+    }
+    .BotCard { 
+      max-width: 320px; max-height: 250px; overflow: hidden;
+      @media (max-width: $tablet) {
+        max-width: 100%; 
+        max-height: 320px;     
+      }
+    }
+    a { position: relative; }
+    a .BotItem__Hover {
+      opacity: 0;
+      transition: all .15s linear;
+      position: absolute;
+      text-align: center;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 150px;
+      height: 150px;
+      border-radius: 50px;
+      background-color: #000;
+      svg path { fill: #fff; }
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    a:hover .BotItem__Hover {
+      opacity: 1;
+    }
+    @media (max-width: $tablet) {
+      flex-basis: 100%;
+    }
+  }
+}
+
+.SupportButtonHolder button {
+  position: relative;
+  display: block;
+  height: 60px;
+  width: auto;
+}
+.WithdrawButtonHolder button {
+  position: relative;
+  display: block;
+  height: 60px;
+  width: auto;
+}
+.WithdrawButtonHolder {
+}
+.WithdrawButtonHolder p {
+}
