@@ -55,14 +55,14 @@ const HamburgerNav = class extends React.Component {
               className="Navbar__Mobile--Contents--Item"
               to="/"
             >
-              Featured
+              Featured Bots
             </Link>
             <Link
               onClick={this.toggleNav}
               className="Navbar__Mobile--Contents--Item"
               to="/all"
             >
-              Bots
+              All Bots
             </Link>
             <Link
               onClick={this.toggleNav}

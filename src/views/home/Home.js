@@ -41,11 +41,12 @@ class Home extends Component {
         <div className="Hero">
           <div className="Columns">
             <div className="Columns__Column--50">
-              <h1>Support Open Source</h1>
-              <p>Support any open source project (Prime Bots) on Gittron and get a Support Bot NFT as a thank you.</p>
+              <h1>Hail Open Source!</h1>
+              <p>Support any Open Source project (Prime Bots) on Gittron and get a Support Bot NFT as a thank you.</p>
+              <p><Link to="/about/#support-bot">What can I do with a Support Bot NFT?</Link></p>
               <h2>Project Owners</h2>
-              <p>Register your repo to add passive income to your project. Just come back later and withdraw.</p>
-              <p><a href="/about">Read More =></a></p>
+              <p>Register your repo to generate a Prime Bot and add passive income to your project. Just come back later and withdraw.</p>
+              <p><Link to="/dashboard">Generate Prime =></Link></p>
             </div>
             <div className="Columns__Column--50">
               <iframe

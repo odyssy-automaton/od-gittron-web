@@ -37,10 +37,10 @@ const HeaderLinks = class extends Component {
 
         <div className="Navbar__Desktop">
         <Link to="/" className="Navbar__Desktop--Item">
-            Featured
+            Featured Bots
           </Link>
           <Link to="/all" className="Navbar__Desktop--Item">
-            Bots
+            All Bots
           </Link>
           <Link to="/about" className="Navbar__Desktop--Item">
             About
