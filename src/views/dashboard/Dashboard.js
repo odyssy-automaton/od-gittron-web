@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { Web3Consumer } from 'web3-react';
 
 import PrimeGenerator from '../../components/shared/prime-generator/PrimeGenerator';
+import ContactForm from '../../components/forms/contact/ContactForm';
 
 import './Dashboard.scss';
 import DashboardBots from '../../components/shared/dashboard-bots/DashboardBots';
@@ -19,12 +20,12 @@ function Dashboard() {
                   <div className="Columns__Column--50">
                     <h3>Generate a Prime Bot</h3>
                     <p>
-                      Enter the full URL for a Github repo that you own or manage to
-                      receive a Gen 0 Prime Bot.
+                      Enter the full URL for a Github repo that you own or
+                      manage to receive a Gen 0 Prime Bot.
                     </p>
                     <p>
-                      Supporters of your repo can donate to your fund of choice and
-                      they'll get a clone in the form of a Support Bot.
+                      Supporters of your repo can donate to your fund of choice
+                      and they'll get a clone in the form of a Support Bot.
                     </p>
                     <p>
                       Set a price for each Support bot and an address to receive
@@ -36,6 +37,9 @@ function Dashboard() {
                       gtContext={gtContext}
                       account={context.account}
                     />
+                  </div>
+                  <div className="Columns__Column--100">
+                    <ContactForm walletAddress={context.account} />
                   </div>
                   <div className="Columns__Column--100">
                     <h3>Your Bots</h3>

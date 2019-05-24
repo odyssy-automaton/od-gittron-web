@@ -196,6 +196,11 @@ input {
   &:focus { outline: none; border-bottom: 1px solid #5f5fff; }
 }
 
+input[type="checkbox"] {
+  -webkit-appearance: checkbox;
+  box-sizing: border-box;
+}
+
 fieldset {
   display: block;
   margin-inline-start: 0px;
