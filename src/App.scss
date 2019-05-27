@@ -101,6 +101,8 @@ a {
     display: flex;
     flex-direction: column;
     max-width: 600px;
+    padding: 50px;
+    border: 2px solid #fff; 
   }
 }
 
@@ -109,6 +111,7 @@ a {
 .Columns {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
   &__Column {
     &--33 {
       position: relative;
@@ -217,9 +220,23 @@ fieldset {
 
 .Contain {
   max-width: 1200px;
-  width: calc(100% -  50px);
   margin: 0 auto;
-  padding: 25px;
+  @media (max-width: $tablet) {
+    width: calc(100% -  50px);
+    padding: 25px;
+  }
+}
+
+// Pre Code
+
+pre {
+  white-space: pre-wrap;
+  font-size: 11px;
+  border-left: 2px solid #000;
+  padding: 15px; 
+  code {
+
+  }
 }
 
 // Error
