@@ -19,7 +19,7 @@ function About() {
       <div className="Block Border-Bottom">
         <div className="Block__Contents Contain">
           <h2>
-            Deploy an autonomous fundraising bot for your open-source project.
+            Deploy an autonomous fundraising bot for your open source project.
           </h2>
           <p>
             Register your repo to add passive income to your project. Just come
@@ -29,7 +29,12 @@ function About() {
               href="https://medium.com/odyssy/hail-open-source-hail-gittron-ae50db8e7031"
               target="_blank"
               rel="noopener noreferrer"
-            >Medium</a></strong>.</p>
+            >Medium =></a></strong></p>
+            <p><strong>Follow Gittron on <a
+              href="https://twitter.com/gittron_"
+              target="_blank"
+              rel="noopener noreferrer"
+            >Twitter =></a></strong></p>
         </div>
       </div>
       <div className="Block Columns Contain">
@@ -131,19 +136,7 @@ function About() {
             <strong>What's the Contract Address?</strong>
           </p>
           <p>
-            Rinkeby:{' '}
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href={`https://rinkeby.etherscan.io/address/${
-                process.env.REACT_APP_CONTRACT_ADDRESS
-              }`}
-            >
-              {process.env.REACT_APP_CONTRACT_ADDRESS}
-            </a>
-          </p>
-          <p>
-            Mainnet:{' '}
+            Mainnet ={' '}
             <a
               target="_blank"
               rel="noopener noreferrer"
@@ -152,6 +145,18 @@ function About() {
               }`}
             >
               {process.env.REACT_APP_MAIN_CONTRACT_ADDRESS}
+            </a>
+          </p>
+          <p>
+            Rinkeby = {' '}
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href={`https://rinkeby.etherscan.io/address/${
+                process.env.REACT_APP_CONTRACT_ADDRESS
+              }`}
+            >
+              {process.env.REACT_APP_CONTRACT_ADDRESS}
             </a>
           </p>
           <p>
@@ -228,11 +233,10 @@ function About() {
           </strong> </p>
           <p>
             Copy the below HTML snippet into your Github repo's readme and replace "MyBotId" with your Prime Bot ID (the "0x..." section  of the "gittron.me/bots/0x...." URL that is your Prime Bot profile page)
-            <pre><code>
-            &lt;a href="https://gittron.me/bots/MyBotID">
-            &lt;img src="https://badgen.net/https/data.gittron.me/v1/bots/supporter-count/MyBotID" alt="support bots"/>&lt;/a>
-            </code></pre>
           </p>
+          <pre><code>
+          &lt;a href="https://gittron.me/bots/MyBotID">&lt;img src="https://badgen.net/https/data.gittron.me/v1/bots/supporter-count/MyBotID" alt="support bots"/>&lt;/a>
+          </code></pre>
           <p>
             <strong>
               My Prime Bot ran out of Buidl Bots. How do I get more?
