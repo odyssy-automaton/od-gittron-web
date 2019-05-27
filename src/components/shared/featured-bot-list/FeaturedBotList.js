@@ -56,9 +56,9 @@ class FeaturedBotList extends Component {
                   Generation {bot.generation} | {bot.totalSupports} Supporters | {bot.buidls} Buidlers
                 </p>
                 <p>
-                  <Link className="Link" to={`bots/${bot.tokenId}`}>View Bot =></Link> | <Link className="Link" to={`https://github.com/${bot.repoOwner}/${bot.repo}`}>
+                  <Link className="Link" to={`bots/${bot.tokenId}`}>View Bot =></Link> | <a className="Link" target="_blank" rel="noopener noreferrer" href={`https://github.com/${bot.repoOwner}/${bot.repo}`}>
                   View Repo =>
-                  </Link>
+                  </a>
                 </p>
               </div>
             </div>
