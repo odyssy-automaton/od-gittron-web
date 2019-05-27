@@ -10,9 +10,37 @@
 .Hero {
     a { color: white; font-size: 1.25em; }
     .Columns {
-    max-width: 1200px;
-    margin: 0 auto;
-    &__Column--50:first-of-type { flex-basis: calc(45% - 35px); padding-right: 35px; }
+        max-width: 1200px;
+        margin: 0 auto;
+        &__Column--50:first-of-type { 
+            flex-basis: calc(45% - 100px);
+            padding: 0px 50px;
+            @media (max-width: 1199px) {
+                flex-basis: 100%;
+                padding: 50px;
+            }
+            @media (max-width: $tablet) {
+                flex-basis: 100%;
+                padding: 25px;
+            }
+        }
+        &__Column--50:nth-of-type(2) { 
+            @media (max-width: 1199px) {
+                flex-basis: 100%;
+                padding: 25px;
+            }
+        }
+    }
+}
+
+iframe {
+    @media (max-width: 1199px) {
+        margin: 0 auto;
+        text-align: center;
+        width: 100%;
+    }
+    @media (max-width: $tablet) {
+        width: 100%;
     }
 }
 
@@ -21,8 +49,10 @@
     align-items: center;
     flex-wrap: wrap;
     justify-content: space-between;
+    padding-top: 25px; 
+    padding-bottom: 50px; 
     p { 
-        margin: 50px 0px; 
+        margin: 25px 0px; 
         font-size: 1.35em;
         @media (max-width: $phone){
             margin: 25px 0px;
