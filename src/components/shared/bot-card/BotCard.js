@@ -15,7 +15,7 @@ class BotCard extends Component {
           <p className="BotCard__Header--Details">{bot.tokenType} Bot | Gen {bot.generation}</p>
           <p>{bot.mined}</p>
           
-          {!bot.verified ? (
+          {bot.verified ? (
           <div className="Verified">
             <img
               src="https://s3.amazonaws.com/odyssy-assets/Bot--Verified.svg"
