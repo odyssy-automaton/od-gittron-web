@@ -1,12 +1,13 @@
 import React, { Fragment } from 'react';
 import { Web3Consumer } from 'web3-react';
 
+import { GittronWeb3Consumer } from '../../contexts/Gittronweb3Context';
+
 import PrimeGenerator from '../../components/shared/prime-generator/PrimeGenerator';
-import ContactForm from '../../components/forms/contact/ContactForm';
+import Contact from '../../components/shared/contact/Contact';
+import DashboardBots from '../../components/shared/dashboard-bots/DashboardBots';
 
 import './Dashboard.scss';
-import DashboardBots from '../../components/shared/dashboard-bots/DashboardBots';
-import { GittronWeb3Consumer } from '../../contexts/Gittronweb3Context';
 
 function Dashboard() {
   return (
@@ -39,7 +40,10 @@ function Dashboard() {
                     />
                   </div>
                   <div className="Columns__Column--100">
-                    <ContactForm walletAddress={context.account} />
+                    <Contact
+                      authenticated={context.active}
+                      address={context.account}
+                    />
                   </div>
                   <div className="Columns__Column--100">
                     <h3>Your Bots</h3>

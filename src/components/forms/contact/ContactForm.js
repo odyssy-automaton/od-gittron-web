@@ -4,23 +4,17 @@ import { post } from '../../../util/requests';
 import HubspotApi from '../../../util/hubspotApi';
 
 export default class ContactForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      walletAddress: '',
-      submitted: false,
-      inDappPref: true,
-      marketingPref: true,
-      loading: false,
-      error: null,
-    };
-  }
+  state = {
+    email: '',
+    address: '',
+    submitted: false,
+    inDappPref: true,
+    marketingPref: true,
+    loading: false,
+    error: null,
+  };
 
   handleChange = (e) => {
-    console.log(e);
-    // this.setState({ [e.target.name]: e.target.value });
-
     const target = e.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
@@ -36,14 +30,14 @@ export default class ContactForm extends React.Component {
 
     const body = {
       email: this.state.email,
-      walletAddress: this.props.walletAddress,
+      walletAddress: this.props.address,
       inDappPref: this.state.inDappPref,
       marketingPref: this.state.marketingPref,
     };
 
     const res = await new HubspotApi().addContact(body);
 
-    await post(`bots/email-sign-up`, body);
+    await post(`contacts/email-sign-up`, body);
 
     if (res.status === 'error') {
       this.setState({
@@ -52,6 +46,7 @@ export default class ContactForm extends React.Component {
       });
     } else {
       this.setState({ submitted: true });
+      this.props.handleSignUp();
     }
   };
 
