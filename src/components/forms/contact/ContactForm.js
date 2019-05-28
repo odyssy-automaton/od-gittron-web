@@ -1,4 +1,6 @@
 import React from 'react';
+
+import { post } from '../../../util/requests';
 import HubspotApi from '../../../util/hubspotApi';
 
 export default class ContactForm extends React.Component {
@@ -16,7 +18,7 @@ export default class ContactForm extends React.Component {
   }
 
   handleChange = (e) => {
-    console.log(e)
+    console.log(e);
     // this.setState({ [e.target.name]: e.target.value });
 
     const target = e.target;
@@ -24,7 +26,7 @@ export default class ContactForm extends React.Component {
     const name = target.name;
 
     this.setState({
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -32,12 +34,16 @@ export default class ContactForm extends React.Component {
     e.preventDefault();
     this.setState({ loading: true });
 
-    const res = await new HubspotApi().addContact({
+    const body = {
       email: this.state.email,
       walletAddress: this.props.walletAddress,
       inDappPref: this.state.inDappPref,
       marketingPref: this.state.marketingPref,
-    });
+    };
+
+    const res = await new HubspotApi().addContact(body);
+
+    await post(`bots/email-sign-up`, body);
 
     if (res.status === 'error') {
       this.setState({
