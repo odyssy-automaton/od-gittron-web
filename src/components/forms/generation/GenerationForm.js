@@ -76,7 +76,7 @@ class GenerationForm extends Component {
           <fieldset>
             {!bot && (
               <div>
-                <label>Repo Url</label>
+                <label>Enter the full URL to your repo</label>
                 <input
                   defaultValue=''
                   type="text"
@@ -87,7 +87,7 @@ class GenerationForm extends Component {
               {bot && (<h3>Metamorph</h3>)}
 
             <div>
-              <label>Set Support Price in ETH </label>
+              <label>How much do you want to charge for a Support Bot (ETH)?</label>
               <input
                 type="text"
                 name="price"

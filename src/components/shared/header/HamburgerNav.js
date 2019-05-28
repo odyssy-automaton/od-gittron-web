@@ -50,21 +50,20 @@ const HamburgerNav = class extends React.Component {
         </button>
         <div className={mobileNavClass}>
           <div className="Navbar__Mobile--Contents">
+          <Link
+              onClick={this.toggleNav}
+              className="Navbar__Mobile--Contents--Item"
+              to="/"
+            >
+              Featured Bots
+            </Link>
             <Link
               onClick={this.toggleNav}
               className="Navbar__Mobile--Contents--Item"
               to="/all"
             >
-              Bots
+              All Bots
             </Link>
-            <Link
-              onClick={this.toggleNav}
-              className="Navbar__Mobile--Contents--Item"
-              to="/"
-            >
-              Featured
-            </Link>
-
             <Link
               onClick={this.toggleNav}
               className="Navbar__Mobile--Contents--Item"

@@ -31,6 +31,13 @@
     position: absolute;
     top: 20px;
     right: 15px;
-    img { width: 30px; }
+    img { width: 24px; }
   }
+}
+
+.iconFork {
+  position: absolute;
+  top: 50px;
+  right: 15px;
+  svg {fill:red;}
 }
