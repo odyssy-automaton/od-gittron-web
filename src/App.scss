@@ -31,6 +31,10 @@ body {
   color: #61dafb;
 }
 
+.Link {
+  text-decoration: underline;
+}
+
 a {
   color: black;
   text-decoration: none;
@@ -109,13 +113,13 @@ a {
     &--33 {
       position: relative;
       height: 100%;
-      flex-basis: 33%;
+      flex-basis: 30%;
       @media (max-width: $tablet) {
         flex-basis: 100%;
       }
     }
     &--50 {
-      flex-basis: 50%;
+      flex-basis: 45%;
       height: 100%;
       position: relative;
       @media (max-width: $tablet) {
