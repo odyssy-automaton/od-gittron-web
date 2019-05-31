@@ -17,6 +17,7 @@
     "web3-react": "^3.0.1"
   },
   "scripts": {
+    "prepare": "[ ! -f .env ] && cp .env.sample .env || exit 0",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
