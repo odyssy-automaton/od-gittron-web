@@ -115,23 +115,30 @@ export default class GittronWeb3Service {
       .call();
   }
 
-  async tokensByOwner(address) {
+  getOwnerTokensFromLog(addr) {
+    // topic: 0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef
+    // key value of all tokens and latest owner
 
-    let tokens = [];
-    let valid = true;
-    let bot = '';
-    let index = 0;
-    while (valid) {
-      try {
-        bot = await this.gittronContract.methods
-          .tokenOfOwnerByIndex(address, index)
-          .call();
-        tokens.push(bot);
-        index++;
-      } catch (err) {
-        valid = false;
-      }
-    }
+    return this.gittronContract
+      .getPastEvents('Transfer', {
+        fromBlock: 0,
+        toBlock: 'latest',
+      })
+      .then((events) => {
+        const tlog = events;
+        const lTokens = {};
+        tlog.forEach((event) => {
+          if (event.returnValues.to.toLowerCase() === addr.toLowerCase()) {
+            lTokens[event.returnValues.tokenId] = event.returnValues.to;
+          }
+        });
+
+        return Object.keys(lTokens);
+      });
+  }
+
+  async tokensByOwner(address) {
+    const tokens = await this.getOwnerTokensFromLog(address);
     return tokens.map((item) => this.web3Service.numberToHex(item));
   }
 
