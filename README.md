@@ -8,18 +8,9 @@
 yarn install
 ```
 
-2. Copy sample .env.sample to .env.|ENVIRONMENT_NAME|
+2. Make any necessary environment variable changes to `.env`
 
-   **Note**: Ensure your `.env` file is up to date with the latest `.env.sample` file. New environment variables may
-   have been changed or added, which could result in a bad build.
-
-   ```
-   $ cp .env.sample .env
-   ```
-
-3. Make any necessary environment variable changes
-
-4. Run a dev server
+3. Run a dev server
 
 ```bash
 yarn start
