@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 
-
 import { get } from '../../util/requests';
 
 import './Home.scss';
@@ -21,10 +20,8 @@ class Home extends Component {
       const { data } = await get(`bots`);
       const bots = data
         .filter((bot) => !bot.disabled)
-        .filter((bot) => bot.hatched)
-        .sort((botA, botb) => {
-          return botA.verified === botb.verified ? 0 : botA.verified ? -1 : 1;
-        });
+        .filter((bot) => bot.hatched);
+
       this.setState({
         bots,
       });
@@ -44,11 +41,23 @@ class Home extends Component {
           <div className="Columns">
             <div className="Columns__Column--50">
               <h1>Hail Open Source!</h1>
-              <p>Support any Open Source project (Prime Bots) on Gittron and get a Support Bot NFT as a thank you.</p>
-              <p><HashLink to="/about#support-bot">What can I do with a Support Bot NFT?</HashLink></p>
+              <p>
+                Support any Open Source project (Prime Bots) on Gittron and get
+                a Support Bot NFT as a thank you.
+              </p>
+              <p>
+                <HashLink to="/about#support-bot">
+                  What can I do with a Support Bot NFT?
+                </HashLink>
+              </p>
               <h2>Project Owners</h2>
-              <p>Register your repo to generate a Prime Bot and add passive income to your project.</p>
-              <p><Link to="/dashboard">Generate Prime =></Link></p>
+              <p>
+                Register your repo to generate a Prime Bot and add passive
+                income to your project.
+              </p>
+              <p>
+                <Link to="/dashboard">Generate Prime =></Link>
+              </p>
             </div>
             <div className="Columns__Column--50">
               <iframe
@@ -65,9 +74,7 @@ class Home extends Component {
         </div>
         <Web3Consumer>
           {(context) => (
-            <div className="Contain">
-              {bots && <BotFeatured bots={bots} />}
-            </div>
+            <div className="Contain">{bots && <BotFeatured bots={bots} />}</div>
           )}
         </Web3Consumer>
       </div>
