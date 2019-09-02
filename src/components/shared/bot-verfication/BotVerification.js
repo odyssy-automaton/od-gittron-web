@@ -55,7 +55,7 @@ class BotVerfication extends Component {
             <p>Repo = {bot.repo}</p>
             <p>
               To verify you own or manage a repo, create a file in your root
-              directory called '.gittron' that contains your public key used to
+              directory called '.gittron' that contains your address used to
               register this bot.
             </p>
 
