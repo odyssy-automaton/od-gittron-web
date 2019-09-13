@@ -23,4 +23,4 @@ Set up auto-linting and prettier to be run on file save or in real-time in your 
 
 # Gittron
 
-<table border="0"><tr>  <td><a href="https://gittron.me/bots/0xf1fcf6233e6637a2ea47ee253da18bf3"><img src="https://s3.amazonaws.com/od-flat-svg/0xf1fcf6233e6637a2ea47ee253da18bf3.png" alt="gittron" width="50"/></a></td><td><a href="https://gittron.me/bots/0xf1fcf6233e6637a2ea47ee253da18bf3">SUPPORT US WITH GITTRON</a></td></tr></table>
+<table border="0"><tr>  <td><a href="https://gittron.me/bots/0x1f9be21c1f2c7695811193ed5f0ad024"><img src="https://s3.amazonaws.com/od-flat-svg/0x1f9be21c1f2c7695811193ed5f0ad024.png" alt="gittron" width="50"/></a></td><td><a href="https://gittron.me/bots/0x1f9be21c1f2c7695811193ed5f0ad024">SUPPORT US WITH GITTRON</a></td></tr></table>
